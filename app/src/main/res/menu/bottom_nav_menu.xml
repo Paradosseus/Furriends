@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/Home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/likedPets"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="Liked Pets" />
+    <item
+        android:id="@+id/notifications"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/inbox"
+        android:icon="@drawable/ic_baseline_inbox_24"
+        android:title="Inbox" />
+</menu>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="View Profile" />
+
+    <item
+        android:id="@+id/applicationStatusFragment"
+        android:icon="@drawable/ic_baseline_application_24"
+        android:title="Application Status" />
+    <item
+        android:id="@+id/listingFragment"
+        android:icon="@drawable/ic_baseline_listings_24"
+        android:title="Listings" />
+    <item
+        android:id="@+id/donateFragment"
+        android:icon="@drawable/ic_baseline_donate_24"
+        android:title="Donate" />
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_baseline_logout_24"
+        android:title="Logout" />
+    </group>
+</menu>
