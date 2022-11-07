@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".ui.activities.RegisterActivity">
+
 
     <TextView
         android:id="@+id/tvCreateNewAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="104dp"
         android:text="Create New Account"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,92 +22,64 @@
         android:id="@+id/etRFirstName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
+        android:hint="First Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:hint="First Name"
-        app:layout_constraintEnd_toStartOf="@+id/etLastName"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateNewAccount" />
 
     <EditText
-        android:id="@+id/etLastName"
+        android:id="@+id/etRLastName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
+        android:hint="Last Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:hint="Last Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/etRFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreateNewAccount" />
-
-    <TextView
-        android:id="@+id/tvGender"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="Gender:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rgGender"
+        app:layout_constraintEnd_toEndOf="@+id/etRFirstName"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etRFirstName"
-        app:layout_constraintTop_toTopOf="@+id/rgGender" />
-
-    <RadioGroup
-        android:id="@+id/rgGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toEndOf="@+id/tvGender"
-        app:layout_constraintTop_toBottomOf="@+id/etRFirstName">
-
-        <RadioButton
-            android:id="@+id/rbMale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male" />
-
-        <RadioButton
-            android:id="@+id/rbFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female" />
-
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/etRFirstName" />
 
     <EditText
         android:id="@+id/etREmailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:hint="Email Address"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/etLastName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etRFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/rgGender" />
+        app:layout_constraintEnd_toEndOf="@+id/etRLastName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etRLastName"
+        app:layout_constraintTop_toBottomOf="@+id/etRLastName" />
 
     <EditText
         android:id="@+id/etRPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:hint="Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/etREmailAddress"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etREmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/etREmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/etREmailAddress"
+        app:passwordToggleEnabled="true" />
 
     <EditText
         android:id="@+id/etRConfirmPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -114,57 +87,40 @@
         app:layout_constraintStart_toStartOf="@+id/etRPassword"
         app:layout_constraintTop_toBottomOf="@+id/etRPassword" />
 
-    <EditText
-        android:id="@+id/etBirthday"
+    <LinearLayout
+        android:id="@+id/ll_terms_and_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Date of Birth"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="@+id/etRConfirmPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etRConfirmPassword" />
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etRConfirmPassword">
 
-    <Button
-        android:id="@+id/btnSelectDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="Select Date"
-        android:backgroundTint="@color/sky_blue"
-        app:layout_constraintEnd_toEndOf="@+id/etRConfirmPassword"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/etBirthday"
-        app:layout_constraintTop_toBottomOf="@+id/etRConfirmPassword" />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_terms_and_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:checked="false" />
 
-    <EditText
-        android:id="@+id/etRAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Address"
-        app:layout_constraintEnd_toEndOf="@+id/etRConfirmPassword"
-        app:layout_constraintHorizontal_bias="0.207"
-        app:layout_constraintStart_toStartOf="@+id/etRConfirmPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etBirthday" />
-
-    <EditText
-        android:id="@+id/etRBirthday"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Phone Number"
-        app:layout_constraintEnd_toEndOf="@+id/etRAddress"
-        app:layout_constraintStart_toStartOf="@+id/etRAddress"
-        app:layout_constraintTop_toBottomOf="@+id/etRAddress" />
+        <TextView
+            android:id="@+id/tv_terms_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I agree to the terms and conditions" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnRCreateAccount"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Register"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/sky_blue"
-        app:layout_constraintEnd_toEndOf="@+id/etRBirthday"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="@+id/etRBirthday"
-        app:layout_constraintTop_toBottomOf="@+id/etRBirthday" />
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_terms_and_condition" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

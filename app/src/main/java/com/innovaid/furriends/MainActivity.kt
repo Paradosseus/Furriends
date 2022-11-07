@@ -1,18 +1,19 @@
 package com.innovaid.furriends
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import com.innovaid.furriends.databinding.ActivityMainBinding
+import com.innovaid.furriends.utils.Constants
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
+        val sharedPreferences = getSharedPreferences(Constants.FURRIENDS_PREFERENCES, Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString(Constants.LOGGED_IN_USERNAME, "")!!
+        tvHello.text = "The logged in user is $username"
 
     }
 }

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.AddPetProfileActivity">
+
+    <ImageView
+        android:id="@+id/ivPetProfileImage"
+        android:layout_width="103dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="132dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnAddPetImage"
+        android:layout_width="127dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="8dp"
+        android:text="Add Image"
+        app:layout_constraintEnd_toEndOf="@+id/ivPetProfileImage"
+        app:layout_constraintStart_toStartOf="@+id/ivPetProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/ivPetProfileImage" />
+
+    <EditText
+        android:id="@+id/etPetName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        app:layout_constraintEnd_toStartOf="@+id/etBreed"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/etBreed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/etPetName"
+        app:layout_constraintTop_toBottomOf="@+id/tvBreed" />
+
+    <TextView
+        android:id="@+id/tvBreed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Breed"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/etBreed"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddPetImage" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Name"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/tvBreed"
+        app:layout_constraintStart_toStartOf="@+id/etPetName"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddPetImage" />
+
+
+    <TextView
+        android:id="@+id/tvPetBirthday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Birthday"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/tvPetType"
+        app:layout_constraintStart_toStartOf="@+id/etPetName"
+        app:layout_constraintTop_toBottomOf="@+id/etPetName" />
+
+    <TextView
+        android:id="@+id/tvPetType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/etBreed"
+        app:layout_constraintStart_toEndOf="@+id/tvPetBirthday"
+        app:layout_constraintTop_toBottomOf="@+id/etBreed" />
+
+    <ImageView
+        android:id="@+id/ivCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBirthdayValue"
+        app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
+        app:layout_constraintTop_toTopOf="@+id/tvBirthdayValue"
+        app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+    <TextView
+        android:id="@+id/tvBirthdayValue"
+        android:layout_width="149dp"
+        android:layout_height="26dp"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:text="Select a Date"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tvPetBirthday"
+        app:layout_constraintTop_toBottomOf="@+id/tvPetBirthday" />
+
+    <Spinner
+        android:id="@+id/spPetType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/pet_types"
+        app:layout_constraintStart_toStartOf="@+id/tvPetType"
+        app:layout_constraintTop_toBottomOf="@+id/tvPetType" />
+
+
+    <TextView
+        android:id="@+id/tvPetGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tvBirthdayValue"
+        app:layout_constraintTop_toBottomOf="@+id/tvBirthdayValue" />
+
+    <RadioGroup
+        android:id="@+id/petGender"
+        android:layout_width="145dp"
+        android:layout_height="31dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/tvPetGender"
+        app:layout_constraintTop_toBottomOf="@+id/tvPetGender">
+
+        <RadioButton
+            android:id="@+id/rbPetMale"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/rbPetFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female" />
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/tvSpayedNeutered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spayed or Neutered"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/spPetType"
+        app:layout_constraintTop_toBottomOf="@+id/spPetType" />
+
+    <RadioGroup
+        android:id="@+id/rgSpayedNeutered"
+        android:layout_width="111dp"
+        android:layout_height="33dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
+        app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
+
+        <RadioButton
+            android:id="@+id/rbSNYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes" />
+
+        <RadioButton
+            android:id="@+id/rbSNNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSavePetProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="152dp"
+        android:text="Save Profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

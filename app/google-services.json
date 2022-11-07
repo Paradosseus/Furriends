@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1076824038105",
+    "firebase_url": "https://furriends-e8959-default-rtdb.firebaseio.com",
+    "project_id": "furriends-e8959",
+    "storage_bucket": "furriends-e8959.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076824038105:android:4926f5775225606b2bfcc8",
+        "android_client_info": {
+          "package_name": "com.innovaid.furriends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076824038105-529smbk0i7mm5stbg1cvcv32adnreniq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjy92U6ovUNdYQ3Og3b0UsyoMPNwaSq_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076824038105-529smbk0i7mm5stbg1cvcv32adnreniq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
