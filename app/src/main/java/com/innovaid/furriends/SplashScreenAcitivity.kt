@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.innovaid.furriends.databinding.ActivitySplashScreenAcitivityBinding
+import com.innovaid.furriends.ui.activities.DashboardActivity
 import com.innovaid.furriends.ui.activities.LoginActivity
 
 class SplashScreenActivity : AppCompatActivity() {

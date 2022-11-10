@@ -15,17 +15,16 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/ivUserImage"
+            android:id="@+id/ivHeaderUserImage"
             android:src="@drawable/ic_baseline_account_circle_24"
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
         <TextView
-            android:id="@+id/tvUserName"
+            android:id="@+id/tvHeaderUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="User"
             android:textStyle="bold"
             android:textColor="@color/black"
             />

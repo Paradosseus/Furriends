@@ -88,7 +88,7 @@ class SetUpUserProfileActivity : BaseActivity(), View.OnClickListener {
             userHashMap[Constants.MOBILE] = phoneNumber.toLong()
         }
         if (address.isNotEmpty()) {
-            userHashMap[Constants.ADDRESS] = address.toString()
+            userHashMap[Constants.ADDRESS] = address
         }
         if(userProfileImageURL.isNotEmpty()) {
             userHashMap[Constants.IMAGE] = userProfileImageURL
@@ -98,14 +98,13 @@ class SetUpUserProfileActivity : BaseActivity(), View.OnClickListener {
         //showProgressDialog(resources.getString(R.string.please_wait))
 
         FirestoreClass().updateUserProfile(this, userHashMap)
-
         Toast.makeText(this, "Your details are saved", Toast.LENGTH_SHORT).show()
     }
     fun updateUserProfileSuccess() {
         hideProgressDialog()
-        Toast.makeText(this, "Your profile is updated successfully" , Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Your profile has been updated successfully" , Toast.LENGTH_SHORT)
 
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, DashboardActivity::class.java))
         finish()
     }
     override fun onRequestPermissionsResult(
@@ -146,7 +145,6 @@ class SetUpUserProfileActivity : BaseActivity(), View.OnClickListener {
     }
     private fun validateUserProfileDetails(): Boolean {
         return when {
-
 
             etPhoneNumber.text.toString().trim { it <= ' ' }.isEmpty() -> {
                 Toast.makeText(this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show()

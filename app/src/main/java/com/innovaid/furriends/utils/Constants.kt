@@ -14,10 +14,13 @@ object Constants {
     const val OTHER_USER_DETAILS: String = "OtherUserDetails"
     const val READ_STORAGE_PERMISSION_CODE = 2
     const val PICK_IMAGE_REQUEST_CODE = 1
+    const val FIRST_NAME: String = "firstName"
+    const val LAST_NAME: String = "lastName"
     const val MOBILE: String = "phoneNumber"
     const val ADDRESS: String = "address"
     const val USER_PROFILE_IMAGE: String = "UserProfileImage"
     const val IMAGE: String = "image"
+    const val BIO: String = "bio"
     const val COMPLETE_PROFILE: String = "profileCompleted"
 
     fun imageSelector(activity: Activity) {

@@ -10,6 +10,7 @@
     <!-- Strings used for fragments for navigation -->
 
     <string-array name="pet_types">
+        <item>""</item>
         <item>Dog</item>
         <item>Cat</item>
     </string-array>

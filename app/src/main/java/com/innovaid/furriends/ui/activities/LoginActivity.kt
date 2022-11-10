@@ -72,7 +72,7 @@ class LoginActivity : BaseActivity() {
             intent.putExtra(Constants.OTHER_USER_DETAILS, user)
             startActivity(intent)
         } else {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, DashboardActivity::class.java))
         }
         finish()
     }

@@ -11,6 +11,7 @@ import com.innovaid.furriends.R
 import com.innovaid.furriends.databinding.ActivityRegisterBinding
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
+import com.innovaid.furriends.utils.Constants
 import kotlinx.android.synthetic.main.activity_register.*
 
 
@@ -84,14 +85,18 @@ class RegisterActivity : BaseActivity() {
     fun userRegistrationSuccess() {
 
         hideProgressDialog()
+        Toast.makeText(this, "You have registered successfully!", Toast.LENGTH_SHORT).show()
+        FirestoreClass().getUserInfo(this)
 
-        Toast.makeText(this, "You are registered successfully!", Toast.LENGTH_SHORT).show()
+    }
+    fun userRegisteredSuccessful(user: User) {
 
-        FirebaseAuth.getInstance().signOut()
-
+        if (user.profileCompleted == 0) {
+            val intent = Intent(this, SetUpUserProfileActivity::class.java)
+            intent.putExtra(Constants.OTHER_USER_DETAILS, user)
+            startActivity(intent)
+        }
         finish()
-
-
     }
 
 

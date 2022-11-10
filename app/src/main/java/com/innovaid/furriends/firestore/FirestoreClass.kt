@@ -11,9 +11,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.innovaid.furriends.models.User
-import com.innovaid.furriends.ui.activities.LoginActivity
-import com.innovaid.furriends.ui.activities.RegisterActivity
-import com.innovaid.furriends.ui.activities.SetUpUserProfileActivity
+import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.utils.Constants
 
 class FirestoreClass {
@@ -75,6 +73,13 @@ class FirestoreClass {
                     is LoginActivity -> {
                         activity.userLoggedInSuccessful(user)
                     }
+                    is RegisterActivity -> {
+                        activity.userRegisteredSuccessful(user)
+                    }
+                    is ProfileActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
+
                 }
 
             }
@@ -83,6 +88,13 @@ class FirestoreClass {
                     is LoginActivity -> {
                         activity.hideProgressDialog()
                     }
+                    is RegisterActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is ProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+
                 }
 
                 Log.e(
@@ -97,6 +109,9 @@ class FirestoreClass {
                 when(activity) {
                     is SetUpUserProfileActivity -> {
 
+                        activity.updateUserProfileSuccess()
+                    }
+                    is EditProfileActivity -> {
                         activity.updateUserProfileSuccess()
                     }
                 }
@@ -129,6 +144,9 @@ class FirestoreClass {
                         is SetUpUserProfileActivity -> {
                             activity.imageUploadSuccess(uri.toString())
                         }
+                        is EditProfileActivity -> {
+                            activity.imageUploadSuccess(uri.toString())
+                        }
                     }
 
                 }
@@ -138,6 +156,8 @@ class FirestoreClass {
                     is SetUpUserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
+                    is EditProfileActivity ->
+                        activity.hideProgressDialog()
                 }
 
                 Log.e(

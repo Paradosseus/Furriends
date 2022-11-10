@@ -1,14 +1,18 @@
 package com.innovaid.furriends.ui.activities
 
 import android.app.Dialog
+import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 import com.innovaid.furriends.R
+import com.innovaid.furriends.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_set_up_user_profile.*
 
 import kotlinx.android.synthetic.main.progress_dialog.*
+import kotlinx.android.synthetic.main.side_nav_header.*
 
 /**
  * A base activity class is used to define the functions and members which we will use in all the activities.
@@ -65,11 +69,13 @@ open class BaseActivity : AppCompatActivity() {
 
         Toast.makeText(
             this,
-            resources.getString(R.string.please_click_back_again_to_exit),
+              resources.getString(R.string.please_click_back_again_to_exit),
             Toast.LENGTH_SHORT
         ).show()
 
         @Suppress("DEPRECATION")
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
+
+
 }
