@@ -15,6 +15,7 @@ import com.google.firebase.storage.StorageReference
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
+import com.innovaid.furriends.ui.fragments.HomeFragment
 import com.innovaid.furriends.ui.fragments.InboxFragment
 import com.innovaid.furriends.ui.fragments.ListingsFragment
 import com.innovaid.furriends.utils.Constants
@@ -85,9 +86,9 @@ class FirestoreClass {
                     is ProfileActivity -> {
                         activity.userDetailsSuccess(user)
                     }
-                    is DashboardActivity -> {
-                        activity.userDetailsSuccess(user)
-                    }
+//                    is DashboardActivity -> {
+//                        activity.userDetailsSuccess(user)
+//                    }
 
                 }
 
@@ -209,7 +210,6 @@ class FirestoreClass {
                 Log.e("Pets List", document.documents.toString())
 
                 val petsList: ArrayList<Pet> = ArrayList()
-
                 for(i in document.documents) {
 
                     val pet = i.toObject(Pet::class.java)
@@ -236,4 +236,28 @@ class FirestoreClass {
             }
 
     }
+
+//    fun getPetsListToHome(fragment: HomeFragment) {
+//        fireStore.collection(Constants.PETS)
+//            .get()
+//            .addOnSuccessListener { document ->
+//                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+//
+//                val petsList: ArrayList<Pet> = ArrayList()
+//
+//                for(i in document.documents) {
+//
+//                    val pet = i.toObject(Pet::class.java)!!
+//                    pet.petId = i.id
+//                    petsList.add(pet)
+//                }
+//                fragment.petListSuccessfullyLoadedToHome(petsList)
+//            }
+//            .addOnFailureListener {
+//                e ->
+//                fragment.hideProgressDialog()
+//                Log.e(fragment.javaClass.simpleName, "Error while getting pets list", e)
+//            }
+//
+//    }
 }

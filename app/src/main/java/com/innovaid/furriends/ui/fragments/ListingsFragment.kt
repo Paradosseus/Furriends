@@ -40,6 +40,10 @@ class ListingsFragment : BaseFragment() {
     fun petListLoadedSuccessfullyFromFireStore(petsList: ArrayList<Pet>) {
 
         hideProgressDialog()
+
+        for(i in petsList) {
+            Log.i("Pet Name", i.petName!!)
+        }
         if(petsList.size > 0) {
             rvUserPetListings.visibility = View.VISIBLE
             tvNoListings.visibility = View.GONE

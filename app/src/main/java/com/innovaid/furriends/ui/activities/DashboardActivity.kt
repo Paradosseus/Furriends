@@ -52,7 +52,7 @@ class DashboardActivity : BaseActivity() {
             when(it.itemId) {
                 R.id.nav_profile -> startActivity(Intent(this, ProfileActivity::class.java))
                 R.id.nav_application_status -> startActivity(Intent(this, ApplicationStatusActivity::class.java))
-                R.id.nav_listings -> startActivity(Intent(this, DummyActivity::class.java))
+                R.id.nav_favorites -> startActivity(Intent(this, FavoritesActivity::class.java))
                 R.id.nav_donate -> startActivity(Intent(this, DonateActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
@@ -80,15 +80,15 @@ class DashboardActivity : BaseActivity() {
         bottomNavView.setupWithNavController(navController)
 
     }
-    fun userDetailsSuccess(user: User) {
-        userDetails = user
-
-        hideProgressDialog()
-
-        GlideLoader(this).loadUserPicture(user.image, ivHeaderUserImage)
-        tvUserProfileName.text = "${user.firstName} ${user.lastName}"
-
-    }
+//    fun userDetailsSuccess(user: User) {
+//        userDetails = user
+//
+//        hideProgressDialog()
+//
+//        GlideLoader(this).loadUserPicture(user.image, ivHeaderUserImage)
+//        tvUserProfileName.text = "${user.firstName} ${user.lastName}"
+//
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {

@@ -32,7 +32,7 @@ open class PetsListAdapter(
         val model = list[position]
 
         if(holder is MyViewHolder) {
-            GlideLoader(context).loadPetPicture(model.image, holder.itemView.ivPetImage)
+            GlideLoader(context).loadPetPicture(model.image!!, holder.itemView.ivPetImage)
             holder.itemView.tvListPetName.text = model.petName
             holder.itemView.tvListPetBreed.text = model.petBreed
         }

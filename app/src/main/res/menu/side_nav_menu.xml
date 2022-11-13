@@ -14,9 +14,9 @@
         android:icon="@drawable/ic_baseline_application_24"
         android:title="Application Status" />
     <item
-        android:id="@+id/nav_listings"
-        android:icon="@drawable/ic_baseline_listings_24"
-        android:title="Listings" />
+        android:id="@+id/nav_favorites"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="Favorites" />
     <item
         android:id="@+id/nav_donate"
         android:icon="@drawable/ic_baseline_donate_24"

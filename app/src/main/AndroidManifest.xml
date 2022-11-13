@@ -18,33 +18,8 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
-            android:name=".ApplicationStatusActvity"
+            android:name=".ui.activities.FavoritesActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".DummyActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ListingsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_listings"
-            android:theme="@style/Theme.Furriends.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ListActivity"
-            android:exported="false"
-            android:label="@string/title_activity_list"
-            android:theme="@style/Theme.Furriends.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -58,13 +33,6 @@
         </activity>
         <activity
             android:name=".ui.activities.ProfileActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.activities.ListingsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

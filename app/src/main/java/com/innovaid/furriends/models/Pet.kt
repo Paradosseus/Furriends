@@ -5,16 +5,17 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Pet(
-    val userId: String = "",
-    val userName: String,
-    val petName: String = "",
-    val petBreed: String = "",
-    val petBirthDate: String = "",
-    val petColor: String ="",
-    val petType: String = "",
-    val petGender: String  ="",
-    val spayedOrNeutered: String ="",
-    val description: String = "",
-    val image: String = "",
-    var petId: String = ""
+    val userId: String? = null,
+    val userName: String? = null,
+    val petName: String? = null,
+    val petBreed: String? = null,
+    val petBirthDate: String? = null,
+    val petColor: String? =null,
+    val petType: String? = null,
+    val petGender: String?  =null,
+    val spayedOrNeutered: String? =null,
+    val description: String? = null,
+    val image: String? = null,
+    val status: String? =null,
+    var petId: String? = null
 ): Parcelable
