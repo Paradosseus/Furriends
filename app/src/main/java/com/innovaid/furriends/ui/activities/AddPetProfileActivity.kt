@@ -12,7 +12,6 @@ import android.util.Log
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.innovaid.furriends.R
@@ -21,7 +20,6 @@ import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_pet_profile.*
-import kotlinx.android.synthetic.main.activity_set_up_user_profile.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -84,7 +82,7 @@ class AddPetProfileActivity : BaseActivity(), View.OnClickListener {
     private fun updateTable(myCalendar: Calendar) {
         val myFormat = "dd-MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-        tvPetBirthdayValue.setText(sdf.format(myCalendar.time))
+        tvBirthdayValue.setText(sdf.format(myCalendar.time))
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -138,7 +136,7 @@ class AddPetProfileActivity : BaseActivity(), View.OnClickListener {
                 Toast.makeText(this, "Please Enter your Pet's Breed", Toast.LENGTH_SHORT).show()
                 false
             }
-            tvPetBirthdayValue.text.toString().trim { it <= ' ' }.isEmpty() -> {
+            tvBirthdayValue.text.toString().trim { it <= ' ' }.isEmpty() -> {
                 Toast.makeText(this, "Please Enter your Pet's Birthdate", Toast.LENGTH_SHORT).show()
                 false
             }
@@ -181,7 +179,7 @@ class AddPetProfileActivity : BaseActivity(), View.OnClickListener {
             username,
             etPetName.text.toString().trim { it <= ' ' },
             etPetBreed.text.toString().trim { it <= ' ' },
-            tvPetBirthdayValue.text.toString().trim { it <= ' ' },
+            tvBirthdayValue.text.toString().trim { it <= ' ' },
             etPetColor.text.toString().trim { it <= ' ' },
             spPetType.selectedItem.toString(),
             petGender.text.toString().trim { it <= ' ' },

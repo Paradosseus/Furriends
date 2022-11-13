@@ -164,4 +164,5 @@ class SetUpUserProfileActivity : BaseActivity(), View.OnClickListener {
         userProfileImageURL = imageURL
         updateUserProfileDetails()
     }
+
 }

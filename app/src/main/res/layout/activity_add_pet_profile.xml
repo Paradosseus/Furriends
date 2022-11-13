@@ -96,8 +96,8 @@
                 android:text="Type"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/tvPetGender"
-                app:layout_constraintStart_toStartOf="@+id/tvPetBirthdayValue"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetBirthdayValue" />
+                app:layout_constraintStart_toStartOf="@+id/tvBirthdayValue"
+                app:layout_constraintTop_toBottomOf="@+id/tvBirthdayValue" />
 
             <Spinner
                 android:id="@+id/spPetType"
@@ -108,7 +108,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvPetType" />
 
             <TextView
-                android:id="@+id/tvPetBirthdayValue"
+                android:id="@+id/tvBirthdayValue"
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="50dp"
@@ -168,9 +168,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPetBirthdayValue"
-                app:layout_constraintStart_toEndOf="@+id/tvPetBirthdayValue"
-                app:layout_constraintTop_toTopOf="@+id/tvPetBirthdayValue"
+                app:layout_constraintBottom_toBottomOf="@+id/tvBirthdayValue"
+                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
+                app:layout_constraintTop_toTopOf="@+id/tvBirthdayValue"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
 
@@ -248,7 +248,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.994"
-                app:layout_constraintStart_toEndOf="@+id/tvPetBirthdayValue"
+                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
                 app:layout_constraintStart_toStartOf="@+id/etPetBreed"
                 app:layout_constraintTop_toBottomOf="@+id/tvPetColor" />
 

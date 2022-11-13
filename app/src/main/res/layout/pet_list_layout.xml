@@ -56,42 +56,42 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/llButtonContainer"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:gravity="end"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/llPetImageContainer"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <LinearLayout
+        android:id="@+id/llButtonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="end"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/llPetImageContainer"
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/ibEditPetProfile"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:contentDescription="image"-->
-<!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
-<!--        android:padding="5dp"-->
-<!--        android:src="@drawable/ic_baseline_edit_24"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/llPetDescriptionContainer"-->
-<!--        tools:layout_editor_absoluteY="10dp" />-->
+    <ImageButton
+        android:id="@+id/ibEditPetProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="image"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:padding="5dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintStart_toEndOf="@+id/llPetDescriptionContainer"
+        tools:layout_editor_absoluteY="10dp" />
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/ibDeletePetProfile"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:contentDescription="image"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
-<!--        android:padding="5dp"-->
-<!--        android:src="@drawable/ic_baseline_delete_24"-->
-<!--        />-->
+    <ImageButton
+        android:id="@+id/ibDeletePetProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="image"
+        android:background="@android:color/transparent"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:padding="5dp"
+        android:src="@drawable/ic_baseline_delete_24"
+        />
 
-<!--    </LinearLayout>-->
+    </LinearLayout>
 
 
 
