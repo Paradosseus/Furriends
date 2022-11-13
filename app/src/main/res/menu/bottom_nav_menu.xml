@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home" />
     <item
-        android:id="@+id/nav_favorites"
+        android:id="@+id/nav_listings"
         android:icon="@drawable/ic_baseline_favorite_24"
-        android:title="Favorites" />
+        android:title="Listings"/>
     <item
         android:id="@+id/nav_notifications"
         android:icon="@drawable/ic_baseline_notifications_24"

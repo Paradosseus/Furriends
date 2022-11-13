@@ -5,16 +5,22 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
+import com.innovaid.furriends.ui.fragments.InboxFragment
+import com.innovaid.furriends.ui.fragments.ListingsFragment
 import com.innovaid.furriends.utils.Constants
 
 class FirestoreClass {
+
     private val fireStore = FirebaseFirestore.getInstance()
 
     fun registerUser(activity: RegisterActivity, userInfo: User) {
@@ -79,6 +85,9 @@ class FirestoreClass {
                     is ProfileActivity -> {
                         activity.userDetailsSuccess(user)
                     }
+                    is DashboardActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
 
                 }
 
@@ -108,7 +117,6 @@ class FirestoreClass {
             .addOnSuccessListener {
                 when(activity) {
                     is SetUpUserProfileActivity -> {
-
                         activity.updateUserProfileSuccess()
                     }
                     is EditProfileActivity -> {
@@ -129,8 +137,8 @@ class FirestoreClass {
             }
 
     }
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
-        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child( Constants.USER_PROFILE_IMAGE + "." + System.currentTimeMillis() + "." + Constants.getFileExtension(activity, imageFileURI)
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
+        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child( imageType + "." + System.currentTimeMillis() + "." + Constants.getFileExtension(activity, imageFileURI)
         )
         sRef.putFile(imageFileURI!!).addOnSuccessListener { takeSnapshot ->
             Log.e(
@@ -147,6 +155,9 @@ class FirestoreClass {
                         is EditProfileActivity -> {
                             activity.imageUploadSuccess(uri.toString())
                         }
+                        is AddPetProfileActivity -> {
+                            activity.imageUploadSuccess(uri.toString())
+                        }
                     }
 
                 }
@@ -156,8 +167,12 @@ class FirestoreClass {
                     is SetUpUserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
-                    is EditProfileActivity ->
+                    is EditProfileActivity -> {
                         activity.hideProgressDialog()
+                    }
+                    is AddPetProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
                 }
 
                 Log.e(
@@ -167,4 +182,58 @@ class FirestoreClass {
                 )
             }
     }
+
+    fun uploadPetDetails(activity: AddPetProfileActivity, petInfo: Pet) {
+        fireStore.collection(Constants.PETS)
+            .document()
+            .set(petInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.petUploadSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the pet details",
+                    e
+                )
+            }
+    }
+
+//    fun getPetsList(fragment: Fragment) {
+//        fireStore.collection(Constants.PETS)
+//            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+//            .get()
+//            .addOnSuccessListener { document ->
+//
+//                Log.e("Pets List", document.documents.toString())
+//
+//                val petsList: ArrayList<Pet> = ArrayList()
+//
+//                for(i in document.documents) {
+//
+//                    val pet = i.toObject(Pet::class.java)
+//                    pet!!.petId = i.id
+//
+//                    petsList.add(pet)
+//                }
+//
+//                when(fragment) {
+//                    is ListingsFragment -> {
+//                        fragment.petListLoadedSuccessfullyFromFireStore(petsList)
+//                    }
+//                }
+//            }
+//            .addOnFailureListener { e ->
+//                // Hide the progress dialog if there is any error based on the base class instance.
+//                when (fragment) {
+//                    is ListingsFragment -> {
+//                        fragment.hideProgressDialog()
+//                    }
+//                }
+//
+//                Log.e("Get Product List", "Error while getting product list.", e)
+//            }
+//
+//    }
 }

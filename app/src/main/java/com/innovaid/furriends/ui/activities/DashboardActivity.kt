@@ -23,6 +23,7 @@ import com.innovaid.furriends.databinding.ActivityDashboardBinding
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_set_up_user_profile.*
 import kotlinx.android.synthetic.main.side_nav_header.*
 import kotlinx.android.synthetic.main.side_nav_header.view.*
@@ -51,7 +52,7 @@ class DashboardActivity : BaseActivity() {
             when(it.itemId) {
                 R.id.nav_profile -> startActivity(Intent(this, ProfileActivity::class.java))
                 R.id.nav_application_status -> startActivity(Intent(this, ApplicationStatusActivity::class.java))
-                R.id.nav_listings -> startActivity(Intent(this, ListingsActivity::class.java))
+                R.id.nav_listings -> startActivity(Intent(this, DummyActivity::class.java))
                 R.id.nav_donate -> startActivity(Intent(this, DonateActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
@@ -70,13 +71,22 @@ class DashboardActivity : BaseActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home,
-                R.id.nav_favorites,
+                R.id.nav_listings,
                 R.id.nav_notifications,
                 R.id.nav_inbox
             ),drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
+
+    }
+    fun userDetailsSuccess(user: User) {
+        userDetails = user
+
+        hideProgressDialog()
+
+        GlideLoader(this).loadUserPicture(user.image, ivHeaderUserImage)
+        tvUserProfileName.text = "${user.firstName} ${user.lastName}"
 
     }
 

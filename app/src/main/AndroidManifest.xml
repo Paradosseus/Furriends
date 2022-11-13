@@ -18,6 +18,38 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
+            android:name=".ApplicationStatusActvity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DummyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ListingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_listings"
+            android:theme="@style/Theme.Furriends.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_list"
+            android:theme="@style/Theme.Furriends.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.activities.ApplicationStatusActivity"
             android:exported="false">
             <meta-data
@@ -91,18 +123,16 @@
             android:name=".SplashScreenActivity"
             android:exported="true"
             android:theme="@style/SplashScreenTheme">
-
-        </activity>
-        <activity
-            android:name=".ui.activities.DashboardActivity"
-            android:exported="true"
-            android:theme="@style/Theme.DashboardTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activities.DashboardActivity"
+            android:exported="true"
+            android:theme="@style/Theme.DashboardTheme" />
         <activity
             android:name=".ui.activities.RegisterActivity"
             android:exported="true" />

@@ -10,10 +10,11 @@
         android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/nav_favorites"
-        android:name="com.innovaid.furriends.ui.fragments.FavoritesFragment"
-        android:label="Favorites"
-        tools:layout="@layout/fragment_favorites" />
+        android:id="@+id/nav_listings"
+        android:name="com.innovaid.furriends.ui.fragments.ListingsFragment"
+        android:label="Listings"
+        tools:layout="@layout/fragment_listings" >
+    </fragment>
     <fragment
         android:id="@+id/nav_notifications"
         android:name="com.innovaid.furriends.ui.fragments.NotificationsFragment"
