@@ -1,5 +1,6 @@
 package com.innovaid.furriends.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.ui.activities.PetDetailsActivity
 import com.innovaid.furriends.ui.adapters.HomePetsListAdapter
 import com.innovaid.furriends.ui.adapters.PetsListAdapter
+import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_listings.*
@@ -55,6 +58,14 @@ class HomeFragment : BaseFragment() {
 
             val adapterPets = HomePetsListAdapter(requireActivity(), homePetsList)
             rvHomePetListings.adapter = adapterPets
+
+            adapterPets.setOnClickListener(object: HomePetsListAdapter.OnClickListener {
+                override fun onClick(position: Int, pet: Pet) {
+                    val intent = Intent(context, PetDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PET_ID,pet.petId)
+                    startActivity(intent)
+                }
+            })
         } else {
             rvHomePetListings.visibility = View.GONE
             tvHomeNoListings.visibility = View.VISIBLE

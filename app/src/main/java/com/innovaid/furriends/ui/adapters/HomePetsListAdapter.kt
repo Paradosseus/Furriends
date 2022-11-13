@@ -16,6 +16,7 @@ open class HomePetsListAdapter(
     private val list: ArrayList<Pet>,
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var onClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(
@@ -27,6 +28,10 @@ open class HomePetsListAdapter(
         )
     }
 
+    fun setOnClickListener(onClickListener: OnClickListener){
+        this.onClickListener = onClickListener
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
@@ -34,6 +39,12 @@ open class HomePetsListAdapter(
             GlideLoader(context).loadPetPicture(model.image!!, holder.itemView.ivHomePetImage)
             holder.itemView.tvHomePetName.text = model.petName
             holder.itemView.tvHomePetBreed.text = model.petBreed
+
+            holder.itemView.setOnClickListener {
+                if(onClickListener != null) {
+                    onClickListener!!.onClick(position, model)
+                }
+            }
         }
     }
 
@@ -42,4 +53,8 @@ open class HomePetsListAdapter(
     }
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    interface OnClickListener {
+        fun onClick(position: Int, pet: Pet)
+    }
 }
