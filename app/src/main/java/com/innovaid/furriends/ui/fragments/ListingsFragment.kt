@@ -37,36 +37,35 @@ class ListingsFragment : BaseFragment() {
         return mRootView
     }
 
-//    fun petListLoadedSuccessfullyFromFireStore(petsList: ArrayList<Pet>) {
-//
-//        hideProgressDialog()
-//
-//        if(petsList.size > 0) {
-//            rvUserPetListings.visibility = View.VISIBLE
-//            tvNoListings.visibility = View.GONE
-//
-//            rvUserPetListings.layoutManager = LinearLayoutManager(activity)
-//            rvUserPetListings.setHasFixedSize(true)
-//
-//            val adapterPets = PetsListAdapter(requireActivity(), petsList)
-//            rvUserPetListings.adapter = adapterPets
-//        } else {
-//            rvUserPetListings.visibility = View.GONE
-//            tvNoListings.visibility = View.VISIBLE
-//        }
-//
-//    }
+    fun petListLoadedSuccessfullyFromFireStore(petsList: ArrayList<Pet>) {
+
+        hideProgressDialog()
+        if(petsList.size > 0) {
+            rvUserPetListings.visibility = View.VISIBLE
+            tvNoListings.visibility = View.GONE
+
+            rvUserPetListings.layoutManager = LinearLayoutManager(activity)
+            rvUserPetListings.setHasFixedSize(true)
+
+            val adapterPets = PetsListAdapter(requireActivity(), petsList)
+            rvUserPetListings.adapter = adapterPets
+        } else {
+            rvUserPetListings.visibility = View.GONE
+            tvNoListings.visibility = View.VISIBLE
+        }
+
+    }
 
 
-//    private fun getPetsListFromFireStore() {
-//        showProgressDialog(resources.getString(R.string.please_wait))
-//        FirestoreClass().getPetsList(this)
-//    }
+    private fun getPetsListFromFireStore() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().getPetsList(this@ListingsFragment)
+    }
 
-//    override fun onResume() {
-//        super.onResume()
-//        getPetsListFromFireStore()
-//    }
+    override fun onResume() {
+        super.onResume()
+        getPetsListFromFireStore()
+    }
 
 
 

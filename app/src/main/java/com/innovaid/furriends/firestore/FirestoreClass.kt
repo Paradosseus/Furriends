@@ -200,40 +200,40 @@ class FirestoreClass {
             }
     }
 
-//    fun getPetsList(fragment: Fragment) {
-//        fireStore.collection(Constants.PETS)
-//            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
-//            .get()
-//            .addOnSuccessListener { document ->
-//
-//                Log.e("Pets List", document.documents.toString())
-//
-//                val petsList: ArrayList<Pet> = ArrayList()
-//
-//                for(i in document.documents) {
-//
-//                    val pet = i.toObject(Pet::class.java)
-//                    pet!!.petId = i.id
-//
-//                    petsList.add(pet)
-//                }
-//
-//                when(fragment) {
-//                    is ListingsFragment -> {
-//                        fragment.petListLoadedSuccessfullyFromFireStore(petsList)
-//                    }
-//                }
-//            }
-//            .addOnFailureListener { e ->
-//                // Hide the progress dialog if there is any error based on the base class instance.
-//                when (fragment) {
-//                    is ListingsFragment -> {
-//                        fragment.hideProgressDialog()
-//                    }
-//                }
-//
-//                Log.e("Get Product List", "Error while getting product list.", e)
-//            }
-//
-//    }
+    fun getPetsList(fragment: Fragment) {
+        fireStore.collection(Constants.PETS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+
+                Log.e("Pets List", document.documents.toString())
+
+                val petsList: ArrayList<Pet> = ArrayList()
+
+                for(i in document.documents) {
+
+                    val pet = i.toObject(Pet::class.java)
+                    pet!!.petId = i.id
+
+                    petsList.add(pet)
+                }
+
+                when(fragment) {
+                    is ListingsFragment -> {
+                        fragment.petListLoadedSuccessfullyFromFireStore(petsList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (fragment) {
+                    is ListingsFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting product list.", e)
+            }
+
+    }
 }

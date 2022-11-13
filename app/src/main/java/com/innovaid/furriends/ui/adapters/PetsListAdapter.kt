@@ -14,37 +14,37 @@ import kotlinx.android.synthetic.main.activity_add_pet_profile.view.*
 import kotlinx.android.synthetic.main.pet_list_layout.view.*
 import kotlinx.android.synthetic.main.pet_list_layout.view.ivPetImage
 
-class PetsListAdapter(private val petsList: ArrayList<Pet>): RecyclerView.Adapter<PetsListAdapter.MyViewHolder>() {
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetsListAdapter.MyViewHolder {
-
-            val itemView = LayoutInflater.from(parent.context).inflate(
+open class PetsListAdapter(
+    private val context: Context,
+    private val list: ArrayList<Pet>,
+    ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return MyViewHolder(
+            LayoutInflater.from(context).inflate(
                 R.layout.pet_list_layout,
                 parent,
                 false
-
             )
-        return MyViewHolder(itemView)
-
+        )
     }
 
-
-
-    override fun getItemCount(): Int {
-        return petsList.size
-    }
-
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val pet: Pet  = petsList[position]
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val model = list[position]
 
         if(holder is MyViewHolder) {
-            //GlideLoader(context).loadPetPicture(pet.image, holder.itemView.ivPetImage)
-            holder.itemView.tvListPetName.text = pet.petName
-            holder.itemView.tvListPetBreed.text = pet.petBreed
-
+            GlideLoader(context).loadPetPicture(model.image, holder.itemView.ivPetImage)
+            holder.itemView.tvListPetName.text = model.petName
+            holder.itemView.tvListPetBreed.text = model.petBreed
         }
     }
+
+    override fun getItemCount(): Int {
+        return list.size
+    }
+
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
+
+
+
+

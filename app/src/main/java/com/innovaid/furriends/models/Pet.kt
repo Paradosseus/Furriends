@@ -16,6 +16,5 @@ data class Pet(
     val spayedOrNeutered: String ="",
     val description: String = "",
     val image: String = "",
-    val status: String="",
     var petId: String = ""
 ): Parcelable
