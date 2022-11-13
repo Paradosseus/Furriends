@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.innovaid.furriends.R
 import com.innovaid.furriends.databinding.ActivityDashboardBinding
+import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -33,7 +34,7 @@ class DashboardActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
-    private lateinit var userDetails: User
+    private lateinit var userDetails:User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,16 +80,25 @@ class DashboardActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
 
+
     }
-//    fun userDetailsSuccess(user: User) {
-//        userDetails = user
-//
-//        hideProgressDialog()
-//
-//        GlideLoader(this).loadUserPicture(user.image, ivHeaderUserImage)
-//        tvUserProfileName.text = "${user.firstName} ${user.lastName}"
-//
-//    }
+    override fun onResume() {
+        super.onResume()
+        getUserDetails()
+    }
+    private fun getUserDetails() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().getUserInfo(this)
+    }
+    fun userDetailsSuccess(user: User) {
+        userDetails = user
+
+        hideProgressDialog()
+
+        GlideLoader(this).loadUserPicture(user.image, ivHeaderUserImage)
+        tvHeaderUserName.text = "${user.firstName} ${user.lastName}"
+
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {

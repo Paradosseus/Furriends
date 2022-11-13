@@ -6,13 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 //import androidx.lifecycle.ViewModelProviders
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.ui.adapters.HomePetsListAdapter
+import com.innovaid.furriends.ui.adapters.PetsListAdapter
 import com.innovaid.furriends.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_listings.*
 
 
 class HomeFragment : BaseFragment() {
@@ -30,22 +37,34 @@ class HomeFragment : BaseFragment() {
         return root
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        getpetsListForHome()
-//    }
+    override fun onResume() {
+        super.onResume()
+        getPetsListForHome()
+    }
 
-//    fun petListSuccessfullyLoadedToHome(homePetsList: ArrayList<Pet>) {
-//        hideProgressDialog()
-//        for (i in homePetsList) {
-//            Log.i("Pets name", i.petName)
-//        }
-//    }
-//    private fun getpetsListForHome() {
-//        showProgressDialog(resources.getString(R.string.please_wait))
-//
-//        FirestoreClass().getPetsListToHome(this@HomeFragment)
-//    }
+    fun petListSuccessfullyLoadedToHome(homePetsList: ArrayList<Pet>) {
+
+        hideProgressDialog()
+
+        if(homePetsList.size > 0) {
+            rvHomePetListings.visibility = View.VISIBLE
+            tvHomeNoListings.visibility = View.GONE
+
+            rvHomePetListings.layoutManager = GridLayoutManager(activity, 2)
+            rvHomePetListings.setHasFixedSize(true)
+
+            val adapterPets = HomePetsListAdapter(requireActivity(), homePetsList)
+            rvHomePetListings.adapter = adapterPets
+        } else {
+            rvHomePetListings.visibility = View.GONE
+            tvHomeNoListings.visibility = View.VISIBLE
+        }
+    }
+    private fun getPetsListForHome() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        FirestoreClass().getPetsListToHome(this@HomeFragment)
+    }
 
 
 }
