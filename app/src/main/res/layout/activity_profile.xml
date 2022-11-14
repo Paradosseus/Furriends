@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:contentDescription="image"
-                app:srcCompat="@drawable/ic_baseline_account_circle_24"
+                app:srcCompat="@drawable/profile_icon"
                 tools:layout_editor_absoluteX="33dp"
                 tools:layout_editor_absoluteY="120dp" />
 
@@ -61,13 +61,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="3dp"
-                    android:text="0" />
+                    android:text="0"
+                    android:textColor="@color/gray"/>
 
                 <TextView
                     android:id="@+id/tvLiked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Liked" />
+                    android:text="Liked"
+                    android:textColor="@color/gray"/>
             </LinearLayout>
 
 
@@ -88,12 +90,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="3dp"
+                    android:textColor="@color/gray"
                     android:text="0" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adopted" />
+                    android:text="Adopted"
+                    android:textColor="@color/gray"/>
             </LinearLayout>
 
             <LinearLayout
@@ -107,7 +111,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Edit Profile" />
+                    android:text="Edit Profile"
+                    android:textColor="@color/sky_blue"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -128,6 +133,7 @@
             android:id="@+id/tvUserProfileName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="25sp"/>
         <TextView
@@ -156,6 +162,7 @@
             android:layout_height="wrap_content"
             android:text="Bio"
             android:textSize="20sp"
+            android:textColor="@color/black"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/tvUserBio"

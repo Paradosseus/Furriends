@@ -53,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="35sp" />
 
                 <LinearLayout
@@ -95,6 +96,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:text="About"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"

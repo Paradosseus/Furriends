@@ -5,6 +5,7 @@
         android:id="@+id/actionAddPet"
         android:icon="@drawable/ic_baseline_add_a_listing_24"
         android:title="Add a pet"
+        android:iconTint="@color/white"
         app:showAsAction="always"
         />
 

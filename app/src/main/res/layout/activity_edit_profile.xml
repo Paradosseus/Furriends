@@ -10,20 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="88dp"
-            android:gravity="center"
-            android:text="Complete Profile"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         /
 
 
@@ -31,9 +17,10 @@
             android:id="@+id/flUserImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/ivUserPhoto"
@@ -42,7 +29,7 @@
                 android:background="@drawable/user_image_background"
                 android:contentDescription="image"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_account_circle_24" />
+                android:src="@drawable/profile_icon" />
 
 
         </FrameLayout>
@@ -52,18 +39,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="First Name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/etFirstName"
                     app:layout_constraintStart_toStartOf="@+id/etFirstName" />
 
         <EditText
             android:id="@+id/etFirstName"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/edit_text_border"
             android:inputType="textPersonName"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,13 +64,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Last Name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/etLastName"
                     app:layout_constraintStart_toStartOf="@+id/etLastName" />
 
                 <EditText
                     android:id="@+id/etLastName"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/edit_text_border"
                     android:inputType="textPersonName"
@@ -94,12 +86,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/etEmail"
                     app:layout_constraintStart_toStartOf="@+id/etEmail" />
                 <EditText
                     android:id="@+id/etEmail"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/edit_text_border"
                     android:inputType="textEmailAddress"
@@ -113,16 +107,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Phone Number"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/etPhoneNumber"
                     app:layout_constraintStart_toStartOf="@+id/etPhoneNumber" />
 
                 <EditText
                     android:id="@+id/etPhoneNumber"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/edit_text_border"
-
                     android:inputType="phone"
                     app:layout_constraintEnd_toEndOf="@+id/etEmail"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -134,16 +129,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Address"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/etAddress"
                     app:layout_constraintStart_toStartOf="@+id/etAddress" />
 
                 <EditText
                     android:id="@+id/etAddress"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/edit_text_border"
-
                     app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/etPhoneNumber"
@@ -154,6 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bio"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/etBio"
                     app:layout_constraintStart_toStartOf="@+id/etBio" />
 
@@ -179,16 +177,6 @@
                     app:layout_constraintEnd_toEndOf="@+id/etBio"
                     app:layout_constraintStart_toStartOf="@+id/etBio"
                     app:layout_constraintTop_toBottomOf="@+id/etBio" />
-
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="202dp"
-            android:layout_height="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

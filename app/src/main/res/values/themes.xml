@@ -55,6 +55,8 @@
     <style name="Theme.Furriends.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Furriends.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="roundedEdgeImage" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerRadius">10dp</item>
+    </style>
 
 </resources>

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivAppLogo"
-        android:layout_width="232dp"
-        android:layout_height="213dp"
+        android:layout_width="314dp"
+        android:layout_height="248dp"
         android:layout_marginTop="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -17,16 +17,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/app_logo" />
 
+    <View
+        android:id="@+id/view2"
+        android:layout_width="262dp"
+        android:layout_height="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivAppLogo" />
+
     <EditText
         android:id="@+id/etEmailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:hint="Email Address"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/ivAppLogo"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/ivAppLogo"
+        app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toBottomOf="@+id/ivAppLogo" />
 
     <EditText
@@ -56,8 +65,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Login"
         android:backgroundTint="@color/sky_blue"
+        android:text="Login"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
@@ -78,8 +87,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Create New Account"
         android:backgroundTint="@color/sky_blue"
+        android:text="Create New Account"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/tvOr" />

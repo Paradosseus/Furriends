@@ -31,6 +31,11 @@ class RegisterActivity : BaseActivity() {
         binding.btnRCreateAccount.setOnClickListener {
             registerUser()
 
+        tvLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
         }
     }
     private fun registerUser() {
