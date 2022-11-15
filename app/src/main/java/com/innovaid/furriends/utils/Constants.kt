@@ -34,7 +34,7 @@ object Constants {
 
     const val PET_IMAGE: String ="petImage"
     const val USER_ID: String = "userId"
-    const val EXTRA_PET_ID = "extra_pet_id"
+    const val EXTRA_PET_ID = "extraPetId"
     const val EXTRA_PET_OWNER_ID = "extraOwnerId"
 
     const val OTHER_PET_DETAILS: String = "OtherPetDetails"
