@@ -112,13 +112,58 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Description..."
+                app:layout_constraintBottom_toTopOf="@+id/btnAdopt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetDetailAboutTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPetDetailAboutTitle"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnAdopt"
+                android:layout_width="242dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Adopt"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/ibAddtoFavorite"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/icon_button_background"
+                android:backgroundTint="@color/gray"
+                android:src="@drawable/favorite_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/btnAdopt"
+                app:layout_constraintStart_toEndOf="@+id/btnAdopt"
+                app:layout_constraintTop_toTopOf="@+id/btnAdopt" />
+
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/ibMessageUser"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/icon_button_background"
+                android:backgroundTint="@color/green"
+                android:src="@drawable/message_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/ibAddtoFavorite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ibAddtoFavorite"
+                app:layout_constraintTop_toTopOf="@+id/ibAddtoFavorite" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </ScrollView>

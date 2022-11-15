@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.innovaid.furriends.R
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.ui.activities.EditPetProfileActivity
 import com.innovaid.furriends.ui.activities.PetDetailsActivity
 import com.innovaid.furriends.ui.fragments.ListingsFragment
 import com.innovaid.furriends.utils.Constants
@@ -39,7 +40,9 @@ open class PetsListAdapter(
             holder.itemView.tvListPetName.text = model.petName
             holder.itemView.tvListPetBreed.text = model.petBreed
             holder.itemView.ibEditPetProfile.setOnClickListener {
-                fragment.editPetProfile()
+                val intent = Intent(context, EditPetProfileActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PET_ID,model.petId)
+                context.startActivity(intent)
             }
             holder.itemView.ibDeletePetProfile.setOnClickListener {
                 fragment.deletePet(model.petId!!)
@@ -47,6 +50,7 @@ open class PetsListAdapter(
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, PetDetailsActivity::class.java)
                 intent.putExtra(Constants.EXTRA_PET_ID,model.petId)
+                intent.putExtra(Constants.EXTRA_PET_OWNER_ID,model.userId)
                 context.startActivity(intent)
             }
         }

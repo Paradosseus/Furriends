@@ -59,13 +59,13 @@ class HomeFragment : BaseFragment() {
             val adapterPets = HomePetsListAdapter(requireActivity(), homePetsList)
             rvHomePetListings.adapter = adapterPets
 
-            adapterPets.setOnClickListener(object: HomePetsListAdapter.OnClickListener {
-                override fun onClick(position: Int, pet: Pet) {
-                    val intent = Intent(context, PetDetailsActivity::class.java)
-                    intent.putExtra(Constants.EXTRA_PET_ID,pet.petId)
-                    startActivity(intent)
-                }
-            })
+//            adapterPets.setOnClickListener(object: HomePetsListAdapter.OnClickListener {
+//                override fun onClick(position: Int, pet: Pet) {
+//                    val intent = Intent(context, PetDetailsActivity::class.java)
+//                    intent.putExtra(Constants.EXTRA_PET_ID,pet.petId)
+//                    startActivity(intent)
+//                }
+//            })
         } else {
             rvHomePetListings.visibility = View.GONE
             tvHomeNoListings.visibility = View.VISIBLE

@@ -3,6 +3,7 @@ package com.innovaid.furriends.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
@@ -21,9 +22,21 @@ class PetDetailsActivity : BaseActivity() {
 
         if(intent.hasExtra(Constants.EXTRA_PET_ID)) {
             mPetId = intent.getStringExtra(Constants.EXTRA_PET_ID)!!
-            Log.i("Pet id", mPetId)
+
         }
+        var petOwnerId: String = ""
         getPetDetails()
+        if (intent.hasExtra(Constants.EXTRA_PET_OWNER_ID)) {
+            petOwnerId = intent.getStringExtra(Constants.EXTRA_PET_OWNER_ID)!!
+        }
+        if(FirestoreClass().getCurrentUserID() == petOwnerId) {
+            btnAdopt.visibility = View.GONE
+            ibAddtoFavorite.visibility = View.GONE
+            ibMessageUser.visibility = View.GONE
+        }
+            btnAdopt.visibility = View.VISIBLE
+            ibAddtoFavorite.visibility = View.VISIBLE
+            ibMessageUser.visibility = View.VISIBLE
     }
     fun getPetDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))

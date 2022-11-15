@@ -1,12 +1,15 @@
 package com.innovaid.furriends.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.innovaid.furriends.R
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.ui.activities.PetDetailsActivity
+import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.pet_home_layout.view.*
 import kotlinx.android.synthetic.main.pet_list_layout.view.*
@@ -41,9 +44,14 @@ open class HomePetsListAdapter(
             holder.itemView.tvHomePetBreed.text = model.petBreed
 
             holder.itemView.setOnClickListener {
-                if(onClickListener != null) {
-                    onClickListener!!.onClick(position, model)
-                }
+                val intent = Intent(context, PetDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PET_ID,model.petId)
+                intent.putExtra(Constants.EXTRA_PET_OWNER_ID,model.userId)
+                context.startActivity(intent)
+//            holder.itemView.setOnClickListener {
+//                if(onClickListener != null) {
+//                    onClickListener!!.onClick(position, model)
+//                }
             }
         }
     }

@@ -76,8 +76,6 @@ class EditProfileActivity : BaseActivity(), View.OnClickListener {
 
                     if (validateUserProfileDetails()) {
 
-
-
                         if(selectedImageFileUri != null) {
                             FirestoreClass().uploadImageToCloudStorage(this, selectedImageFileUri, Constants.USER_PROFILE_IMAGE)
                         } else {

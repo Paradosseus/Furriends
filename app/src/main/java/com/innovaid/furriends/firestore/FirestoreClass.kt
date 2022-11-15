@@ -249,7 +249,6 @@ class FirestoreClass {
                     activity.petDetailsSuccess(pet)
                 }
 
-
             }
             .addOnFailureListener {
                 e ->
@@ -299,29 +298,25 @@ class FirestoreClass {
             }
 
     }
-//    //
-//    fun updatePetProfile(activity: Activity, userHashMap: HashMap<String, Any>) {
-//        fireStore.collection(Constants.PETS).document(getCurrentUserID())
-//            .update(userHashMap)
-//            .addOnSuccessListener {
-//                when(activity) {
-//                    is EditPetProfileActivity -> {
-//                        activity.updatePetProfileSuccess()
-//                    }
-//
-//                }
-//            }
-//            .addOnFailureListener{ e->
-//                when(activity) {
-//                    is EditPetProfileActivity -> {
-//                        activity.hideProgressDialog()
-//                    }
-//                }
-//
-//                Log.e(
-//                    activity.javaClass.simpleName, "Error while updating the user details", e
-//                )
-//            }
-//
-//    }
+
+    fun getPetDetailsForEdit(activity: EditPetProfileActivity, petId: String) {
+        fireStore.collection(Constants.PETS)
+            .document(petId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+                val pet = document.toObject(Pet::class.java)
+                if (pet != null) {
+                    activity.petDetailsSuccessForEdit(pet)
+                }
+
+            }
+            .addOnFailureListener {
+                    e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while getting the pet details", e)
+
+            }
+    }
+
 }

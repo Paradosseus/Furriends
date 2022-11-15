@@ -36,11 +36,6 @@ class ListingsFragment : BaseFragment() {
         mRootView = inflater.inflate(R.layout.fragment_listings,container, false)
         return mRootView
     }
-    fun editPetProfile() {
-        val intent = Intent(requireActivity(), EditPetProfileActivity::class.java)
-//        intent.putExtra(Constants.OTHER_PET_DETAILS,petDetails)
-        startActivity(intent)
-    }
     fun deletePet(petID: String) {
         showAlertDialogToDeletePetProfile(petID)
     }
