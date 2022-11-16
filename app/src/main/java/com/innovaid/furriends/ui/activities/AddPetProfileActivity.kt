@@ -32,9 +32,12 @@ class AddPetProfileActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_pet_profile)
+
+
         ivAddPetImage.setOnClickListener(this)
         btnSetupPetProfile.setOnClickListener(this)
         ivCalendar.setOnClickListener(this)
+        ibAPDBackButton.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -51,7 +54,6 @@ class AddPetProfileActivity : BaseActivity(), View.OnClickListener {
                         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
                             Constants.READ_STORAGE_PERMISSION_CODE)
                     }
-
                 }
                 R.id.btnSetupPetProfile -> {
                     if (validatePetDetails()) {
@@ -61,6 +63,9 @@ class AddPetProfileActivity : BaseActivity(), View.OnClickListener {
                 }
                 R.id.ivCalendar -> {
                     setDate()
+                }
+                R.id.ibAPDBackButton -> {
+                    onBackPressed()
                 }
 
             }

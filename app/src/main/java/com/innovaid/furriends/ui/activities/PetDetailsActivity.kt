@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_add_pet_profile.*
 import kotlinx.android.synthetic.main.activity_pet_details.*
 import kotlinx.android.synthetic.main.pet_list_layout.view.*
 
@@ -41,6 +43,9 @@ class PetDetailsActivity : BaseActivity(),  View.OnClickListener {
             ibMessageUser.visibility = View.VISIBLE
         }
         getPetDetails()
+
+        ibAddtoFavorite.setOnClickListener(this)
+        ibPDBackButton.setOnClickListener(this)
     }
     fun getPetDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
@@ -62,10 +67,13 @@ class PetDetailsActivity : BaseActivity(),  View.OnClickListener {
         if (p0 != null) {
             when (p0.id) {
                 R.id.ibAddtoFavorite -> {
-                    ibAddtoFavorite.setImageResource(R.drawable.message_icon)
+                    ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
                 }
                 R.id.btnAdopt -> {
-                    btnAdopt.setText("Yawa")
+
+                }
+                R.id.ibPDBackButton -> {
+                    onBackPressed()
                 }
             }
         }

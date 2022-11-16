@@ -7,17 +7,37 @@
     tools:context=".ui.activities.ProfileActivity">
 
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbProfileActivity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <FrameLayout
             android:id="@+id/flUserProfilePhoto"
@@ -41,6 +61,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -62,14 +83,14 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="3dp"
                     android:text="0"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:id="@+id/tvLiked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Liked"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray" />
             </LinearLayout>
 
 
@@ -90,14 +111,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="3dp"
-                    android:textColor="@color/gray"
-                    android:text="0" />
+                    android:text="0"
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Adopted"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="Edit Profile"
-                    android:textColor="@color/sky_blue"/>
+                    android:textColor="@color/sky_blue" />
             </LinearLayout>
 
         </LinearLayout>
@@ -125,6 +146,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:orientation="vertical"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">

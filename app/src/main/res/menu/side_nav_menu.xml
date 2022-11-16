@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_baseline_account_circle_24"
-        android:title="View Profile" />
+        android:title="View Profile"/>
 
     <item
         android:id="@+id/nav_application_status"

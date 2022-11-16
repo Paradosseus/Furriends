@@ -25,8 +25,8 @@ class RegisterActivity : BaseActivity() {
         binding = ActivityRegisterBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
 
+        setupActionBar()
 
         binding.btnRCreateAccount.setOnClickListener {
             registerUser()
@@ -37,6 +37,19 @@ class RegisterActivity : BaseActivity() {
         }
 
         }
+    }
+
+    private fun setupActionBar() {
+
+        setSupportActionBar(tbRegisterActivity)
+        supportActionBar!!.title = "Register"
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+
+        }
+
+        tbRegisterActivity.setNavigationOnClickListener { onBackPressed() }
     }
     private fun registerUser() {
 

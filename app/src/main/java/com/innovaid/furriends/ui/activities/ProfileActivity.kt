@@ -11,6 +11,7 @@ import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.side_nav_header.*
 
 class ProfileActivity : BaseActivity() {
@@ -21,12 +22,25 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        setupActionBar()
+
         tvEditUserProfile.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)
             intent.putExtra(Constants.OTHER_USER_DETAILS, userDetails)
             startActivity(intent)
         }
 
+    }
+    private fun setupActionBar() {
+
+        setSupportActionBar(tbProfileActivity)
+        supportActionBar!!.title = "User Profile"
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+
+        }
+        tbProfileActivity.setNavigationOnClickListener { onBackPressed() }
     }
     override fun onResume() {
         super.onResume()

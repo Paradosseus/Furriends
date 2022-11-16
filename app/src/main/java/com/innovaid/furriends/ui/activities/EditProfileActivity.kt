@@ -16,6 +16,7 @@ import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_donate.*
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_set_up_user_profile.*
 import kotlinx.android.synthetic.main.activity_set_up_user_profile.btnSaveProfile
@@ -36,6 +37,8 @@ class EditProfileActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+
+        setupActionBar()
 
         if(intent.hasExtra(Constants.OTHER_USER_DETAILS)) {
 
@@ -58,8 +61,21 @@ class EditProfileActivity : BaseActivity(), View.OnClickListener {
 
         ivUserPhoto.setOnClickListener(this)
         btnSaveProfile.setOnClickListener(this)
+
+
     }
 
+    private fun setupActionBar() {
+
+        setSupportActionBar(tbEditProfileActivity)
+        supportActionBar!!.title = "Edit Profile"
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+
+        }
+        tbEditProfileActivity.setNavigationOnClickListener { onBackPressed() }
+    }
     override fun onClick(p0: View?) {
         if (p0 != null) {
             when (p0.id) {
