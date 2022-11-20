@@ -1,55 +1,67 @@
 package com.innovaid.furriends.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
+import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.innovaid.furriends.MainActivity
 import com.innovaid.furriends.R
 
-import com.innovaid.furriends.databinding.ActivityLoginBinding
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.utils.Constants
+import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : BaseActivity() {
-    private lateinit var binding: ActivityLoginBinding
+class LoginActivity : BaseActivity(), View.OnClickListener {
+
+    //Declares Firebase Authentication as Global Variable
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Getting the instance of Firebase Authentication
         firebaseAuth = FirebaseAuth.getInstance()
-        binding = ActivityLoginBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
+        setContentView(R.layout.activity_login)
 
 
-        binding.btnLogin.setOnClickListener {
-            loginUser()
-        }
+        btnLogin.setOnClickListener(this)
 
-        binding.btnRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
+        btnCreateNewAccount.setOnClickListener(this)
 
-        binding.tvForgotPassword.setOnClickListener {
-            val intent = Intent(this, ForgotPasswordActivity::class.java)
-            startActivity(intent)
-        }
+        tvForgotPassword.setOnClickListener(this)
 
     }
+    //Triggers specific code-block when given Ids are clicked
+    override fun onClick(p0: View?) {
+        if(p0 != null) {
+            when (p0.id) {
+                R.id.tvForgotPassword -> {
+                    val intent = Intent(this, ForgotPasswordActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.btnLogin -> {
+                    loginUser()
+                }
+                R.id.btnCreateNewAccount -> {
+                    val intent = Intent(this, RegisterActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+    }
+    // A function that will login users with their registered email and password using Firebase Authentication
     private fun loginUser() {
+        if (validateLoginCredentials()) {
 
-        val em = binding.etEmailAddress.text.toString().trim { it <= ' ' }
-        val pass = binding.etPassword.text.toString().trim { it <= ' ' }
-
-        if (em.isNotEmpty() && pass.isNotEmpty()) {
+            //Getting and storing the email and password into variables from the xml and trimming the space
+            val em = etEmailAddress.text.toString().trim { it <= ' ' }
+            val pass = etPassword.text.toString().trim { it <= ' ' }
 
             showProgressDialog(resources.getString(R.string.please_wait))
 
+            //Login using Firebase Authentication
             firebaseAuth.signInWithEmailAndPassword(em, pass).addOnCompleteListener { task ->
 
                 if(task.isSuccessful) {
@@ -62,7 +74,25 @@ class LoginActivity : BaseActivity() {
                 }
             }
         }
+
     }
+    //Validates if user has entered their login credentials or not
+    private fun validateLoginCredentials(): Boolean {
+        return when {
+            TextUtils.isEmpty(etEmailAddress.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this,"Please enter your email address", Toast.LENGTH_SHORT).show()
+                false
+            }
+            TextUtils.isEmpty(etPassword.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this,"Please enter your password", Toast.LENGTH_SHORT).show()
+                false
+            }
+            else -> {
+                true
+            }
+        }
+    }
+    //A Function that notifies the user has logged in successfully and redirects them to the Dashboard Activity
     fun userLoggedInSuccessful(user: User) {
 
         hideProgressDialog()
@@ -76,4 +106,5 @@ class LoginActivity : BaseActivity() {
         }
         finish()
     }
+
 }

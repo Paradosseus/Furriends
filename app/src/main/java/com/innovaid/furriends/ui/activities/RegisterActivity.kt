@@ -16,19 +16,16 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 
 class RegisterActivity : BaseActivity() {
-    private lateinit var binding: ActivityRegisterBinding
+
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var progressDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
-
+        setContentView(R.layout.activity_register)
 
         setupActionBar()
 
-        binding.btnRCreateAccount.setOnClickListener {
+        btnRCreateAccount.setOnClickListener {
             registerUser()
 
         tvLogin.setOnClickListener {
@@ -38,7 +35,7 @@ class RegisterActivity : BaseActivity() {
 
         }
     }
-
+    //Sets up action bar
     private fun setupActionBar() {
 
         setSupportActionBar(tbRegisterActivity)
@@ -55,11 +52,11 @@ class RegisterActivity : BaseActivity() {
 
         showProgressDialog(resources.getString(R.string.please_wait))
 
-        val userEmail = binding.etREmailAddress.text.toString().trim { it <= ' ' }
-        val userPassword = binding.etRPassword.text.toString().trim { it <= ' ' }
-        val confirmPassword = binding.etRConfirmPassword.text.toString().trim { it <= ' ' }
-        val userFirstName = binding.etRFirstName.text.toString().trim { it <= ' ' }
-        val userLastName = binding.etRLastName.text.toString().trim { it <= ' ' }
+        val userEmail = etREmailAddress.text.toString().trim { it <= ' ' }
+        val userPassword = etRPassword.text.toString().trim { it <= ' ' }
+        val confirmPassword = etRConfirmPassword.text.toString().trim { it <= ' ' }
+        val userFirstName = etRFirstName.text.toString().trim { it <= ' ' }
+        val userLastName = etRLastName.text.toString().trim { it <= ' ' }
 
 
         if (userEmail.isNotEmpty() && userPassword.isNotEmpty() && confirmPassword.isNotEmpty()) {
