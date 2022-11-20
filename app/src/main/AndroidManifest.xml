@@ -18,28 +18,28 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
-            android:name=".AdminDashboardActivity"
+            android:name=".ui.activities.AdminDashboardActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdoptionActivity"
+            android:name=".ui.activities.AdoptionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddStrayAnimalActivity"
+            android:name=".ui.activities.AddStrayAnimalActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ApplicationStatusActivity"
+            android:name=".ui.activities.ApplicationStatusActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -61,13 +61,6 @@
         </activity>
         <activity
             android:name=".ui.activities.FavoritesActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.activities.ApplicationStatusActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

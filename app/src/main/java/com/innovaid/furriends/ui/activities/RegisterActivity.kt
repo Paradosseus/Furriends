@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : BaseActivity() {
 
-    private lateinit var firebaseAuth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +57,15 @@ class RegisterActivity : BaseActivity() {
         val confirmPassword = etRConfirmPassword.text.toString().trim { it <= ' ' }
         val userFirstName = etRFirstName.text.toString().trim { it <= ' ' }
         val userLastName = etRLastName.text.toString().trim { it <= ' ' }
+        val userAccessLevel = "user"
 
 
         if (userEmail.isNotEmpty() && userPassword.isNotEmpty() && confirmPassword.isNotEmpty()) {
             if(userPassword == confirmPassword) {
 
 
-                firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener { task ->
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(userEmail, userPassword)
+                    .addOnCompleteListener { task ->
 
 
                     if (task.isSuccessful){
@@ -74,7 +76,9 @@ class RegisterActivity : BaseActivity() {
                             firebaseUser.uid,
                             userFirstName,
                             userLastName,
-                            userEmail
+                            userEmail,
+                            userAccessLevel
+
                         )
 
                         FirestoreClass().registerUser(this@RegisterActivity, user)

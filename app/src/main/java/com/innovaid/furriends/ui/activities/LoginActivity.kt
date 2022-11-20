@@ -96,13 +96,16 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     fun userLoggedInSuccessful(user: User) {
 
         hideProgressDialog()
-
-        if (user.profileCompleted == 0) {
-            val intent = Intent(this, SetUpUserProfileActivity::class.java)
-            intent.putExtra(Constants.OTHER_USER_DETAILS, user)
-            startActivity(intent)
+        if (user.userType == "admin") {
+            startActivity(Intent(this, AdminDashboardActivity::class.java))
         } else {
-            startActivity(Intent(this, DashboardActivity::class.java))
+            if (user.profileCompleted == 0) {
+                val intent = Intent(this, SetUpUserProfileActivity::class.java)
+                intent.putExtra(Constants.OTHER_USER_DETAILS, user)
+                startActivity(intent)
+            } else {
+                startActivity(Intent(this, DashboardActivity::class.java))
+            }
         }
         finish()
     }
