@@ -5,17 +5,18 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class StrayAnimal(
-    val breed: String? = null,
-    val petColor: String? =null,
-    val petType: String? = null,
-    val petGender: String?  =null,
-    val spayedOrNeutered: String? =null,
-    val location: String? = null,
+    val userId: String? = null,
+    val strayAnimalBreed: String? = null,
+    val strayAnimalColor: String? =null,
+    val strayAnimalType: String? = null,
+    val strayAnimalGender: String?  =null,
+    val strayAnimalSpayedOrNeutered: String? =null,
+    val locationFounded: String? = null,
     val dateFounded: String? = null,
     val timeFounded: String? = null,
-    val description: String? = null,
-    val image: String? = null,
+    val strayAnimalDescription: String? = null,
+    val strayAnimalImage: String? = null,
     val status: String? = null,
     val adoptedTo : String? = null,
-    val strayAnimalId: String? = null
+    var strayAnimalId: String? = null
 ) : Parcelable

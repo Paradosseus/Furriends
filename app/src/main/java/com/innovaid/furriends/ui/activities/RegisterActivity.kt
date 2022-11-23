@@ -1,16 +1,14 @@
 package com.innovaid.furriends.ui.activities
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.innovaid.furriends.R
-import com.innovaid.furriends.databinding.ActivityRegisterBinding
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
+import com.innovaid.furriends.ui.activities.user.SetUpUserProfileActivity
 import com.innovaid.furriends.utils.Constants
 import kotlinx.android.synthetic.main.activity_register.*
 

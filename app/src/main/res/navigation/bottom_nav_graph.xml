@@ -6,23 +6,23 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.innovaid.furriends.ui.fragments.HomeFragment"
+        android:name="com.innovaid.furriends.ui.fragments.user.UserHomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_user_home" />
     <fragment
         android:id="@+id/nav_listings"
-        android:name="com.innovaid.furriends.ui.fragments.ListingsFragment"
+        android:name="com.innovaid.furriends.ui.fragments.user.UserListingsFragment"
         android:label="Listings"
         tools:layout="@layout/fragment_listings" >
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
-        android:name="com.innovaid.furriends.ui.fragments.NotificationsFragment"
+        android:name="com.innovaid.furriends.ui.fragments.user.UserNotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/nav_inbox"
-        android:name="com.innovaid.furriends.ui.fragments.InboxFragment"
+        android:name="com.innovaid.furriends.ui.fragments.user.UserInboxFragment"
         android:label="Inbox"
         tools:layout="@layout/fragment_inbox" />
 </navigation>

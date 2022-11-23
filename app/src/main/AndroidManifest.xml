@@ -18,56 +18,78 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.AdminDashboardActivity"
+            android:name=".CityPoundAdoptionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.AdoptionActivity"
+            android:name=".UserAdoptionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.AddStrayAnimalActivity"
+            android:name=".ui.activities.admin.StrayAnimalDetailsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.ApplicationStatusActivity"
+            android:name=".ui.activities.admin.AddStrayAnimalProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.PetDetailsActivity"
+            android:name=".ui.activities.admin.AdminDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DashboardTheme">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.activities.admin.StrayAdoptionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.EditPetProfileActivity"
+            android:name=".ui.activities.user.UserApplicationStatusActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.FavoritesActivity"
+            android:name=".ui.activities.user.UserPetDetailsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.ProfileActivity"
+            android:name=".ui.activities.user.EditUserPetProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.activities.user.UserFavoritesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.activities.user.UserProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -88,14 +110,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.SetUpUserProfileActivity"
+            android:name=".ui.activities.user.SetUpUserProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.ForgotPasswordActivity"
+            android:name=".ui.activities.user.ForgotPasswordActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -109,14 +131,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.EditProfileActivity"
+            android:name=".ui.activities.user.EditUserProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.AddPetProfileActivity"
+            android:name=".ui.activities.user.AddUserPetProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -133,7 +155,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.DashboardActivity"
+            android:name=".ui.activities.user.UserDashboardActivity"
             android:exported="true"
             android:theme="@style/Theme.DashboardTheme" />
         <activity

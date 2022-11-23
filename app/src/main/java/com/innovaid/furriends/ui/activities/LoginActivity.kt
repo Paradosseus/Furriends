@@ -10,6 +10,10 @@ import com.innovaid.furriends.R
 
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
+import com.innovaid.furriends.ui.activities.admin.AdminDashboardActivity
+import com.innovaid.furriends.ui.activities.user.UserDashboardActivity
+import com.innovaid.furriends.ui.activities.user.ForgotPasswordActivity
+import com.innovaid.furriends.ui.activities.user.SetUpUserProfileActivity
 import com.innovaid.furriends.utils.Constants
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -104,7 +108,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 intent.putExtra(Constants.OTHER_USER_DETAILS, user)
                 startActivity(intent)
             } else {
-                startActivity(Intent(this, DashboardActivity::class.java))
+                startActivity(Intent(this, UserDashboardActivity::class.java))
             }
         }
         finish()

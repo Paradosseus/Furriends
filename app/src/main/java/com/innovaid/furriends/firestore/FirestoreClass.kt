@@ -9,15 +9,19 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
-import com.innovaid.furriends.ui.fragments.HomeFragment
-import com.innovaid.furriends.ui.fragments.InboxFragment
-import com.innovaid.furriends.ui.fragments.ListingsFragment
+import com.innovaid.furriends.ui.activities.admin.AddStrayAnimalProfileActivity
+import com.innovaid.furriends.ui.activities.admin.StrayAnimalDetailsActivity
+import com.innovaid.furriends.ui.activities.user.*
+import com.innovaid.furriends.ui.fragments.admin.AdminHomeFragment
+import com.innovaid.furriends.ui.fragments.admin.AdminStrayListingsFragment
+import com.innovaid.furriends.ui.fragments.user.UserHomeFragment
+import com.innovaid.furriends.ui.fragments.user.UserListingsFragment
 import com.innovaid.furriends.utils.Constants
 
 class FirestoreClass {
@@ -82,10 +86,10 @@ class FirestoreClass {
                     is RegisterActivity -> {
                         activity.userRegisteredSuccessful(user)
                     }
-                    is ProfileActivity -> {
+                    is UserProfileActivity -> {
                         activity.userDetailsSuccess(user)
                     }
-                    is DashboardActivity -> {
+                    is UserDashboardActivity -> {
                         activity.userDetailsSuccess(user)
                     }
 
@@ -100,10 +104,10 @@ class FirestoreClass {
                     is RegisterActivity -> {
                         activity.hideProgressDialog()
                     }
-                    is ProfileActivity -> {
+                    is UserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
-                    is DashboardActivity -> {
+                    is UserDashboardActivity -> {
                         activity.hideProgressDialog()
                     }
 
@@ -122,7 +126,7 @@ class FirestoreClass {
                     is SetUpUserProfileActivity -> {
                         activity.updateUserProfileSuccess()
                     }
-                    is EditProfileActivity -> {
+                    is EditUserProfileActivity -> {
                         activity.updateUserProfileSuccess()
                     }
                 }
@@ -155,10 +159,13 @@ class FirestoreClass {
                         is SetUpUserProfileActivity -> {
                             activity.imageUploadSuccess(uri.toString())
                         }
-                        is EditProfileActivity -> {
+                        is EditUserProfileActivity -> {
                             activity.imageUploadSuccess(uri.toString())
                         }
-                        is AddPetProfileActivity -> {
+                        is AddUserPetProfileActivity -> {
+                            activity.imageUploadSuccess(uri.toString())
+                        }
+                        is AddStrayAnimalProfileActivity -> {
                             activity.imageUploadSuccess(uri.toString())
                         }
                     }
@@ -170,10 +177,10 @@ class FirestoreClass {
                     is SetUpUserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
-                    is EditProfileActivity -> {
+                    is EditUserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
-                    is AddPetProfileActivity -> {
+                    is AddUserPetProfileActivity -> {
                         activity.hideProgressDialog()
                     }
                 }
@@ -186,7 +193,7 @@ class FirestoreClass {
             }
     }
 
-    fun uploadPetDetails(activity: AddPetProfileActivity, petInfo: Pet) {
+    fun uploadPetDetails(activity: AddUserPetProfileActivity, petInfo: Pet) {
         fireStore.collection(Constants.PETS)
             .document()
             .set(petInfo, SetOptions.merge())
@@ -202,6 +209,23 @@ class FirestoreClass {
                 )
             }
     }
+    fun uploadStrayAnimalDetails(activity: AddStrayAnimalProfileActivity, strayAnimalInfo: StrayAnimal) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .document()
+            .set(strayAnimalInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.strayAnimalUploadSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the pet details",
+                    e
+                )
+            }
+    }
+
 
     fun getPetsList(fragment: Fragment) {
         fireStore.collection(Constants.PETS)
@@ -221,7 +245,7 @@ class FirestoreClass {
                 }
 
                 when(fragment) {
-                    is ListingsFragment -> {
+                    is UserListingsFragment -> {
                         fragment.petListLoadedSuccessfullyFromFireStore(petsList)
                     }
                 }
@@ -229,7 +253,7 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 // Hide the progress dialog if there is any error based on the base class instance.
                 when (fragment) {
-                    is ListingsFragment -> {
+                    is UserListingsFragment -> {
                         fragment.hideProgressDialog()
                     }
                 }
@@ -238,7 +262,48 @@ class FirestoreClass {
             }
 
     }
-    fun getPetDetails(activity: PetDetailsActivity, petId: String) {
+    fun getStrayAnimalList(fragment: Fragment) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+
+                Log.e("Stray List List", document.documents.toString())
+
+                val strayAnimalList: ArrayList<StrayAnimal> = ArrayList()
+                for(i in document.documents) {
+
+                    val strayAnimal = i.toObject(StrayAnimal::class.java)
+                    strayAnimal!!.strayAnimalId = i.id
+
+                    strayAnimalList.add(strayAnimal)
+                }
+
+                when(fragment) {
+                    is AdminStrayListingsFragment -> {
+                        fragment.strayAnimalListLoadedSuccessfullyFromFireStore(strayAnimalList)
+                    }
+                    is AdminHomeFragment -> {
+                        fragment.strayAnimalListLoadedSuccessfullyFromFireStore(strayAnimalList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (fragment) {
+                    is AdminStrayListingsFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                    is AdminHomeFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting product list.", e)
+            }
+
+    }
+    fun getPetDetails(activity: UserPetDetailsActivity, petId: String) {
         fireStore.collection(Constants.PETS)
             .document(petId)
             .get()
@@ -257,7 +322,24 @@ class FirestoreClass {
 
             }
     }
-    fun deletePet(fragment: ListingsFragment, petId: String) {
+    fun getStrayAnimalDetails(activity: StrayAnimalDetailsActivity, strayAnimalId: String) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .document(strayAnimalId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+                val strayAnimal = document.toObject(StrayAnimal::class.java)
+                if (strayAnimal != null) {
+                    activity.strayAnimalSuccess(strayAnimal)
+                }
+            }
+            .addOnFailureListener {
+                e->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while getting the stray animal details", e)
+            }
+    }
+    fun deletePet(fragment: UserListingsFragment, petId: String) {
         fireStore.collection(Constants.PETS)
             .document(petId)
             .delete()
@@ -275,7 +357,7 @@ class FirestoreClass {
             }
     }
 
-    fun getPetsListToHome(fragment: HomeFragment) {
+    fun getPetsListToHome(fragment: UserHomeFragment) {
         fireStore.collection(Constants.PETS)
             .get()
             .addOnSuccessListener { document ->
@@ -299,7 +381,7 @@ class FirestoreClass {
 
     }
 
-    fun getPetDetailsForEdit(activity: EditPetProfileActivity, petId: String) {
+    fun getPetDetailsForEdit(activity: EditUserPetProfileActivity, petId: String) {
         fireStore.collection(Constants.PETS)
             .document(petId)
             .get()

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.admin.AddStrayAnimalProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-32dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/frameLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivStrayAnimalImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:scaleType="fitXY" />
+
+                <ImageButton
+                    android:id="@+id/ivAddStrayAnimalImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:backgroundTint="@drawable/ib_state"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_baseline_add_a_photo_24" />
+
+                <ImageButton
+                    android:id="@+id/ibAPDBackButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@drawable/ib_state"
+                    android:src="@drawable/ic_baseline_arrow_back_24" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvStrayAnimalDateFounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="Date Founded"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+
+            <TextView
+                android:id="@+id/tvStrayAnimalDateFoundedValue"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="6"
+                android:gravity="center"
+                android:hint="Select a Date"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/tvStrayAnimalTimeFoundedValue"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalDateFounded" />
+
+            <ImageView
+                android:id="@+id/ivDateSelector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvStrayAnimalDateFoundedValue"
+                app:layout_constraintStart_toEndOf="@+id/tvStrayAnimalDateFoundedValue"
+                app:layout_constraintTop_toTopOf="@+id/tvStrayAnimalDateFoundedValue"
+                app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+
+            <TextView
+                android:id="@+id/tvStrayAnimalTimeFounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Time"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalTimeFoundedValue"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+
+
+            <TextView
+                android:id="@+id/tvStrayAnimalTimeFoundedValue"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="6"
+                android:gravity="center"
+                android:text="Select Time"
+                android:inputType="time"
+                app:layout_constraintEnd_toStartOf="@+id/ivSelectTime"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvStrayAnimalDateFoundedValue"
+                app:layout_constraintTop_toTopOf="@+id/ivDateSelector" />
+
+            <ImageView
+                android:id="@+id/ivSelectTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icons8_clock"
+                app:layout_constraintBottom_toBottomOf="@+id/tvStrayAnimalTimeFoundedValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.035"
+                app:layout_constraintStart_toEndOf="@+id/tvStrayAnimalTimeFoundedValue"
+                app:layout_constraintTop_toTopOf="@+id/tvStrayAnimalTimeFoundedValue"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvStrayAnimalLocationFounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Location"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalDateFoundedValue"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalDateFoundedValue" />
+
+            <EditText
+                android:id="@+id/etStrayAnimalLocationFoundedValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                app:layout_constraintEnd_toEndOf="@+id/tvStrayAnimalTimeFoundedValue"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalDateFoundedValue"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalLocationFounded" />
+
+            <TextView
+                android:id="@+id/tvStrayAnimalBreed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Breed"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/etStrayAnimalLocationFoundedValue"
+                app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalLocationFoundedValue" />
+
+            <EditText
+                android:id="@+id/etStrayAnimalBreed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                app:layout_constraintEnd_toStartOf="@+id/etStrayAnimalColor"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalBreed"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalBreed" />
+
+            <TextView
+                android:id="@+id/tvStrayAnimalColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Color"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/etStrayAnimalColor"
+                app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalLocationFoundedValue" />
+
+            <EditText
+                android:id="@+id/etStrayAnimalColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etStrayAnimalBreed"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalColor" />
+
+            <TextView
+                android:id="@+id/tvStrayAnimalPetType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Type"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/etStrayAnimalBreed"
+                app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalBreed" />
+
+            <Spinner
+                android:id="@+id/spStrayAnimalPetTypeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pet_types"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalPetType"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalPetType" />
+
+            <TextView
+                android:id="@+id/tvStrayAnimalGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Gender"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/etStrayAnimalColor"
+                app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalColor" />
+
+            <RadioGroup
+                android:id="@+id/rgStrayAnimalGender"
+                android:layout_width="145dp"
+                android:layout_height="31dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalGender"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalGender">
+
+                <RadioButton
+                    android:id="@+id/rbSAMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/rbSAFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tvStrayAnimalSpayedOrNeutered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Spayed or Neutered"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/spStrayAnimalPetTypeValue"
+                app:layout_constraintTop_toBottomOf="@+id/spStrayAnimalPetTypeValue" />
+
+            <RadioGroup
+                android:id="@+id/rgStrayAnimalSpayedNeutered"
+                android:layout_width="111dp"
+                android:layout_height="33dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalSpayedOrNeutered"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalSpayedOrNeutered">
+
+                <RadioButton
+                    android:id="@+id/rbSASNYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/rbSASNNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tvStrayAnimalDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Description"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/rgStrayAnimalSpayedNeutered"
+                app:layout_constraintTop_toBottomOf="@+id/rgStrayAnimalSpayedNeutered" />
+
+            <EditText
+                android:id="@+id/etStrayAnimalDescription"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:background="@drawable/edit_text_border"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/etStrayAnimalColor"
+                app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalDescription"
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalDescription" />
+
+            <Button
+                android:id="@+id/btnSetupStrayAnimalProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="SET-UP PROFILE"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalDescription" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

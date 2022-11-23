@@ -12,6 +12,7 @@ object Constants {
     //Collections
     const val USERS: String = "users"
     const val PETS: String = "pets"
+    const val STRAY_ANIMALS: String = "stray animals"
 
     const val FURRIENDS_PREFERENCES: String = "FurriendsPref"
     const val LOGGED_IN_USERNAME: String = "LoggedInUserName"
@@ -29,24 +30,27 @@ object Constants {
     const val BIO: String = "bio"
     const val COMPLETE_PROFILE: String = "profileCompleted"
 
-    //Pet
-
 
     const val PET_IMAGE: String ="petImage"
     const val USER_ID: String = "userId"
     const val EXTRA_PET_ID = "extraPetId"
     const val EXTRA_PET_OWNER_ID = "extraOwnerId"
 
-    const val OTHER_PET_DETAILS: String = "OtherPetDetails"
-    const val PET_NAME: String ="petName"
-    const val PET_BREED: String ="petBreed"
-    const val PET_BIRTHDATE: String ="petBirthDate"
-    const val PET_COLOR: String ="petColor"
-    const val PET_TYPE: String ="petType"
-    const val PET_GENDER: String ="petGender"
-    const val PET_SPAYED_OR_NEUTERED: String ="spayedOrNeutered"
-    const val PET_DESCRIPTION: String ="description"
-    const val PET_STATUS: String ="status"
+    const val STRAY_ANIMAL_IMAGE: String = "strayAnimalImage"
+    const val EXTRA_STRAY_ANIMAL_ID = "extraPetId"
+    const val EXTRA_STRAY_OWNER_ID = "userId"
+
+
+//    const val OTHER_PET_DETAILS: String = "OtherPetDetails"
+//    const val PET_NAME: String ="petName"
+//    const val PET_BREED: String ="petBreed"
+//    const val PET_BIRTHDATE: String ="petBirthDate"
+//    const val PET_COLOR: String ="petColor"
+//    const val PET_TYPE: String ="petType"
+//    const val PET_GENDER: String ="petGender"
+//    const val PET_SPAYED_OR_NEUTERED: String ="spayedOrNeutered"
+//    const val PET_DESCRIPTION: String ="description"
+//    const val PET_STATUS: String ="status"
 
 
 

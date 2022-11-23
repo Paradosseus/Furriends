@@ -33,6 +33,9 @@
 
     </style>
 
+
+
+
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/sky_blue</item>

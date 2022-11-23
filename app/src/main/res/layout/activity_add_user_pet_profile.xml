@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.user.AddUserPetProfileActivity">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-91dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+
+                android:layout_height="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivPetImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:scaleType="fitXY" />
+
+                <ImageButton
+                    android:id="@+id/ivAddPetImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:backgroundTint="@drawable/ib_state"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_baseline_add_a_photo_24" />
+                <ImageButton
+                    android:id="@+id/ibAPDBackButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:backgroundTint="@drawable/ib_state"/>
+
+            </FrameLayout>
+
+
+            <EditText
+                android:id="@+id/etPetName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toStartOf="@+id/etPetBreed"
+                app:layout_constraintStart_toStartOf="@+id/tvPetName"
+                app:layout_constraintTop_toBottomOf="@+id/tvPetName" />
+
+            <EditText
+                android:id="@+id/etPetBreed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etPetName"
+                app:layout_constraintTop_toBottomOf="@+id/tvPetBreed" />
+
+            <TextView
+                android:id="@+id/tvPetType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="152dp"
+                android:text="Type"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/tvPetGender"
+                app:layout_constraintStart_toStartOf="@+id/tvBirthdayValue"
+                app:layout_constraintTop_toBottomOf="@+id/tvBirthdayValue" />
+
+            <Spinner
+                android:id="@+id/spPetType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pet_types"
+                app:layout_constraintStart_toStartOf="@+id/tvPetType"
+                app:layout_constraintTop_toBottomOf="@+id/tvPetType" />
+
+            <TextView
+                android:id="@+id/tvBirthdayValue"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="6"
+                android:gravity="center"
+                android:hint="Select a Date"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/etPetColor"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tvPetBirthday"
+                app:layout_constraintTop_toBottomOf="@+id/tvPetBirthday" />
+
+            <TextView
+                android:id="@+id/tvPetBirthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Birthday"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/etPetName"
+                app:layout_constraintTop_toBottomOf="@+id/etPetName" />
+
+            <TextView
+                android:id="@+id/tvPetGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Gender"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/etPetColor"
+                app:layout_constraintTop_toBottomOf="@+id/etPetColor" />
+
+            <RadioGroup
+                android:id="@+id/rgPetGender"
+                android:layout_width="145dp"
+                android:layout_height="31dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/tvPetGender"
+                app:layout_constraintTop_toBottomOf="@+id/tvPetGender">
+
+                <RadioButton
+                    android:id="@+id/rbPetMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/rbPetFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+            </RadioGroup>
+
+            <ImageView
+                android:id="@+id/ivCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvBirthdayValue"
+                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
+                app:layout_constraintTop_toTopOf="@+id/tvBirthdayValue"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+
+            <TextView
+                android:id="@+id/tvSpayedNeutered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Spayed or Neutered"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/spPetType"
+                app:layout_constraintTop_toBottomOf="@+id/spPetType" />
+
+            <RadioGroup
+                android:id="@+id/rgSpayedNeutered"
+                android:layout_width="111dp"
+                android:layout_height="33dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
+
+                <RadioButton
+                    android:id="@+id/rbSNYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/rbSNNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tvPetName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="Name"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/frameLayout"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+            <TextView
+                android:id="@+id/tvPetBreed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Breed"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/etPetBreed"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+            <TextView
+                android:id="@+id/tvPetColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Color"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tvPetBreed"
+                app:layout_constraintTop_toBottomOf="@+id/etPetBreed" />
+
+            <EditText
+                android:id="@+id/etPetColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.994"
+                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
+                app:layout_constraintStart_toStartOf="@+id/etPetBreed"
+                app:layout_constraintTop_toBottomOf="@+id/tvPetColor" />
+
+            <EditText
+                android:id="@+id/etPetDescription"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:background="@drawable/edit_text_border"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/etPetBreed"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tvPetDescription"
+                app:layout_constraintTop_toBottomOf="@+id/tvPetDescription" />
+
+            <Button
+                android:id="@+id/btnSetupPetProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:text="Set-up Profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPetDescription"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvPetDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Description"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/rgSpayedNeutered"
+                app:layout_constraintTop_toBottomOf="@+id/rgSpayedNeutered" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
