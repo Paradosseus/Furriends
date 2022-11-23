@@ -5,16 +5,16 @@
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_admin_profile"
             android:icon="@drawable/ic_baseline_account_circle_24"
             android:title="View Profile"/>
 
         <item
-            android:id="@+id/nav_application_status"
+            android:id="@+id/nav_admin_application_status"
             android:icon="@drawable/ic_baseline_application_24"
             android:title="Application Status" />
         <item
-            android:id="@+id/nav_favorites"
+            android:id="@+id/nav_admin_favorites"
             android:icon="@drawable/ic_baseline_favorite_24"
             android:title="Favorites" />
         <item

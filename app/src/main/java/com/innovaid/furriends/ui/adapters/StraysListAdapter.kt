@@ -46,6 +46,9 @@ open class StraysListAdapter(
 //                intent.putExtra(Constants.EXTRA_STRAY_ANIMAL_ID,model.strayAnimalId)
 //                context.startActivity(intent)
 //            }
+            holder.itemView.ibDeletePetProfile.setOnClickListener {
+                fragment.deletePet(model.strayAnimalId!!)
+            }
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, StrayAnimalDetailsActivity::class.java)
                 intent.putExtra(Constants.EXTRA_STRAY_ANIMAL_ID,model.strayAnimalId)

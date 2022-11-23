@@ -61,6 +61,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="15dp"
                 android:text="Date Founded"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
@@ -99,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Time"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalTimeFoundedValue"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
@@ -138,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Location"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalDateFoundedValue"
                 app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalDateFoundedValue" />
@@ -146,10 +149,10 @@
                 android:id="@+id/etStrayAnimalLocationFoundedValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="time"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
-                app:layout_constraintEnd_toEndOf="@+id/tvStrayAnimalTimeFoundedValue"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="@+id/ivSelectTime"
                 app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalDateFoundedValue"
                 app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalLocationFounded" />
 
@@ -159,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Breed"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/etStrayAnimalLocationFoundedValue"
                 app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalLocationFoundedValue" />
@@ -170,6 +174,7 @@
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
+                android:inputType="text"
                 app:layout_constraintEnd_toStartOf="@+id/etStrayAnimalColor"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/tvStrayAnimalBreed"
@@ -181,6 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Color"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/etStrayAnimalColor"
                 app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalLocationFoundedValue" />
@@ -193,6 +199,7 @@
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/etStrayAnimalBreed"
@@ -204,6 +211,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Type"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/etStrayAnimalBreed"
                 app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalBreed" />
@@ -222,6 +230,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Gender"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/etStrayAnimalColor"
                 app:layout_constraintTop_toBottomOf="@+id/etStrayAnimalColor" />
@@ -253,6 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Spayed or Neutered"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/spStrayAnimalPetTypeValue"
                 app:layout_constraintTop_toBottomOf="@+id/spStrayAnimalPetTypeValue" />
@@ -285,6 +295,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Description"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/rgStrayAnimalSpayedNeutered"
                 app:layout_constraintTop_toBottomOf="@+id/rgStrayAnimalSpayedNeutered" />
@@ -305,7 +316,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
                 android:text="SET-UP PROFILE"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

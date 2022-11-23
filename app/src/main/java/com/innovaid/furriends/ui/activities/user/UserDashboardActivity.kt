@@ -59,7 +59,7 @@ class UserDashboardActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
+                R.id.nav_dashboard,
                 R.id.nav_listings,
                 R.id.nav_notifications,
                 R.id.nav_inbox

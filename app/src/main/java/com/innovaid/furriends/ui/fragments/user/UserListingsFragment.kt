@@ -61,7 +61,7 @@ class UserListingsFragment : BaseFragment() {
     }
     fun deletePetSuccess() {
         hideProgressDialog()
-        Toast.makeText(requireActivity(), "Successfully Delete the Product", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), "Successfully deleted your Listing", Toast.LENGTH_SHORT).show()
 
         getPetsListFromFireStore()
     }

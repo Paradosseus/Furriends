@@ -35,9 +35,9 @@ class AdminHomeFragment : BaseFragment() {
     private fun getStrayAnimalListFromFireStore() {
         showProgressDialog(resources.getString(R.string.please_wait))
 
-        FirestoreClass().getStrayAnimalList(this@AdminHomeFragment)
+        FirestoreClass().getStrayAnimalsListToHome(this@AdminHomeFragment)
     }
-    fun strayAnimalListLoadedSuccessfullyFromFireStore(strayAnimalList: ArrayList<StrayAnimal>) {
+    fun strayAnimalListSuccessfullyLoadedToHome(strayAnimalList: ArrayList<StrayAnimal>) {
 
         hideProgressDialog()
 

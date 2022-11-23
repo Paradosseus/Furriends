@@ -24,7 +24,7 @@ class UserInboxFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
         val textView: TextView = root.findViewById(R.id.tvNotifications)
 
-            textView.text = "This is the Inbox Fragment"
+            textView.text = "You have no messages"
         return root
     }
 

@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.innovaid.furriends.R
+import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.ui.activities.DonateActivity
@@ -20,8 +21,10 @@ import com.innovaid.furriends.ui.activities.LoginActivity
 import com.innovaid.furriends.ui.activities.user.UserApplicationStatusActivity
 import com.innovaid.furriends.ui.activities.user.UserFavoritesActivity
 import com.innovaid.furriends.ui.activities.user.UserProfileActivity
+import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_admin_dashboard.*
 import kotlinx.android.synthetic.main.activity_user_dashboard.*
+import kotlinx.android.synthetic.main.side_nav_header.*
 
 class AdminDashboardActivity : BaseActivity() {
 
@@ -42,6 +45,9 @@ class AdminDashboardActivity : BaseActivity() {
 
         adminSideNavigationMenu.setNavigationItemSelectedListener {
             when(it.itemId) {
+                R.id.nav_admin_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
+                R.id.nav_admin_application_status -> startActivity(Intent(this, UserApplicationStatusActivity::class.java))
+                R.id.nav_admin_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
                     val intent = Intent(this, LoginActivity::class.java)
@@ -58,7 +64,7 @@ class AdminDashboardActivity : BaseActivity() {
         val navController = findNavController(R.id.admin_nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_admin_home,
+                R.id.nav_dashboard,
                 R.id.nav_admin_stray_listings,
                 R.id.nav_admin_notifications,
                 R.id.nav_admin_inbox
@@ -66,6 +72,23 @@ class AdminDashboardActivity : BaseActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
+
+    }
+    override fun onResume() {
+        super.onResume()
+        getUserDetails()
+    }
+    private fun getUserDetails() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().getUserInfo(this)
+    }
+    fun userDetailsSuccess(user: User) {
+        userDetails = user
+
+        hideProgressDialog()
+
+        GlideLoader(this).loadUserPicture(user.image, ivHeaderUserImage)
+        tvHeaderUserName.text = "${user.firstName} ${user.lastName}"
 
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

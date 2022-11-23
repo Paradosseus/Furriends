@@ -10,9 +10,9 @@
         android:id="@+id/ivAppLogo"
         android:layout_width="314dp"
         android:layout_height="248dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/app_logo" />
@@ -87,8 +87,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/sky_blue"
+        android:backgroundTint="@color/gray"
         android:text="Create New Account"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/tvOr" />

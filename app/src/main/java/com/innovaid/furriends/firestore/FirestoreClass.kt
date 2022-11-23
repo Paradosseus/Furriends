@@ -16,6 +16,7 @@ import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.ui.activities.admin.AddStrayAnimalProfileActivity
+import com.innovaid.furriends.ui.activities.admin.AdminDashboardActivity
 import com.innovaid.furriends.ui.activities.admin.StrayAnimalDetailsActivity
 import com.innovaid.furriends.ui.activities.user.*
 import com.innovaid.furriends.ui.fragments.admin.AdminHomeFragment
@@ -90,6 +91,9 @@ class FirestoreClass {
                         activity.userDetailsSuccess(user)
                     }
                     is UserDashboardActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
+                    is AdminDashboardActivity -> {
                         activity.userDetailsSuccess(user)
                     }
 
@@ -283,9 +287,6 @@ class FirestoreClass {
                     is AdminStrayListingsFragment -> {
                         fragment.strayAnimalListLoadedSuccessfullyFromFireStore(strayAnimalList)
                     }
-                    is AdminHomeFragment -> {
-                        fragment.strayAnimalListLoadedSuccessfullyFromFireStore(strayAnimalList)
-                    }
                 }
             }
             .addOnFailureListener { e ->
@@ -356,6 +357,23 @@ class FirestoreClass {
                 )
             }
     }
+    fun deleteStrayAnimal(fragment: AdminStrayListingsFragment, strayAnimalId: String) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .document(strayAnimalId)
+            .delete()
+            .addOnSuccessListener {
+                fragment.deleteStrayAnimalSuccess()
+            }
+
+            .addOnFailureListener { e ->
+                fragment.hideProgressDialog()
+
+                Log.e(
+                    fragment.requireActivity().javaClass.simpleName,
+                    "Error while deleting the profile", e
+                )
+            }
+    }
 
     fun getPetsListToHome(fragment: UserHomeFragment) {
         fireStore.collection(Constants.PETS)
@@ -375,6 +393,29 @@ class FirestoreClass {
             }
             .addOnFailureListener {
                 e ->
+                fragment.hideProgressDialog()
+                Log.e(fragment.javaClass.simpleName, "Error while getting pets list", e)
+            }
+
+    }
+    fun getStrayAnimalsListToHome(fragment: AdminHomeFragment) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                val strayAnimalsList: ArrayList<StrayAnimal> = ArrayList()
+
+                for(i in document.documents) {
+
+                    val strayAnimal = i.toObject(StrayAnimal::class.java)!!
+                    strayAnimal.strayAnimalId = i.id
+                    strayAnimalsList.add(strayAnimal)
+                }
+                fragment.strayAnimalListSuccessfullyLoadedToHome(strayAnimalsList)
+            }
+            .addOnFailureListener {
+                    e ->
                 fragment.hideProgressDialog()
                 Log.e(fragment.javaClass.simpleName, "Error while getting pets list", e)
             }

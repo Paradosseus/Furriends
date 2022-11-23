@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorOffWhite"
     tools:context=".ui.fragments.admin.AdminHomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="440dp"
-        android:text="You have no listings yet"
+        android:text="There are no new listings yet"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

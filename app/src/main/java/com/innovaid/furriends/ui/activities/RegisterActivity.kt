@@ -25,12 +25,9 @@ class RegisterActivity : BaseActivity() {
 
         btnRCreateAccount.setOnClickListener {
             registerUser()
-
-        tvLogin.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
         }
-
+        tvLogin.setOnClickListener {
+            onBackPressed()
         }
     }
     //Sets up action bar

@@ -23,7 +23,7 @@ class UserNotificationsFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
         val textView: TextView = root.findViewById(R.id.tvNotifications)
 
-            textView.text = "This is the Notifications Fragment"
+            textView.text = "You currently have no new notifications"
 
         return root
     }

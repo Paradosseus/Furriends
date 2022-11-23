@@ -24,4 +24,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_listings">ListingsActivity</string>
+
+    <string name="link_to_adoption_form">
+       <a href="https://www.google.com/">Adoption Form Link</a>
+    </string>
 </resources>

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.user.UserFavoritesActivity">
+    tools:context=".ui.activities.MessageActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout3"
+        android:id="@+id/appBarLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tbFavoritesActivity"
+            android:id="@+id/tbMessageActivity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
@@ -26,16 +26,40 @@
             app:layout_constraintTop_toTopOf="parent" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="398dp"
         android:layout_height="wrap_content"
-        android:text="You have not add any pet to your favorites"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout3"
-        app:layout_constraintVertical_bias="0.363" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout4">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/transparent"
+            android:hint="To:"
+            android:inputType="text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/gray" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="526dp"
+            android:background="@color/transparent"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:hint="Type your message here..." />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

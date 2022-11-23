@@ -1,11 +1,16 @@
 package com.innovaid.furriends.ui.activities.user
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Message
 import android.view.View
+import android.widget.Toast
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.MessageActivity
+import com.innovaid.furriends.ui.activities.admin.StrayAdoptionActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_user_pet_details.*
@@ -40,7 +45,9 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
         }
         getPetDetails()
 
+        btnAdopt.setOnClickListener(this)
         ibAddtoFavorite.setOnClickListener(this)
+        ibMessageUser.setOnClickListener(this)
         ibPDBackButton.setOnClickListener(this)
     }
     fun getPetDetails() {
@@ -62,11 +69,15 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
     override fun onClick(p0: View?) {
         if (p0 != null) {
             when (p0.id) {
+                R.id.btnAdopt -> {
+                    startActivity(Intent(this, UserAdoptionActivity::class.java))
+                }
                 R.id.ibAddtoFavorite -> {
+                    Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
                     ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
                 }
-                R.id.btnAdopt -> {
-
+                R.id.ibMessageUser -> {
+                    startActivity(Intent(this, MessageActivity::class.java))
                 }
                 R.id.ibPDBackButton -> {
                     onBackPressed()

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.innovaid.furriends.databinding.ActivityForgotPasswordBinding
+import kotlinx.android.synthetic.main.activity_forgot_password.*
+import kotlinx.android.synthetic.main.activity_register.*
 
 class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityForgotPasswordBinding
@@ -38,5 +40,19 @@ class ForgotPasswordActivity : AppCompatActivity() {
             }
         }
 
+        setupActionBar()
+
+    }
+    private fun setupActionBar() {
+
+        setSupportActionBar(tbForgotPasswordActivity)
+        supportActionBar!!.title = "Forgot Password?"
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+
+        }
+
+        tbForgotPasswordActivity.setNavigationOnClickListener { onBackPressed() }
     }
 }

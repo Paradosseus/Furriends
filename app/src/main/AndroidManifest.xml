@@ -18,14 +18,14 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
-            android:name=".CityPoundAdoptionActivity"
+            android:name=".ui.activities.MessageActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserAdoptionActivity"
+            android:name=".ui.activities.user.UserAdoptionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

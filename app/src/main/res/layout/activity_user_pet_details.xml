@@ -40,13 +40,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-
                 <ImageButton
                     android:id="@+id/ibPDBackButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_baseline_arrow_back_24"
-                    android:backgroundTint="@drawable/ib_state"/>
+                    android:backgroundTint="@drawable/ib_state"
+                    android:src="@drawable/ic_baseline_arrow_back_24" />
             </FrameLayout>
 
             <LinearLayout
@@ -131,53 +130,53 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Description..."
-                app:layout_constraintBottom_toTopOf="@+id/btnAdopt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetDetailAboutTitle"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPetDetailAboutTitle" />
 
-            <Button
-
-                android:id="@+id/btnAdopt"
-                android:layout_width="242dp"
-                android:layout_height="55dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginBottom="16dp"
-                android:text="Adopt"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageButton
-
-                android:id="@+id/ibAddtoFavorite"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/icon_button_background"
-                android:backgroundTint="@color/gray"
-                android:src="@drawable/favorite_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/btnAdopt"
-                app:layout_constraintStart_toEndOf="@+id/btnAdopt"
-                app:layout_constraintTop_toTopOf="@+id/btnAdopt" />
-
-            <ImageButton
-
-                android:id="@+id/ibMessageUser"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/icon_button_background"
-                android:backgroundTint="@color/green"
-                android:src="@drawable/message_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/ibAddtoFavorite"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ibAddtoFavorite"
-                app:layout_constraintTop_toTopOf="@+id/ibAddtoFavorite" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <Button
+
+                    android:id="@+id/btnAdopt"
+                    android:layout_width="240dp"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Adopt"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <ImageButton
+
+                    android:id="@+id/ibAddtoFavorite"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/icon_button_background"
+                    android:backgroundTint="@color/gray"
+                    android:src="@drawable/favorite_icon" />
+
+                <ImageButton
+                    android:id="@+id/ibMessageUser"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/icon_button_background"
+                    android:backgroundTint="@color/green"
+                    android:src="@drawable/message_icon" />
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

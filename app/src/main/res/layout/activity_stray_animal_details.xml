@@ -53,7 +53,6 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 android:padding="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,8 +63,8 @@
                     android:id="@+id/tvStrayAnimalDetailBreed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Breed" />
-
+                    android:text="Breed"
+                    android:textSize="20sp" />
 
 
                 <LinearLayout
@@ -91,27 +90,35 @@
                         android:text="Color" />
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/tvStrayAnimalDetailLocationFounded"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location Founded:"
-                    android:textColor="@color/black"/>
+                    android:text="Location Found:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tvStrayAnimalDetailLocationFoundedValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Location" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date and Time:"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tvStrayAnimalDetailDateAndTimeFounded"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date and Time"/>
+                    android:text="Date and Time" />
 
             </LinearLayout>
 
@@ -139,53 +146,52 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Description..."
-                app:layout_constraintBottom_toTopOf="@+id/btnAdopt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalDetailAboutTitle"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalDetailAboutTitle" />
 
-            <Button
-
-                android:id="@+id/btnAdoptStrayAnimal"
-                android:layout_width="242dp"
-                android:layout_height="55dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginBottom="16dp"
-                android:text="Adopt"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageButton
-
-                android:id="@+id/ibAddStrayAnimalToFavorite"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/icon_button_background"
-                android:backgroundTint="@color/gray"
-                android:src="@drawable/favorite_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/btnAdoptStrayAnimal"
-                app:layout_constraintStart_toEndOf="@+id/btnAdoptStrayAnimal"
-                app:layout_constraintTop_toTopOf="@+id/btnAdoptStrayAnimal" />
-
-            <ImageButton
-
-                android:id="@+id/ibMessageAdmin"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/icon_button_background"
-                android:backgroundTint="@color/green"
-                android:src="@drawable/message_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/ibAddStrayAnimalToFavorite"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ibAddStrayAnimalToFavorite"
-                app:layout_constraintTop_toTopOf="@+id/ibAddStrayAnimalToFavorite" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <Button
+                    android:id="@+id/btnAdoptStrayAnimal"
+                    android:layout_width="240dp"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Adopt"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <ImageButton
+
+                    android:id="@+id/ibAddStrayAnimalToFavorite"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/icon_button_background"
+                    android:backgroundTint="@color/gray"
+                    android:src="@drawable/favorite_icon" />
+
+                <ImageButton
+                    android:id="@+id/ibMessageAdmin"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/icon_button_background"
+                    android:backgroundTint="@color/green"
+                    android:src="@drawable/message_icon" />
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

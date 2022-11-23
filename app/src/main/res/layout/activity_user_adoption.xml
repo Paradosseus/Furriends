@@ -6,4 +6,268 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.user.UserAdoptionActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbUserAdoptionActivity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="PERSONAL INFORMATION"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name of Prospective Pet Parent"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="Last Name, First Name Middle Initial"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_text_border"
+
+                android:hint="09*********"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="Street Address, City, Province"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Occupation"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_border"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="QUESTIONNAIRE"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="For whom are you adopting for?"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_border"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tell us why you want to adopt?"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_border"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Do you have any other pets in your household?"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="111dp"
+                android:layout_height="33dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Are you able to provide the basic needs of your pet (such as food, water, and shelter)? "
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="111dp"
+                android:layout_height="33dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Are you willing to take full responsibility of your pet?"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="111dp"
+                android:layout_height="33dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="Proceed" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
