@@ -29,7 +29,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance()
         setContentView(R.layout.activity_login)
 
-
         btnLogin.setOnClickListener(this)
 
         btnCreateNewAccount.setOnClickListener(this)
@@ -64,7 +63,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             val pass = etPassword.text.toString().trim { it <= ' ' }
 
             showProgressDialog(resources.getString(R.string.please_wait))
-
             //Login using Firebase Authentication
             firebaseAuth.signInWithEmailAndPassword(em, pass).addOnCompleteListener { task ->
 

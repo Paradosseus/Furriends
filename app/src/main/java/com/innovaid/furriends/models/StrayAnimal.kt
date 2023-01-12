@@ -17,6 +17,7 @@ data class StrayAnimal(
     val strayAnimalDescription: String? = null,
     val strayAnimalImage: String? = null,
     val status: String? = null,
-    val adoptedTo : String? = null,
+    val adoptionStatus: String? =null,
+    val adoptedTo: String? = null,
     var strayAnimalId: String? = null
 ) : Parcelable
