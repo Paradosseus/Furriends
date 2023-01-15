@@ -18,6 +18,20 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
+            android:name=".ViewStrayAdoptionFormActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ApplicationFormListsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.activities.MessageActivity"
             android:exported="false">
             <meta-data

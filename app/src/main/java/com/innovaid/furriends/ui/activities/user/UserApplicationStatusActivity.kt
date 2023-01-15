@@ -11,6 +11,13 @@ class UserApplicationStatusActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_application_status)
 
         setupActionBar()
+
+
+        svApplicationStatus.setStepsNumber(5)
+        val steps = listOf("Application is being reviewed", "Schedule an Appointment", "Assessment is being reviewed","Claim your pet", "Done")
+        svApplicationStatus.setSteps(steps)
+
+
     }
     private fun setupActionBar() {
 

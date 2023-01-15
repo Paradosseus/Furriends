@@ -14,6 +14,21 @@
         <item>Dog</item>
         <item>Cat</item>
     </string-array>
+
+    <string-array name="pet_gender">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="application_status_steps">
+        <item>Application is being reviewed</item>
+        <item>Schedule an Appointment</item>
+        <item>Assessment is being reviewed</item>
+        <item>Claim your pet</item>
+        <item>Done</item>
+    </string-array>
+
     <string name="title_activity_list">ListActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

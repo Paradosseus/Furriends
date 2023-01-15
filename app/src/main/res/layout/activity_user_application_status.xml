@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.user.UserApplicationStatusActivity">
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tbApplicationStatusActivity"
             android:layout_width="match_parent"
@@ -22,5 +25,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:text="There are no active applications"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout7" />
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/svApplicationStatus"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout7"
+        app:sv_animationType="Line"
+        app:sv_doneCircleColor="@color/sky_blue"
+        app:sv_doneCircleRadius="15dp"
+        app:sv_doneStepLineColor="@color/sky_blue"
+        app:sv_doneStepMarkColor="@color/colorOffWhite"
+        app:sv_nextStepLineColor="@color/colorOffWhite"
+        app:sv_nextTextColor="@color/colorOffWhite"
+        app:sv_selectedCircleColor="@color/sky_blue"
+        app:sv_selectedCircleRadius="15dp"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_selectedTextColor="@color/sky_blue"
+        app:sv_stepLineWidth="1dp"
+        app:sv_stepNumberTextSize="15sp"
+        app:sv_stepPadding="10dp"
+        app:sv_stepViewStyle="@style/StepView"
+        app:sv_typeface="@font/inter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
