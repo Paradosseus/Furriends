@@ -99,8 +99,10 @@
             app:cardElevation="5dp">
 
             <EditText
+                android:id="@+id/etUserApplicantName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:inputType="text"
                 android:layout_marginStart="5dp"
                 android:background="@color/transparent"/>
 
@@ -125,8 +127,10 @@
             app:cardElevation="5dp">
 
             <EditText
+                android:id="@+id/etUserApplicantBarangayAddress"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:inputType="text"
                 android:layout_marginStart="5dp"
                 android:background="@color/transparent"/>
 
@@ -174,6 +178,7 @@
                     app:cardElevation="5dp">
 
                     <Spinner
+                        android:id="@+id/spStrayPetType"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:entries="@array/pet_types"
@@ -207,8 +212,11 @@
                     app:cardElevation="5dp">
 
                     <EditText
+                        android:id="@+id/etAdoptedStrayBreed"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp" android:background="@color/transparent"/>
+                        android:layout_height="40dp"
+                        android:inputType="text"
+                        android:background="@color/transparent"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -247,8 +255,11 @@
                     app:cardElevation="5dp">
 
                     <EditText
+                        android:id="@+id/etAdoptedStrayColor"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp" android:background="@color/transparent"/>
+                        android:layout_height="40dp"
+                        android:inputType="text"
+                        android:background="@color/transparent"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -278,6 +289,7 @@
                     app:cardElevation="5dp">
 
                     <Spinner
+                        android:id="@+id/spAdoptedStrayGender"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:entries="@array/pet_gender"
@@ -294,11 +306,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/cb_terms_and_condition"
+                android:id="@+id/cbAdoptionTermsAndCondition"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 tools:checked="false" />
@@ -311,6 +324,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnSubmitAdoptionForm"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

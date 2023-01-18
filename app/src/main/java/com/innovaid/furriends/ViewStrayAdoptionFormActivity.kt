@@ -12,7 +12,7 @@ class ViewStrayAdoptionFormActivity : BaseActivity() {
         setContentView(R.layout.activity_view_stray_adoption_form)
 
         val assetManager = this.assets
-        val inputStream = assetManager.open("Adoption-Form-Sample.pdf")
+        val inputStream = assetManager.open("Adoption-Form-Interactive.pdf")
 
         val adoptionFormView = pvStrayAdoptionFormView
         adoptionFormView.fromStream(inputStream).load()

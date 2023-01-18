@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class UserPetAdoptionForm(
-    val issuedUserId: String? = null,
+    val applicantUserId: String? = null,
     val dateIssued: String? = null,
     val timeIssued: String? = null,
     val reviewStatus: String? = null,

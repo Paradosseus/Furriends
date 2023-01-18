@@ -37,6 +37,12 @@ android {
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+        exclude 'com/itextpdf/io/font/cmap_info.txt'
+        exclude 'com/itextpdf/io/font/cmap/*'
+    }
+
+
 }
 
 dependencies {
@@ -86,6 +92,11 @@ dependencies {
 
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     implementation 'com.github.shuhart:stepview:1.5.1'
+
+    implementation 'com.itextpdf:itextpdf:5.5.13'
+
+
+
 
 
 
