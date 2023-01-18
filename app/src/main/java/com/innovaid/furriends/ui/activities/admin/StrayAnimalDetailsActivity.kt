@@ -74,7 +74,9 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
         if (p0 != null) {
             when (p0.id) {
                 R.id.btnAdoptStrayAnimal -> {
-                    startActivity(Intent(this, StrayAdoptionActivity::class.java))
+                    val intent = Intent(this, StrayAdoptionActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_STRAY_ANIMAL_ID, mStrayAnimalId)
+                    startActivity(intent)
                 }
                 R.id.ibAddStrayAnimalToFavorite -> {
                     ibAddStrayAnimalToFavorite.setImageResource(R.drawable.added_to_favorite_icon)

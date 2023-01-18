@@ -40,6 +40,7 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
         btnSetupStrayAnimalProfile.setOnClickListener(this)
         ivDateSelector.setOnClickListener(this)
         ivSelectTime.setOnClickListener(this)
+
     }
 
 

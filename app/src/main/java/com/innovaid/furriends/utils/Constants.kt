@@ -13,6 +13,7 @@ object Constants {
     const val USERS: String = "users"
     const val PETS: String = "pets"
     const val STRAY_ANIMALS: String = "stray animals"
+    const val STRAY_ANIMAL_ADOPTION_FORMS: String = "adoption forms for stray animals"
 
     const val FURRIENDS_PREFERENCES: String = "FurriendsPref"
     const val LOGGED_IN_USERNAME: String = "LoggedInUserName"
@@ -39,6 +40,9 @@ object Constants {
     const val STRAY_ANIMAL_IMAGE: String = "strayAnimalImage"
     const val EXTRA_STRAY_ANIMAL_ID = "extraPetId"
     const val EXTRA_STRAY_OWNER_ID = "userId"
+
+
+
 
 
 //    const val OTHER_PET_DETAILS: String = "OtherPetDetails"

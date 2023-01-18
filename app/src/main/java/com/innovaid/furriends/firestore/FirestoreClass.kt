@@ -12,11 +12,13 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.models.StrayAdoptionForm
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.ui.activities.admin.AddStrayAnimalProfileActivity
 import com.innovaid.furriends.ui.activities.admin.AdminDashboardActivity
+import com.innovaid.furriends.ui.activities.admin.StrayAdoptionActivity
 import com.innovaid.furriends.ui.activities.admin.StrayAnimalDetailsActivity
 import com.innovaid.furriends.ui.activities.user.*
 import com.innovaid.furriends.ui.fragments.admin.AdminHomeFragment
@@ -148,6 +150,28 @@ class FirestoreClass {
             }
 
     }
+    fun uploadStrayAnimalAdoptionToStorage(activity: Activity, pdfUri: Uri) {
+        val sRef = FirebaseStorage.getInstance().reference.child("filled-form.pdf")
+        val uploadTask = sRef.putFile(pdfUri)
+
+        val urlTask = uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            sRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            when(activity) {
+                is StrayAdoptionActivity -> {
+                    val downloadUrl = task.result
+                    activity.uploadPdfSuccess(downloadUrl.toString())
+                }
+            }
+
+        }
+
+    }
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child( imageType + "." + System.currentTimeMillis() + "." + Constants.getFileExtension(activity, imageFileURI)
         )
@@ -196,7 +220,23 @@ class FirestoreClass {
                 )
             }
     }
+    fun uploadStrayAdoptionFormDetails(activity: StrayAdoptionActivity, adoptionFormInfo: StrayAdoptionForm) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .document()
+            .set(adoptionFormInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.uploadStrayApplicationFormDetailsSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading your form",
+                    e
+                )
+            }
 
+    }
     fun uploadPetDetails(activity: AddUserPetProfileActivity, petInfo: Pet) {
         fireStore.collection(Constants.PETS)
             .document()
