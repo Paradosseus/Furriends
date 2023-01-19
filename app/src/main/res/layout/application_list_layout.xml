@@ -10,7 +10,7 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:id="@+id/llPetImageContainer"
+        android:id="@+id/llStrayImageContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="2dp"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.5">
 
         <ImageView
-            android:id="@+id/ivPetImage"
+            android:id="@+id/ivStrayImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:contentDescription="image"
@@ -38,7 +38,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/llPetImageContainer"
+        app:layout_constraintStart_toEndOf="@+id/llStrayImageContainer"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView

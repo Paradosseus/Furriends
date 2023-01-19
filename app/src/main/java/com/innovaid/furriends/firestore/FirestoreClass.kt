@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.innovaid.furriends.ReviewApplicationActivity
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.models.StrayAdoptionForm
 import com.innovaid.furriends.models.StrayAnimal
@@ -154,7 +155,7 @@ class FirestoreClass {
 
     }
     fun uploadStrayAnimalAdoptionToStorage(activity: Activity, pdfUri: Uri) {
-        val sRef = FirebaseStorage.getInstance().reference.child("filled-form.pdf")
+        val sRef = FirebaseStorage.getInstance().reference.child("${System.currentTimeMillis()}.pdf")
         val uploadTask = sRef.putFile(pdfUri)
 
         val urlTask = uploadTask.continueWithTask { task ->
@@ -273,11 +274,36 @@ class FirestoreClass {
             }
     }
 
-    fun getApplicationsList() {
+    fun getApplicationsList(activity: Activity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .get()
             .addOnSuccessListener {  document ->
-                
+
+                Log.e("Applicants List", document.documents.toString())
+
+                val applicantsList: ArrayList<StrayAdoptionForm> = ArrayList()
+                for (i in document.documents) {
+
+                    val applicant = i.toObject(StrayAdoptionForm::class.java)
+                    applicant!!.applicantUserId = i.id
+
+                    applicantsList.add(applicant)
+                }
+                when(activity) {
+                    is ReviewApplicationActivity -> {
+                        activity.applicantsListLoadedSuccessfullyFromFirestore(applicantsList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                when(activity) {
+                    is ReviewApplicationActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Application List", "Error while getting applicant list.", e)
+
             }
     }
 
