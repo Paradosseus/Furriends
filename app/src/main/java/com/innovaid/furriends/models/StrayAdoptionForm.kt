@@ -6,6 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class StrayAdoptionForm(
+    val applicantName: String? = null,
+    val applicantAddress: String? = null,
     val applicantUserId: String? = null,
     val dateIssued: String? = null,
     val timeIssued: String? = null,

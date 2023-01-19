@@ -98,6 +98,9 @@ class FirestoreClass {
                     is AdminDashboardActivity -> {
                         activity.userDetailsSuccess(user)
                     }
+                    is StrayAdoptionActivity -> {
+                        activity.uploadStrayApplicationFormDetails(user)
+                    }
 
                 }
 
@@ -270,6 +273,13 @@ class FirestoreClass {
             }
     }
 
+    fun getApplicationsList() {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .get()
+            .addOnSuccessListener {  document ->
+                
+            }
+    }
 
     fun getPetsList(fragment: Fragment) {
         fireStore.collection(Constants.PETS)

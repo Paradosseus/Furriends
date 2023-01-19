@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.innovaid.furriends.R
+import com.innovaid.furriends.ReviewApplicationActivity
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
@@ -48,6 +49,7 @@ class AdminDashboardActivity : BaseActivity() {
                 R.id.nav_admin_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
                 R.id.nav_admin_application_status -> startActivity(Intent(this, UserApplicationStatusActivity::class.java))
                 R.id.nav_admin_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
+                R.id.nav_review_applications -> startActivity(Intent(this,ReviewApplicationActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
                     val intent = Intent(this, LoginActivity::class.java)

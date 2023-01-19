@@ -1,5 +1,6 @@
 package com.innovaid.furriends.ui.activities.admin
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,6 +18,7 @@ import com.innovaid.furriends.R
 import com.innovaid.furriends.ViewStrayAdoptionFormActivity
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.StrayAdoptionForm
+import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.ui.activities.user.UserApplicationStatusActivity
 import com.innovaid.furriends.utils.Constants
@@ -120,17 +122,18 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
 
         mStrayAnimalFormURL = pdfUrl
 
-        uploadStrayApplicationFormDetails()
+        FirestoreClass().getUserInfo(this)
     }
 
-    private fun uploadStrayApplicationFormDetails() {
-        val username = this.getSharedPreferences(Constants.FURRIENDS_PREFERENCES, Context.MODE_PRIVATE)
-            .getString(Constants.LOGGED_IN_USERNAME, "")!!
+    fun uploadStrayApplicationFormDetails(user: User) {
         val currentDateTime = getCurrentDateAndTime()
         val parts = currentDateTime.split(" ")
         val currentDate = parts[0]
         val currentTime = parts[1]
+
         val strayAdoptionForm = StrayAdoptionForm(
+            "${user.firstName} ${user.lastName}",
+            user.address,
             FirestoreClass().getCurrentUserID(),
             currentDate,
             currentTime,
