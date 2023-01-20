@@ -56,9 +56,9 @@ class FirestoreClass {
 
         return currentUserID
     }
+
     fun getUserInfo(activity: Activity) {
         fireStore.collection(Constants.USERS)
-
             .document(getCurrentUserID())
             .get()
             .addOnSuccessListener { document ->
@@ -283,7 +283,7 @@ class FirestoreClass {
                 for (i in document.documents) {
 
                     val applicant = i.toObject(StrayAdoptionForm::class.java)
-                    applicant!!.applicantUserId = i.id
+                    applicant!!.userId = i.id
 
                     applicantsList.add(applicant)
                 }
@@ -396,8 +396,6 @@ class FirestoreClass {
                 }
 
             }
-
-
 
 
     }
@@ -561,6 +559,27 @@ class FirestoreClass {
                         activity.reviewedApplicationSuccess()
                     }
                 }
+            }
+
+    }
+    fun getApplicationStatus(activity: UserApplicationStatusActivity) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener {  querySnapshot ->
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        Log.i(activity.javaClass.simpleName, document.toString())
+                        val applicant = document.toObject(StrayAdoptionForm::class.java)
+                        if(applicant != null) {
+                            activity.applicationStatusLoaded(applicant)
+                        }
+                    }
+
+
+                }
+
+
             }
 
     }

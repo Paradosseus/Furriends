@@ -137,7 +137,7 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
             FirestoreClass().getCurrentUserID(),
             currentDate,
             currentTime,
-            "being reviewed",
+            "application_being_reviewed",
             mStrayAnimalFormURL,
             mStrayAnimalId
         )

@@ -44,7 +44,7 @@ object Constants {
     //Applicant
     const val APPLICANT_NAME: String = "applicantName"
     const val APPLICANT_ADDRESS = "applicantAddress"
-    const val APPLICANT_USER_ID = "applicantUserId"
+    const val APPLICANT_USER_ID = "userId"
     const val EXTRA_APPLICANT_USER_ID = "extraApplicantUserId"
     const val DATE_ISSUED = "dateIssued"
     const val TIME_ISSUED = "timeIssued"
