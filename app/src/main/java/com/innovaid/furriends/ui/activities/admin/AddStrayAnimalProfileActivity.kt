@@ -36,10 +36,13 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_stray_animal_profile)
 
+
+
         ivAddStrayAnimalImage.setOnClickListener(this)
         btnSetupStrayAnimalProfile.setOnClickListener(this)
         ivDateSelector.setOnClickListener(this)
         ivSelectTime.setOnClickListener(this)
+        ibASAPBackButton.setOnClickListener(this)
 
     }
 
@@ -68,7 +71,7 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
                 R.id.ivDateSelector -> {
                     setDate()
                 }
-                R.id.ibAPDBackButton -> {
+                R.id.ibASAPBackButton -> {
                     onBackPressed()
                 }
                 R.id.ivSelectTime -> {

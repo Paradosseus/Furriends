@@ -41,6 +41,18 @@ object Constants {
     const val EXTRA_STRAY_ANIMAL_ID = "extraPetId"
     const val EXTRA_STRAY_OWNER_ID = "userId"
 
+    //Applicant
+    const val APPLICANT_NAME: String = "applicantName"
+    const val APPLICANT_ADDRESS = "applicantAddress"
+    const val APPLICANT_USER_ID = "applicantUserId"
+    const val EXTRA_APPLICANT_USER_ID = "extraApplicantUserId"
+    const val DATE_ISSUED = "dateIssued"
+    const val TIME_ISSUED = "timeIssued"
+    const val REVIEW_STATUS = "reviewStatus"
+    const val ANIMAL_ADOPTION_FORM: String = "strayAnimalAdoptionForm"
+    const val PET_ID = "petId"
+    const val EXTRA_STRAY_ID = "extraPetId"
+
 
 
 

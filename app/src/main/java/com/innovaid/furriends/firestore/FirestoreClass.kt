@@ -17,10 +17,7 @@ import com.innovaid.furriends.models.StrayAdoptionForm
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
-import com.innovaid.furriends.ui.activities.admin.AddStrayAnimalProfileActivity
-import com.innovaid.furriends.ui.activities.admin.AdminDashboardActivity
-import com.innovaid.furriends.ui.activities.admin.StrayAdoptionActivity
-import com.innovaid.furriends.ui.activities.admin.StrayAnimalDetailsActivity
+import com.innovaid.furriends.ui.activities.admin.*
 import com.innovaid.furriends.ui.activities.user.*
 import com.innovaid.furriends.ui.fragments.admin.AdminHomeFragment
 import com.innovaid.furriends.ui.fragments.admin.AdminStrayListingsFragment
@@ -276,6 +273,7 @@ class FirestoreClass {
 
     fun getApplicationsList(activity: Activity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .whereEqualTo(Constants.REVIEW_STATUS, "being reviewed")
             .get()
             .addOnSuccessListener {  document ->
 
@@ -378,6 +376,29 @@ class FirestoreClass {
 
                 Log.e("Get Product List", "Error while getting product list.", e)
             }
+
+    }
+    fun getApplicantDetails(activity: ApplicantDetailsActivity, applicantId: String, strayId: String) {
+
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS).document(applicantId).get()
+            .addOnSuccessListener { document ->
+                Log.e(javaClass.simpleName, document.toString())
+                val applicant = document.toObject(StrayAdoptionForm::class.java)
+                if(applicant != null) {
+                    fireStore.collection(Constants.STRAY_ANIMALS).document(strayId).get()
+                        .addOnSuccessListener { document ->
+                            Log.d(javaClass.simpleName, document.toString())
+                            val strayAnimal = document.toObject(StrayAnimal::class.java)
+                            if (strayAnimal != null) {
+                                activity.applicantDetailSuccess(applicant, strayAnimal)
+                            }
+                        }
+                }
+
+            }
+
+
+
 
     }
     fun getPetDetails(activity: UserPetDetailsActivity, petId: String) {

@@ -37,6 +37,8 @@ open class ApplicationListAdapter(
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, ApplicantDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_APPLICANT_USER_ID,model.applicantUserId)
+                intent.putExtra(Constants.EXTRA_STRAY_ID,model.petId)
                 context.startActivity(intent)
             }
 
