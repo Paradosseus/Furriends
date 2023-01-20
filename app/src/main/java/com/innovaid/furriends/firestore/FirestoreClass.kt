@@ -538,5 +538,31 @@ class FirestoreClass {
 
             }
     }
+    fun approveApplication(activity: ApplicantDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .document(applicantId)
+            .update(applicantHashMap)
+            .addOnSuccessListener {
+                when(activity) {
+                    is ApplicantDetailsActivity -> {
+                        activity.reviewedApplicationSuccess()
+                    }
+                }
+            }
+
+    }
+    fun declineApplication(activity: ApplicantDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .document(applicantId)
+            .update(applicantHashMap)
+            .addOnSuccessListener {
+                when(activity) {
+                    is ApplicantDetailsActivity -> {
+                        activity.reviewedApplicationSuccess()
+                    }
+                }
+            }
+
+    }
 
 }
