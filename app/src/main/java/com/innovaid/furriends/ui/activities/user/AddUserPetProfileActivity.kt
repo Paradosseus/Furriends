@@ -81,9 +81,7 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
             updateTable(myCalendar)
         }
         DatePickerDialog(this, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show()
-
     }
-
 
     private fun updateTable(myCalendar: Calendar) {
         val myFormat = "dd-MM-yyyy"
@@ -219,7 +217,6 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
         hideProgressDialog()
 
         Toast.makeText(this, "Your pet is uploaded successfully", Toast.LENGTH_SHORT).show()
-
 
         finish()
     }

@@ -13,6 +13,7 @@ data class StrayAdoptionForm(
     val timeIssued: String? = null,
     val reviewStatus: String? = null,
     val strayAnimalAdoptionForm: String? = null,
-    val petId: String? = null
+    val petId: String? = null,
+    val appointmentDate: String? = null
 ): Parcelable
 

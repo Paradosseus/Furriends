@@ -139,7 +139,8 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
             currentTime,
             "application_being_reviewed",
             mStrayAnimalFormURL,
-            mStrayAnimalId
+            mStrayAnimalId,
+            "none"
         )
         FirestoreClass().uploadStrayAdoptionFormDetails(this@StrayAdoptionActivity, strayAdoptionForm)
 

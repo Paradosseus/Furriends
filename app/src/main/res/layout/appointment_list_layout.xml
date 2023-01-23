@@ -37,7 +37,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvALApplicantNameValue"
+                android:id="@+id/tvCAApplicantNameValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Applicant Name"/>
@@ -59,7 +59,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/tvALApplicantAddressValue"
+                android:id="@+id/tvCAApplicantAddressValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -74,20 +74,20 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvALApplicantApplicationStatusTitle"
+                android:id="@+id/tvCAApplicantDateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_marginTop="2dp"
-                android:text="Application Status:"
+                android:text="Date:"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/tvALApplicantApplicationStatusValue"
+                android:id="@+id/tvCAApplicantDateValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Application Status:"
+                android:text="Appointment Date"
                 android:textSize="12sp"/>
         </LinearLayout>
 

@@ -50,6 +50,7 @@ class AdminDashboardActivity : BaseActivity() {
                 R.id.nav_admin_application_status -> startActivity(Intent(this, UserApplicationStatusActivity::class.java))
                 R.id.nav_admin_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
                 R.id.nav_review_applications -> startActivity(Intent(this,ReviewApplicationActivity::class.java))
+                R.id.nav_check_appointments -> startActivity(Intent(this, CheckAppointmentListActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
                     val intent = Intent(this, LoginActivity::class.java)

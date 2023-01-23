@@ -52,6 +52,7 @@ object Constants {
     const val ANIMAL_ADOPTION_FORM: String = "strayAnimalAdoptionForm"
     const val PET_ID = "petId"
     const val EXTRA_STRAY_ID = "extraPetId"
+    const val APPOINTMENT_DATE: String = "appointmentDate"
 
 
 

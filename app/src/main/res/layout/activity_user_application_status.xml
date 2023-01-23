@@ -42,16 +42,80 @@
             android:id="@+id/tvApplicationMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="20sp"
             android:text="There are no active applications"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clAppointmentScheduleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvAppointDateTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Appointment Date:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAppointmentDateValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnSelectSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="Select Date"
+                android:textSize="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnConfirmAdoptionDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnConfirmAdoptionDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="confirm"
+                android:textSize="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <com.shuhart.stepview.StepView
             android:id="@+id/svApplicationStatus"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:sv_animationType="Line"
             app:sv_doneCircleColor="@color/sky_blue"
             app:sv_doneCircleRadius="15dp"
@@ -61,6 +125,7 @@
             app:sv_nextTextColor="@color/colorOffWhite"
             app:sv_selectedCircleColor="@color/sky_blue"
             app:sv_selectedCircleRadius="15dp"
+            app:sv_doneTextColor="@color/colorOffWhite"
             app:sv_selectedStepNumberColor="@color/white"
             app:sv_selectedTextColor="@color/sky_blue"
             app:sv_stepLineWidth="1dp"
@@ -69,6 +134,8 @@
             app:sv_stepViewStyle="@style/StepView"
             app:sv_typeface="@font/inter" />
     </LinearLayout>
+
+
 
 
 

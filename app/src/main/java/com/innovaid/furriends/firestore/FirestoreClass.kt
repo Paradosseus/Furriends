@@ -273,7 +273,7 @@ class FirestoreClass {
 
     fun getApplicationsList(activity: Activity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
-            .whereEqualTo(Constants.REVIEW_STATUS, "being reviewed")
+            .whereNotEqualTo(Constants.REVIEW_STATUS, "Complete")
             .get()
             .addOnSuccessListener {  document ->
 
@@ -296,6 +296,40 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 when(activity) {
                     is ReviewApplicationActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Application List", "Error while getting applicant list.", e)
+
+            }
+    }
+
+    fun getAppointmentList(activity: Activity) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .whereEqualTo(Constants.REVIEW_STATUS, "approved_for_interview")
+            .get()
+            .addOnSuccessListener {  document ->
+
+                Log.e("Appointment List", document.documents.toString())
+
+                val appointmentList: ArrayList<StrayAdoptionForm> = ArrayList()
+                for (i in document.documents) {
+
+                    val appointment = i.toObject(StrayAdoptionForm::class.java)
+                    appointment!!.userId = i.id
+
+                    appointmentList.add(appointment)
+                }
+                when(activity) {
+                    is CheckAppointmentListActivity -> {
+                        activity.appointmentListLoadedSuccessfullyFromFirestore(appointmentList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                when(activity) {
+                    is CheckAppointmentListActivity -> {
                         activity.hideProgressDialog()
                     }
                 }
@@ -398,6 +432,39 @@ class FirestoreClass {
             }
 
 
+    }
+
+    fun getApppointmentDetails(activity: ViewAppointmentDetailsActivity, applicantId: String, strayId: String) {
+
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS).document(applicantId).get()
+            .addOnSuccessListener { document ->
+                Log.e(javaClass.simpleName, document.toString())
+                val applicant = document.toObject(StrayAdoptionForm::class.java)
+                if (applicant != null) {
+                    fireStore.collection(Constants.STRAY_ANIMALS).document(strayId).get()
+                        .addOnSuccessListener { document ->
+                            Log.d(javaClass.simpleName, document.toString())
+                            val strayAnimal = document.toObject(StrayAnimal::class.java)
+                            if (strayAnimal != null) {
+                                fireStore.collection((Constants.USERS)).document(applicant.userId!!)
+                                    .get()
+                                    .addOnSuccessListener { document ->
+                                        Log.e(javaClass.simpleName, document.toString())
+                                        val user = document.toObject(User::class.java)
+                                        if (user != null) {
+                                            activity.appointmentDetailSuccess(
+                                                applicant,
+                                                strayAnimal,
+                                                user
+                                            )
+                                        }
+                                    }
+                            }
+                        }
+
+                }
+
+            }
     }
     fun getPetDetails(activity: UserPetDetailsActivity, petId: String) {
         fireStore.collection(Constants.PETS)
@@ -562,6 +629,18 @@ class FirestoreClass {
             }
 
     }
+    fun doneInterview(activity: ViewAppointmentDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .document(applicantId)
+            .update(applicantHashMap)
+            .addOnSuccessListener {
+                when(activity) {
+                    is ViewAppointmentDetailsActivity -> {
+                        activity.doneInterviewSuccess()
+                    }
+                }
+            }
+    }
     fun getApplicationStatus(activity: UserApplicationStatusActivity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
@@ -582,6 +661,25 @@ class FirestoreClass {
 
             }
 
+    }
+    fun confirmAppointmentDate(activity: UserApplicationStatusActivity, appointmentHashMap: HashMap<String, Any>) {
+        val collectionRef = fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+        val query = collectionRef.whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
+        query.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                for (document in task.result!!) {
+                    val docRef = collectionRef.document(document.id)
+                    docRef.update(appointmentHashMap)
+                        .addOnSuccessListener {
+                            when(activity) {
+                                is UserApplicationStatusActivity -> {
+                                    activity.confirmAppointmentDateSuccess()
+                                }
+                            }
+                        }
+                }
+            }
+        }
     }
 
 }
