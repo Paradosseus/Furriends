@@ -19,10 +19,8 @@
             android:title="Favorites" />
         <item
             android:id="@+id/nav_review_applications"
+            android:icon="@drawable/ic_review_24"
             android:title="Review Applications"/>
-        <item
-            android:id="@+id/nav_check_appointments"
-            android:title="Check Appointments"/>
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_baseline_logout_24"

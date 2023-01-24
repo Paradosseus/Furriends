@@ -35,10 +35,20 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
             mStrayId = intent.getStringExtra(Constants.EXTRA_STRAY_ID)!!
         }
 
-        btnApproveApplication.setOnClickListener(this)
+
         getApplicantDetails()
 
         setupActionBar()
+
+
+        btnApproveApplication.setOnClickListener(this)
+        btnDeclineApplication.setOnClickListener(this)
+        btnDoneInterview.setOnClickListener(this)
+        btnPassedAssessment.setOnClickListener(this)
+        btnFailedAssessment.setOnClickListener(this)
+        btnPetClaimed.setOnClickListener(this)
+
+
     }
 
     fun getApplicantDetails() {
@@ -47,8 +57,27 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     }
     fun applicantDetailSuccess(StrayAdoptionForm: StrayAdoptionForm, strayAnimal : StrayAnimal) {
 
-
         hideProgressDialog()
+
+        when(StrayAdoptionForm.reviewStatus) {
+            "application_being_reviewed" -> {
+                llBtnContainerReviewApplication.visibility = View.VISIBLE
+            }
+            "approved_for_interview" -> {
+                llContainerWaitingForAppointmentSchedule.visibility = View.VISIBLE
+                if(StrayAdoptionForm.appointmentDate != "none") {
+                    llContainerWaitingForAppointmentSchedule.visibility = View.GONE
+                    llContainerAppointmentScheduleDate.visibility = View.VISIBLE
+                }
+            }
+            "reviewing_assessment" -> {
+                llBtnContainerReviewAssessment.visibility = View.VISIBLE
+            }
+
+            "claim_pet"-> {
+                llBtnContainerClaimPet.visibility = View.VISIBLE
+            }
+        }
         GlideLoader(this).loadPetPicture(strayAnimal.strayAnimalImage!!, ivADStrayAnimalImage)
         tvADStrayBreed.text = strayAnimal.strayAnimalBreed
         tvADStrayGender.text = strayAnimal.strayAnimalGender
@@ -62,11 +91,12 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
             intent.setDataAndType(Uri.parse(StrayAdoptionForm.strayAnimalAdoptionForm), "application/pdf")
             startActivity(intent)
         }
-
-
+//        GlideLoader(this).loadUserPicture(strayAnimal.strayAnimalImage!!, ivADStrayAnimalImage)
         tvADApplicantName.text = StrayAdoptionForm.applicantName
         tvADApplicantAddress.text = StrayAdoptionForm.applicantAddress
 
+        ivADApplicationStatusValue.text = StrayAdoptionForm.reviewStatus
+        tvADAppointmentScheduleValue.text = StrayAdoptionForm.appointmentDate
 
 
     }
@@ -80,14 +110,50 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
                 R.id.btnDeclineApplication -> {
                     declineApplication()
                 }
+                R.id.btnDoneInterview -> {
+                    doneInterview()
+                }
+                R.id.btnPassedAssessment -> {
+                    passedAssessment()
+                }
+                R.id.btnFailedAssessment -> {
+                    FailedAssessment()
+                }
+                R.id.btnPetClaimed -> {
+                    PetClaimed()
+                }
             }
         }
+    }
+
+    private fun doneInterview() {
+        val applicantHashMap = HashMap<String, Any>()
+        applicantHashMap[Constants.REVIEW_STATUS] ="reviewing_assessment"
+        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
+    }
+
+    private fun PetClaimed() {
+        val applicantHashMap = HashMap<String, Any>()
+        applicantHashMap[Constants.REVIEW_STATUS] ="Complete"
+        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
+    }
+
+    private fun FailedAssessment() {
+        val applicantHashMap = HashMap<String, Any>()
+        applicantHashMap[Constants.REVIEW_STATUS] ="failed_assessment"
+        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
+    }
+
+    private fun passedAssessment() {
+        val applicantHashMap = HashMap<String, Any>()
+        applicantHashMap[Constants.REVIEW_STATUS] ="claim_pet"
+        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
 
     private fun approveApplication() {
         val applicantHashMap = HashMap<String, Any>()
         applicantHashMap[Constants.REVIEW_STATUS] ="approved_for_interview"
-        FirestoreClass().approveApplication(this, applicantHashMap, mApplicantId)
+        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
     fun reviewedApplicationSuccess() {
         finish()
@@ -95,9 +161,8 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     private fun declineApplication() {
         val applicantHashMap = HashMap<String, Any>()
         applicantHashMap[Constants.REVIEW_STATUS] ="declined"
-        FirestoreClass().declineApplication(this, applicantHashMap, mApplicantId)
+        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
-
 
     private fun setupActionBar() {
 

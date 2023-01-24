@@ -8,21 +8,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.innovaid.furriends.R
 import com.innovaid.furriends.models.StrayAdoptionForm
+import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.ui.activities.admin.ApplicantDetailsActivity
-import com.innovaid.furriends.ui.activities.admin.ViewAppointmentDetailsActivity
+import com.innovaid.furriends.ui.activities.user.UserApplicationStatusActivity
 import com.innovaid.furriends.utils.Constants
 import kotlinx.android.synthetic.main.application_list_layout.view.*
-import kotlinx.android.synthetic.main.appointment_list_layout.view.*
+import kotlinx.android.synthetic.main.user_application_status_list_layout.view.*
 
-open class CheckAppointmentListAdapter (
+open class UserApplicationStatusListAdapter(
     private val context: Context,
     private val list: ArrayList<StrayAdoptionForm>,
-
 
     ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder( LayoutInflater.from(parent.context).inflate(
-            R.layout.appointment_list_layout,
+            R.layout.user_application_status_list_layout,
             parent,
             false))
     }
@@ -30,15 +30,15 @@ open class CheckAppointmentListAdapter (
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
-        holder.itemView.tvCAApplicantNameValue.text = model.applicantName
-        holder.itemView.tvCAApplicantAddressValue.text = model.applicantAddress
-        holder.itemView.tvCAApplicantDateValue.text = model.appointmentDate
+        holder.itemView.tvUASLDateValue.text = model.dateIssued
+        holder.itemView.tvUASLTimeValue.text = model.timeIssued
+        holder.itemView.tvUASLApplicationStatusValue.text = model.reviewStatus
 
-        //Set Activity
+
+
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, ViewAppointmentDetailsActivity::class.java)
+            val intent = Intent(context, UserApplicationStatusActivity::class.java)
             intent.putExtra(Constants.EXTRA_APPLICANT_USER_ID,model.userId)
-            intent.putExtra(Constants.EXTRA_STRAY_ID,model.petId)
             context.startActivity(intent)
         }
 

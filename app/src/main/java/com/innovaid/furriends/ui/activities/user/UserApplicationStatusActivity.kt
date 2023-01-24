@@ -109,37 +109,33 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
    fun applicationStatusLoaded(strayAdoptionForm: StrayAdoptionForm) {
 
        mApplicant = strayAdoptionForm
+       svApplicationStatus.visibility = View.VISIBLE
        svApplicationStatus.setStepsNumber(4)
-       val steps = listOf("Application is being reviewed", "Schedule an Appointment", "Assessment is being reviewed","Claim your pet")
-       svApplicationStatus.setSteps(steps)
+
 
        hideProgressDialog()
 
-       if(strayAdoptionForm.reviewStatus == "application_being_reviewed") {
-            svApplicationStatus.visibility = View.VISIBLE
-            tvApplicationMessage.text = "Your application is being reviewed"
-       }
-       if(strayAdoptionForm.reviewStatus == "approved_for_interview") {
-           svApplicationStatus.visibility = View.VISIBLE
-           svApplicationStatus.go(1,true)
-           if(strayAdoptionForm.appointmentDate == "none") {
-               tvApplicationMessage.text = "Application Approved! Set your Appointment"
-               clAppointmentScheduleContainer.visibility = View.VISIBLE
-           } else {
-               tvApplicationMessage.text = "Appointment Set! Visit the Vetenirary for the interview on ${strayAdoptionForm.appointmentDate}"
-               svApplicationStatus.done(true)
+       when(strayAdoptionForm.reviewStatus) {
+           "application_being_reviewed" -> {
+               tvApplicationMessage.text = "Your application is being reviewed"
            }
+           "approved_for_interview" -> {
+               if(strayAdoptionForm.appointmentDate == "none") {
+                   tvApplicationMessage.text = "Application Approved! Set your Appointment"
+                   clAppointmentScheduleContainer.visibility = View.VISIBLE
+               } else {
 
+                   tvApplicationMessage.text = "Appointment Set! Visit the Veterinary for the interview on ${strayAdoptionForm.appointmentDate}"
+               }
+           }
+           "reviewing_assessment" -> {
+               tvApplicationMessage.text = "Your assessment is being reviewed"
+           }
+           "claim_pet" -> {
+               tvApplicationMessage.text = "You passed the assessment. Claim your pet "
+           }
        }
-       if(strayAdoptionForm.reviewStatus == "reviewing_assessment") {
-           svApplicationStatus.visibility = View.VISIBLE
-           svApplicationStatus.go(2, true)
-           tvApplicationMessage.text = "Your assessment is being reviewed"
-       }
-       if(strayAdoptionForm.reviewStatus == "claim_pet")
-           svApplicationStatus.visibility = View.VISIBLE
-       svApplicationStatus.go(3, true)
-           tvApplicationMessage.text = "You passed the assessment. Claim your pet"
+
     }
     private fun setupActionBar() {
         setSupportActionBar(tbApplicationStatusActivity)

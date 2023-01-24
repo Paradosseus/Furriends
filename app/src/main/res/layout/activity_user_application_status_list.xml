@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOffWhite"
-    tools:context=".ui.activities.admin.CheckAppointmentListActivity">
+    tools:context=".ui.activities.user.UserApplicationStatusListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout9"
+        android:id="@+id/appBarLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tbCheckAppointmentList"
+            android:id="@+id/tbUserApplicationStatusListActivity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
@@ -28,20 +28,20 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/tvNoAppointmentListings"
+        android:id="@+id/tvUASLNoApplication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="There are no appointment"
+        android:text="There are no active applications"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout9"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout7"
         app:layout_constraintVertical_bias="0.360" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAdoptionAppointmentLists"
+        android:id="@+id/rvUASLApplicationStatusList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout9"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout7"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

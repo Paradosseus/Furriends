@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.innovaid.furriends.R
 import com.innovaid.furriends.models.StrayAdoptionForm
-import com.innovaid.furriends.ui.activities.admin.ViewAppointmentDetailsActivity
+import com.innovaid.furriends.ui.activities.admin.ApplicantDetailsActivity
 import com.innovaid.furriends.utils.Constants
 import kotlinx.android.synthetic.main.application_list_layout.view.*
-import kotlinx.android.synthetic.main.appointment_list_layout.view.*
 
 
 open class ApplicationListAdapter(
@@ -36,7 +35,7 @@ open class ApplicationListAdapter(
 
 
             holder.itemView.setOnClickListener {
-                val intent = Intent(context, ViewAppointmentDetailsActivity::class.java)
+                val intent = Intent(context, ApplicantDetailsActivity::class.java)
                 intent.putExtra(Constants.EXTRA_APPLICANT_USER_ID,model.userId)
                 intent.putExtra(Constants.EXTRA_STRAY_ID,model.petId)
                 context.startActivity(intent)

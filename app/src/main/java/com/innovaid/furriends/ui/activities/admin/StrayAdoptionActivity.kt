@@ -81,6 +81,8 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
 
 
     private fun submitAdoptionForm() {
+
+        showProgressDialog(resources.getString(R.string.please_wait))
             if (validateFormCredentials()) {
                 val assetManager = this.assets
                 val inputStream = assetManager.open("Adoption-Form-Interactive.pdf")
@@ -146,7 +148,7 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
 
     }
     fun uploadStrayApplicationFormDetailsSuccess() {
-
+        hideProgressDialog()
         Toast.makeText(this,"Your adoption is successfully submitted", Toast.LENGTH_SHORT).show()
         finish()
         startActivity(Intent(this,UserApplicationStatusActivity::class.java))

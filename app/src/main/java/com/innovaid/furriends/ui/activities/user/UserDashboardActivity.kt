@@ -15,6 +15,7 @@ import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
+import com.innovaid.furriends.ui.adapters.UserApplicationStatusListAdapter
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_user_dashboard.*
 import kotlinx.android.synthetic.main.side_nav_header.*
@@ -40,7 +41,7 @@ class UserDashboardActivity : BaseActivity() {
         sideNavigationMenu.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
-                R.id.nav_application_status -> startActivity(Intent(this, UserApplicationStatusActivity::class.java))
+                R.id.nav_application_status -> startActivity(Intent(this, UserApplicationStatusListActivity::class.java))
                 R.id.nav_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
                 R.id.nav_donate -> startActivity(Intent(this, DonateActivity::class.java))
                 R.id.nav_logout -> {
