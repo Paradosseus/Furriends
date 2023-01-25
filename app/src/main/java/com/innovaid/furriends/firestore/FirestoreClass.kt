@@ -19,8 +19,7 @@ import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.ui.activities.admin.*
 import com.innovaid.furriends.ui.activities.user.*
-import com.innovaid.furriends.ui.fragments.admin.AdminHomeFragment
-import com.innovaid.furriends.ui.fragments.admin.AdminStrayListingsFragment
+import com.innovaid.furriends.ui.fragments.admin.*
 import com.innovaid.furriends.ui.fragments.user.UserHomeFragment
 import com.innovaid.furriends.ui.fragments.user.UserListingsFragment
 import com.innovaid.furriends.utils.Constants
@@ -329,7 +328,75 @@ class FirestoreClass {
 
             }
     }
+    fun getApprovedPetLists(fragment: Fragment) {
+        fireStore.collection(Constants.PETS)
+            .whereEqualTo(Constants.APPROVAL_STATUS, "Approved")
+            .get()
+            .addOnSuccessListener { document ->
 
+                Log.e("Approved Pet Post Lists", document.documents.toString())
+                val approvedPetList: ArrayList<Pet> = ArrayList()
+                for (i in document.documents) {
+                    val approvedPetPosts = i.toObject(Pet::class.java)
+                    approvedPetPosts!!.petId = i.id
+
+                    approvedPetList.add(approvedPetPosts)
+                }
+                when(fragment) {
+                    is ApprovedPetPostsFragment -> {
+                        fragment.approvedPetPostsLoaded(approvedPetList)
+                    }
+
+                }
+
+            }
+    }
+    fun getDeclinedPetLists(fragment: Fragment) {
+        fireStore.collection(Constants.PETS)
+            .whereEqualTo(Constants.APPROVAL_STATUS, "Declined")
+            .get()
+            .addOnSuccessListener { document ->
+
+                Log.e("Declined Pet Post Lists", document.documents.toString())
+                val declinedPetList: ArrayList<Pet> = ArrayList()
+                for (i in document.documents) {
+                    val declinedPetPosts = i.toObject(Pet::class.java)
+                    declinedPetPosts!!.petId = i.id
+
+                    declinedPetList.add(declinedPetPosts)
+                }
+                when(fragment) {
+                    is DeclinedPetPostsFragment -> {
+                        fragment.declinedPetPostsLoaded(declinedPetList)
+                    }
+
+                }
+
+            }
+    }
+    fun getPendingPetLists(fragment: Fragment) {
+        fireStore.collection(Constants.PETS)
+            .whereEqualTo(Constants.APPROVAL_STATUS, "Pending")
+            .get()
+            .addOnSuccessListener { document ->
+
+                Log.e("Pending Pet Post Lists", document.documents.toString())
+                val pendingPetList: ArrayList<Pet> = ArrayList()
+                for (i in document.documents) {
+                    val pendingPetPosts = i.toObject(Pet::class.java)
+                    pendingPetPosts!!.petId = i.id
+
+                    pendingPetList.add(pendingPetPosts)
+                }
+                when(fragment) {
+                    is PendingPetPostsFragment -> {
+                        fragment.pendingPetPostsLoaded(pendingPetList)
+                }
+
+            }
+
+            }
+    }
 
     fun getPetsList(fragment: Fragment) {
         fireStore.collection(Constants.PETS)
@@ -425,6 +492,39 @@ class FirestoreClass {
 
 
     }
+    fun getPostOwnerDetails(activity: Activity, petOwnerId: String) {
+        fireStore.collection(Constants.USERS)
+            .document(petOwnerId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+                val petOwner = document.toObject(User::class.java)
+                if (petOwner != null) {
+                    when (activity) {
+                        is ViewPetPostDetailsActivity -> {
+                            activity.postOwnerLoaded(petOwner)
+                        }
+                    }
+                }
+            }
+    }
+    fun getPendingPetDetails(activity: Activity, petId: String) {
+        fireStore.collection(Constants.PETS)
+            .document(petId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+                val pendingPet = document.toObject(Pet::class.java)
+                if (pendingPet != null) {
+                    when (activity) {
+                        is ViewPetPostDetailsActivity -> {
+                            activity.pendingPetLoaded(pendingPet)
+                        }
+                    }
+                }
+
+            }
+    }
 
     fun getPetDetails(activity: UserPetDetailsActivity, petId: String) {
         fireStore.collection(Constants.PETS)
@@ -499,6 +599,7 @@ class FirestoreClass {
 
     fun getPetsListToHome(fragment: UserHomeFragment) {
         fireStore.collection(Constants.PETS)
+            .whereEqualTo(Constants.APPROVAL_STATUS, "Approved")
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.documents.toString())
@@ -561,6 +662,18 @@ class FirestoreClass {
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while getting the pet details", e)
 
+            }
+    }
+    fun changeApprovalStatus(activity: ViewPetPostDetailsActivity, postHashMap: HashMap<String, Any>, petId: String) {
+        fireStore.collection(Constants.PETS)
+            .document(petId)
+            .update(postHashMap)
+            .addOnSuccessListener {
+                when(activity) {
+                    is ViewPetPostDetailsActivity -> {
+                        activity.reviewedPostSuccess()
+                    }
+                }
             }
     }
     fun changeReviewStatus(activity: ApplicantDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {

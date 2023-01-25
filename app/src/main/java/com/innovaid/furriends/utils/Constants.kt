@@ -36,6 +36,7 @@ object Constants {
     const val USER_ID: String = "userId"
     const val EXTRA_PET_ID = "extraPetId"
     const val EXTRA_PET_OWNER_ID = "extraOwnerId"
+    const val APPROVAL_STATUS = "approvalStatus"
 
     const val STRAY_ANIMAL_IMAGE: String = "strayAnimalImage"
     const val EXTRA_STRAY_ANIMAL_ID = "extraPetId"

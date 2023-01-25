@@ -47,7 +47,7 @@ class AdminDashboardActivity : BaseActivity() {
         adminSideNavigationMenu.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_admin_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
-                R.id.nav_admin_application_status -> startActivity(Intent(this, UserApplicationStatusActivity::class.java))
+                R.id.nav_admin_application_status -> startActivity(Intent(this, ManagePostsActivity::class.java))
                 R.id.nav_admin_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
                 R.id.nav_review_applications -> startActivity(Intent(this,ReviewApplicationActivity::class.java))
                 R.id.nav_logout -> {

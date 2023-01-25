@@ -19,6 +19,20 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.admin.ViewPetPostDetailsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.activities.admin.ManagePostsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.activities.user.UserApplicationStatusListActivity"
             android:exported="false">
             <meta-data
