@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_user_application_status_list.*
 
 class UserApplicationStatusListActivity : BaseActivity() {
 
-
+    private var mApplicantStatus: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

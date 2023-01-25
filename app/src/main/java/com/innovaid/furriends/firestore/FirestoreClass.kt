@@ -279,7 +279,7 @@ class FirestoreClass {
                         val applicationList: ArrayList<StrayAdoptionForm> = ArrayList()
                         for (i in document1.documents) {
                             val application = i.toObject(StrayAdoptionForm::class.java)
-                            application!!.userId = i.id
+                            application!!.applicationId = i.id
 
                             applicationList.add(application)
                         }
@@ -308,7 +308,7 @@ class FirestoreClass {
                 for (i in document.documents) {
 
                     val applicant = i.toObject(StrayAdoptionForm::class.java)
-                    applicant!!.userId = i.id
+                    applicant!!.applicationId = i.id
 
                     applicantsList.add(applicant)
                 }
@@ -576,13 +576,13 @@ class FirestoreClass {
             }
 
     }
-    fun getApplicationStatus(activity: UserApplicationStatusActivity) {
+    fun getApplicationStatus(activity: UserApplicationStatusActivity, applicantId: String) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
-            .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
+            .document(applicantId)
             .get()
-            .addOnSuccessListener {  querySnapshot ->
-                if (querySnapshot != null) {
-                    for (document in querySnapshot) {
+            .addOnSuccessListener {  document ->
+                if (document != null) {
+
                         Log.i(activity.javaClass.simpleName, document.toString())
                         val applicant = document.toObject(StrayAdoptionForm::class.java)
                         if(applicant != null) {
@@ -594,27 +594,18 @@ class FirestoreClass {
                 }
 
 
-            }
-
     }
-    fun confirmAppointmentDate(activity: UserApplicationStatusActivity, appointmentHashMap: HashMap<String, Any>) {
-        val collectionRef = fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
-        val query = collectionRef.whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
-        query.get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                for (document in task.result!!) {
-                    val docRef = collectionRef.document(document.id)
-                    docRef.update(appointmentHashMap)
-                        .addOnSuccessListener {
-                            when(activity) {
-                                is UserApplicationStatusActivity -> {
-                                    activity.confirmAppointmentDateSuccess()
-                                }
-                            }
-                        }
+    fun confirmAppointmentDate(activity: UserApplicationStatusActivity, appointmentHashMap: HashMap<String, Any>, applicantId: String) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .document(applicantId)
+            .update(appointmentHashMap)
+            .addOnCompleteListener { document ->
+                when (activity) {
+                    is UserApplicationStatusActivity -> {
+                        activity.confirmAppointmentDateSuccess()
+                    }
+                }
                 }
             }
-        }
     }
 
-}

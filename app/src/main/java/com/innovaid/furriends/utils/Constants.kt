@@ -46,13 +46,16 @@ object Constants {
     const val APPLICANT_ADDRESS = "applicantAddress"
     const val APPLICANT_USER_ID = "userId"
     const val EXTRA_APPLICANT_USER_ID = "extraApplicantUserId"
-    const val DATE_ISSUED = "dateIssued"
-    const val TIME_ISSUED = "timeIssued"
+    const val DATE_ISSUED: String = "dateIssued"
+    const val TIME_ISSUED: String = "timeIssued"
     const val REVIEW_STATUS = "reviewStatus"
     const val ANIMAL_ADOPTION_FORM: String = "strayAnimalAdoptionForm"
     const val PET_ID = "petId"
     const val EXTRA_STRAY_ID = "extraPetId"
     const val APPOINTMENT_DATE: String = "appointmentDate"
+    const val APPLICATION_ID = "applicationId"
+    const val EXTRA_APPLICATION_ID = "extraApplicationId"
+
 
 
 

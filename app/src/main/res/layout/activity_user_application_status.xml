@@ -108,31 +108,127 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:id="@+id/llApplicationStepsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-        <com.shuhart.stepview.StepView
-            android:id="@+id/svApplicationStatus"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            app:sv_animationType="Line"
-            app:sv_doneCircleColor="@color/sky_blue"
-            app:sv_doneCircleRadius="15dp"
-            app:sv_doneStepLineColor="@color/sky_blue"
-            app:sv_doneStepMarkColor="@color/colorOffWhite"
-            app:sv_nextStepLineColor="@color/colorOffWhite"
-            app:sv_nextTextColor="@color/colorOffWhite"
-            app:sv_selectedCircleColor="@color/sky_blue"
-            app:sv_selectedCircleRadius="15dp"
-            app:sv_doneTextColor="@color/colorOffWhite"
-            app:sv_selectedStepNumberColor="@color/white"
-            app:sv_selectedTextColor="@color/sky_blue"
-            app:sv_stepLineWidth="1dp"
-            app:sv_stepNumberTextSize="15sp"
-            app:sv_stepPadding="5dp"
-            app:sv_stepViewStyle="@style/StepView"
-            app:sv_typeface="@font/inter" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivStepOneIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/step_one"/>
+
+                <TextView
+                    android:id="@+id/tvStepOneTextValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/sky_blue"
+                    android:text="Your application is now being reviewed"/>
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/ivStepLineOne"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/line_inactive"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+            <ImageView
+                android:id="@+id/ivStepTwoIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/step_two_inactive"/>
+
+                <TextView
+                    android:id="@+id/tvStepTwoTextValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/gray"
+                    android:text="Set a schedule for your interview"/>
+
+            </LinearLayout>
+
+
+
+            <ImageView
+                android:id="@+id/ivStepLineTwo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/line_inactive"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivStepThreeIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/step_three_inactive"/>
+
+                <TextView
+                    android:id="@+id/tvStepThreeTextValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/gray"
+                    android:text="Your assessment is being reviewed"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivStepLineThree"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/line_inactive"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivStepFourIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/step_four_inactive"/>
+
+                <TextView
+                    android:id="@+id/tvStepFourTextValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/gray"
+                    android:text="You passed!. You can nowclaim your pet!"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

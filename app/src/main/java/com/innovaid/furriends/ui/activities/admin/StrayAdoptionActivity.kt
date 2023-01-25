@@ -139,7 +139,7 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
             FirestoreClass().getCurrentUserID(),
             currentDate,
             currentTime,
-            "application_being_reviewed",
+            "Application is being reviewed",
             mStrayAnimalFormURL,
             mStrayAnimalId,
             "none"
@@ -151,7 +151,8 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
         hideProgressDialog()
         Toast.makeText(this,"Your adoption is successfully submitted", Toast.LENGTH_SHORT).show()
         finish()
-        startActivity(Intent(this,UserApplicationStatusActivity::class.java))
+
+
 
     }
 

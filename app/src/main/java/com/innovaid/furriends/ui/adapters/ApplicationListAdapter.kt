@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.application_list_layout.view.*
 
 open class ApplicationListAdapter(
     private val context: Context,
-    private val list: ArrayList<StrayAdoptionForm>,
+    private val list: ArrayList<StrayAdoptionForm>
 
 
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -36,7 +36,7 @@ open class ApplicationListAdapter(
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, ApplicantDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_APPLICANT_USER_ID,model.userId)
+                intent.putExtra(Constants.EXTRA_APPLICANT_USER_ID,model.applicationId)
                 intent.putExtra(Constants.EXTRA_STRAY_ID,model.petId)
                 context.startActivity(intent)
             }

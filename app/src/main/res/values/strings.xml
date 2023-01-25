@@ -26,7 +26,7 @@
         <item>Schedule an Appointment</item>
         <item>Assessment is being reviewed</item>
         <item>Claim your pet</item>
-        <item>Done</item>
+        <item></item>
     </string-array>
 
     <string name="title_activity_list">ListActivity</string>

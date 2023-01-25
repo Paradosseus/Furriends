@@ -60,21 +60,21 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
         hideProgressDialog()
 
         when(StrayAdoptionForm.reviewStatus) {
-            "application_being_reviewed" -> {
+            "Application is being reviewed" -> {
                 llBtnContainerReviewApplication.visibility = View.VISIBLE
             }
-            "approved_for_interview" -> {
+            "Approved for interview" -> {
                 llContainerWaitingForAppointmentSchedule.visibility = View.VISIBLE
                 if(StrayAdoptionForm.appointmentDate != "none") {
                     llContainerWaitingForAppointmentSchedule.visibility = View.GONE
                     llContainerAppointmentScheduleDate.visibility = View.VISIBLE
                 }
             }
-            "reviewing_assessment" -> {
+            "Reviewing Assessment" -> {
                 llBtnContainerReviewAssessment.visibility = View.VISIBLE
             }
 
-            "claim_pet"-> {
+            "Claim Pet"-> {
                 llBtnContainerClaimPet.visibility = View.VISIBLE
             }
         }
@@ -128,7 +128,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
 
     private fun doneInterview() {
         val applicantHashMap = HashMap<String, Any>()
-        applicantHashMap[Constants.REVIEW_STATUS] ="reviewing_assessment"
+        applicantHashMap[Constants.REVIEW_STATUS] ="Reviewing Assessment"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
 
@@ -140,19 +140,19 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
 
     private fun FailedAssessment() {
         val applicantHashMap = HashMap<String, Any>()
-        applicantHashMap[Constants.REVIEW_STATUS] ="failed_assessment"
+        applicantHashMap[Constants.REVIEW_STATUS] ="Assessment Failed"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
 
     private fun passedAssessment() {
         val applicantHashMap = HashMap<String, Any>()
-        applicantHashMap[Constants.REVIEW_STATUS] ="claim_pet"
+        applicantHashMap[Constants.REVIEW_STATUS] ="Claim Pet"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
 
     private fun approveApplication() {
         val applicantHashMap = HashMap<String, Any>()
-        applicantHashMap[Constants.REVIEW_STATUS] ="approved_for_interview"
+        applicantHashMap[Constants.REVIEW_STATUS] ="Approved for interview"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
     fun reviewedApplicationSuccess() {
@@ -160,7 +160,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     }
     private fun declineApplication() {
         val applicantHashMap = HashMap<String, Any>()
-        applicantHashMap[Constants.REVIEW_STATUS] ="declined"
+        applicantHashMap[Constants.REVIEW_STATUS] ="Declined"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
 

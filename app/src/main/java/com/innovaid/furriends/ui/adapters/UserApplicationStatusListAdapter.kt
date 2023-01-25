@@ -38,7 +38,8 @@ open class UserApplicationStatusListAdapter(
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, UserApplicationStatusActivity::class.java)
-            intent.putExtra(Constants.EXTRA_APPLICANT_USER_ID,model.userId)
+            intent.putExtra(Constants.EXTRA_APPLICATION_ID,model.applicationId)
+            intent.putExtra(Constants.EXTRA_STRAY_ID, model.petId)
             context.startActivity(intent)
         }
 
