@@ -14,6 +14,7 @@ object Constants {
     const val PETS: String = "pets"
     const val STRAY_ANIMALS: String = "stray animals"
     const val STRAY_ANIMAL_ADOPTION_FORMS: String = "applicants"
+    const val FAVORITES: String = "favorites"
 
     const val FURRIENDS_PREFERENCES: String = "FurriendsPref"
     const val LOGGED_IN_USERNAME: String = "LoggedInUserName"
@@ -37,10 +38,12 @@ object Constants {
     const val EXTRA_PET_ID = "extraPetId"
     const val EXTRA_PET_OWNER_ID = "extraOwnerId"
     const val APPROVAL_STATUS = "approvalStatus"
+    const val PET_ADOPTION_STATUS = "adoptionStatus"
 
     const val STRAY_ANIMAL_IMAGE: String = "strayAnimalImage"
     const val EXTRA_STRAY_ANIMAL_ID = "extraPetId"
     const val EXTRA_STRAY_OWNER_ID = "userId"
+    const val STRAY_ADOPTION_STATUS = "adoptionStatus"
 
     //Applicant
     const val APPLICANT_NAME: String = "applicantName"
@@ -57,7 +60,10 @@ object Constants {
     const val APPLICATION_ID = "applicationId"
     const val EXTRA_APPLICATION_ID = "extraApplicationId"
 
-
+    //Favorites
+    const val PET_ID_FAVORITES: String = "petIdFavorites"
+    const val USER_ID_FAVORITES: String = "userIdFavorites"
+    const val ADDED_TO_FAVORITES: String = "addedToFavorites"
 
 
 

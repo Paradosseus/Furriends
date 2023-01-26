@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
+import com.innovaid.furriends.models.Favorites
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.ui.activities.MessageActivity
@@ -75,6 +76,7 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
                 R.id.ibAddtoFavorite -> {
                     Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
                     ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+                    addToFavorites()
                 }
                 R.id.ibMessageUser -> {
                     startActivity(Intent(this, MessageActivity::class.java))
@@ -84,5 +86,19 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
                 }
             }
         }
+    }
+
+    private fun addToFavorites() {
+
+        val favorites = Favorites(
+            mPetId,
+            FirestoreClass().getCurrentUserID(),
+            true
+        )
+        FirestoreClass().addToFavorites(this, favorites)
+    }
+    fun addedToFavorites() {
+        ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+        Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
     }
 }

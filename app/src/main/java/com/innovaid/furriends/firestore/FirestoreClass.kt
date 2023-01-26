@@ -12,10 +12,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.innovaid.furriends.ReviewApplicationActivity
-import com.innovaid.furriends.models.Pet
-import com.innovaid.furriends.models.StrayAdoptionForm
-import com.innovaid.furriends.models.StrayAnimal
-import com.innovaid.furriends.models.User
+import com.innovaid.furriends.models.*
 import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.ui.activities.admin.*
 import com.innovaid.furriends.ui.activities.user.*
@@ -600,6 +597,7 @@ class FirestoreClass {
     fun getPetsListToHome(fragment: UserHomeFragment) {
         fireStore.collection(Constants.PETS)
             .whereEqualTo(Constants.APPROVAL_STATUS, "Approved")
+            .whereNotEqualTo(Constants.PET_ADOPTION_STATUS, "Adopted")
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.documents.toString())
@@ -623,6 +621,7 @@ class FirestoreClass {
     }
     fun getStrayAnimalsListToHome(fragment: AdminHomeFragment) {
         fireStore.collection(Constants.STRAY_ANIMALS)
+            .whereNotEqualTo(Constants.STRAY_ADOPTION_STATUS, "Adopted")
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.documents.toString())
@@ -676,6 +675,20 @@ class FirestoreClass {
                 }
             }
     }
+//    fun changeStrayAdoptionStatus(activity: ApplicantDetailsActivity, strayHashMap: HashMap<String, Any>, strayId: String) {
+//        fireStore.collection(Constants.STRAY_ADOPTION_STATUS)
+//            .document(strayId)
+//            .update(strayHashMap)
+//            .addOnSuccessListener {
+//                when(activity) {
+//                    is ApplicantDetailsActivity -> {
+//                        activity.changedStrayAdoptionStatus()
+//                    }
+//
+//                }
+//            }
+//    }
+
     fun changeReviewStatus(activity: ApplicantDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)
@@ -718,7 +731,23 @@ class FirestoreClass {
                         activity.confirmAppointmentDateSuccess()
                     }
                 }
+            }
+    }
+
+    fun addToFavorites(activity: Activity, favorites: Favorites) {
+        fireStore.collection(Constants.USERS).document(getCurrentUserID()).collection(Constants.FAVORITES).document()
+            .set(favorites, SetOptions.merge())
+            .addOnSuccessListener { document ->
+                when (activity) {
+                    is UserPetDetailsActivity -> {
+                        activity.addedToFavorites()
+                    }
                 }
             }
     }
+    fun removeFromFavorites(activity: Activity, favorites: Favorites) {
+        fireStore.collection(Constants.USERS).document(getCurrentUserID()).collection(Constants.FAVORITES).document()
+            .delete()
+    }
+}
 

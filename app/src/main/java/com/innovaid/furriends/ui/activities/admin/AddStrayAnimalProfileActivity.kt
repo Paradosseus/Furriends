@@ -203,7 +203,8 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
             tvStrayAnimalDateFoundedValue.text.toString().trim { it <= ' ' },
             tvStrayAnimalTimeFoundedValue.text.toString().trim { it <= ' ' },
             etStrayAnimalDescription.text.toString().trim { it <= ' ' },
-            mStrayAnimalImageURL
+            mStrayAnimalImageURL,
+            "Listed"
         )
 
         FirestoreClass().uploadStrayAnimalDetails(this@AddStrayAnimalProfileActivity, strayAnimal)

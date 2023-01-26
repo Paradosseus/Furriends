@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.innovaid.furriends.R
 import com.innovaid.furriends.ReviewApplicationActivity
 import com.innovaid.furriends.firestore.FirestoreClass
@@ -134,8 +135,12 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
 
     private fun PetClaimed() {
         val applicantHashMap = HashMap<String, Any>()
+//        val strayHashMap = HashMap<String, Any>()
         applicantHashMap[Constants.REVIEW_STATUS] ="Complete"
+//        strayHashMap[Constants.STRAY_ADOPTION_STATUS] = "Adopted"
+//        FirestoreClass().changeStrayAdoptionStatus(this,strayHashMap, mStrayId)
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
+
     }
 
     private fun FailedAssessment() {
@@ -155,6 +160,9 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
         applicantHashMap[Constants.REVIEW_STATUS] ="Approved for interview"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
+//    fun changedStrayAdoptionStatus() {
+//
+//    }
     fun reviewedApplicationSuccess() {
         finish()
     }
