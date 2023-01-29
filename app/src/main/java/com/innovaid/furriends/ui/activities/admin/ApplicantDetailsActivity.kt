@@ -22,6 +22,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
 
     private var mApplicantId: String =""
     private var mStrayId: String  = ""
+    private var mApplicantName: String =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +100,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
         ivADApplicationStatusValue.text = StrayAdoptionForm.reviewStatus
         tvADAppointmentScheduleValue.text = StrayAdoptionForm.appointmentDate
 
+        mApplicantName = StrayAdoptionForm.applicantName!!
 
     }
 
@@ -134,12 +136,12 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     }
 
     private fun PetClaimed() {
-        val applicantHashMap = HashMap<String, Any>()
-//        val strayHashMap = HashMap<String, Any>()
-        applicantHashMap[Constants.REVIEW_STATUS] ="Complete"
-//        strayHashMap[Constants.STRAY_ADOPTION_STATUS] = "Adopted"
-//        FirestoreClass().changeStrayAdoptionStatus(this,strayHashMap, mStrayId)
-        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
+        showProgressDialog(resources.getString(R.string.please_wait))
+        val strayHashMap = HashMap<String, Any>()
+        strayHashMap[Constants.ADOPTED_TO] = mApplicantName
+        strayHashMap[Constants.STRAY_ADOPTION_STATUS] = "Adopted"
+        FirestoreClass().changeStrayAdoptionStatus(this,strayHashMap, mStrayId)
+
 
     }
 
@@ -160,10 +162,13 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
         applicantHashMap[Constants.REVIEW_STATUS] ="Approved for interview"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
-//    fun changedStrayAdoptionStatus() {
-//
-//    }
+    fun changedStrayAdoptionStatus() {
+        val applicantHashMap = HashMap<String, Any>()
+        applicantHashMap[Constants.REVIEW_STATUS] ="Complete"
+        FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
+    }
     fun reviewedApplicationSuccess() {
+        hideProgressDialog()
         finish()
     }
     private fun declineApplication() {

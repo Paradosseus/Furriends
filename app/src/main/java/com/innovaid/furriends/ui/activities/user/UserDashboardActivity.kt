@@ -88,6 +88,9 @@ class UserDashboardActivity : BaseActivity() {
         tvHeaderUserName.text = "${user.firstName} ${user.lastName}"
 
     }
+    private fun updateToken() {
+
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {

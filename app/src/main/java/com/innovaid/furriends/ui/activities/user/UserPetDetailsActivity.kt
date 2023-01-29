@@ -74,9 +74,9 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
                     startActivity(Intent(this, UserAdoptionActivity::class.java))
                 }
                 R.id.ibAddtoFavorite -> {
-                    Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
-                    ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
-                    addToFavorites()
+//                    Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
+//                    ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+//                    addToFavorites()
                 }
                 R.id.ibMessageUser -> {
                     startActivity(Intent(this, MessageActivity::class.java))
@@ -88,15 +88,15 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
         }
     }
 
-    private fun addToFavorites() {
-
-        val favorites = Favorites(
-            mPetId,
-            FirestoreClass().getCurrentUserID(),
-            true
-        )
-        FirestoreClass().addToFavorites(this, favorites)
-    }
+//    private fun addToFavorites() {
+//
+//        val favorites = Favorites(
+//            mPetId,
+//            FirestoreClass().getCurrentUserID(),
+//            true
+//        )
+//        FirestoreClass().addToFavorites(this, favorites)
+//    }
     fun addedToFavorites() {
         ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
         Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()

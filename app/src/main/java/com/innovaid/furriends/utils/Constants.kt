@@ -39,11 +39,13 @@ object Constants {
     const val EXTRA_PET_OWNER_ID = "extraOwnerId"
     const val APPROVAL_STATUS = "approvalStatus"
     const val PET_ADOPTION_STATUS = "adoptionStatus"
+    const val ADOPTED_TO = "adoptedTo"
 
     const val STRAY_ANIMAL_IMAGE: String = "strayAnimalImage"
     const val EXTRA_STRAY_ANIMAL_ID = "extraPetId"
     const val EXTRA_STRAY_OWNER_ID = "userId"
     const val STRAY_ADOPTION_STATUS = "adoptionStatus"
+    const val CATEGORY = "category"
 
     //Applicant
     const val APPLICANT_NAME: String = "applicantName"
@@ -61,9 +63,10 @@ object Constants {
     const val EXTRA_APPLICATION_ID = "extraApplicationId"
 
     //Favorites
-    const val PET_ID_FAVORITES: String = "petIdFavorites"
-    const val USER_ID_FAVORITES: String = "userIdFavorites"
-    const val ADDED_TO_FAVORITES: String = "addedToFavorites"
+    const val PET_ID_FAVORITES = "petId"
+    const val USER_ID_FAVORITES = "userId"
+
+    const val FCM_TOKEN: String = "fcmToken"
 
 
 

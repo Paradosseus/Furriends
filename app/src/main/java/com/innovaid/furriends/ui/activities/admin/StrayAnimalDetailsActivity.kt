@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
+import com.innovaid.furriends.models.Favorites
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.ui.activities.MessageActivity
@@ -21,6 +22,10 @@ import kotlinx.android.synthetic.main.activity_user_pet_details.*
 class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private var mStrayAnimalId: String = ""
+    private var mFavoriteId: String = ""
+    private var mCategory: String = ""
+    private var mBreed: String = ""
+    private var mLocation: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +51,8 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
         }
 
         getStrayAnimalDetails()
+        FirestoreClass().isAddedToFavorites(this,mStrayAnimalId)
+
 
         btnAdoptStrayAnimal.setOnClickListener(this)
         ibAddStrayAnimalToFavorite.setOnClickListener(this)
@@ -56,6 +63,8 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
     fun getStrayAnimalDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getStrayAnimalDetails(this, mStrayAnimalId)
+
+
     }
     fun strayAnimalSuccess(strayAnimal: StrayAnimal) {
         hideProgressDialog()
@@ -66,6 +75,10 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
         tvStrayAnimalDetailLocationFoundedValue.text = strayAnimal.locationFounded
         tvStrayAnimalDetailDateAndTimeFounded.text = "${strayAnimal.dateFounded} at ${strayAnimal.timeFounded}"
         tvStrayAnimalDetailDescription.text = strayAnimal.strayAnimalDescription
+
+        mCategory = strayAnimal.category.toString()
+        mBreed = strayAnimal.strayAnimalBreed.toString()
+        mLocation = strayAnimal.locationFounded.toString()
 
 
 
@@ -79,8 +92,7 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
                     startActivity(intent)
                 }
                 R.id.ibAddStrayAnimalToFavorite -> {
-                    ibAddStrayAnimalToFavorite.setImageResource(R.drawable.added_to_favorite_icon)
-                    Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
+                   favoritesListener()
                 }
                 R.id.ibMessageAdmin -> {
                     startActivity(Intent(this, MessageActivity::class.java))
@@ -91,4 +103,25 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+
+    private fun favoritesListener() {
+        FirestoreClass().favoritesListener(this, mStrayAnimalId, mFavoriteId, mCategory)
+    }
+
+    fun addedToFavoritesSuccessfully(){
+        ibAddStrayAnimalToFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+        Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
+    }
+    fun removeFromFavoritesSuccessfully() {
+        ibAddStrayAnimalToFavorite.setImageResource(R.drawable.favorite_icon)
+        Toast.makeText(this, "Remove from Favorites", Toast.LENGTH_SHORT).show()
+    }
+    fun inFavorites() {
+        ibAddStrayAnimalToFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+//        mFavoriteId = favoritesId
+    }
+    fun notInFavorites(){
+        ibAddStrayAnimalToFavorite.setImageResource(R.drawable.favorite_icon)
+    }
+
 }

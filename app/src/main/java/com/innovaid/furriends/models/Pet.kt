@@ -18,6 +18,7 @@ data class Pet(
     val image: String? = null,
     val approvalStatus: String? = null,
     val adoptionStatus: String? =null,
+    val category: String? = null,
     val adoptedTo: String? = null,
     var petId: String? = null
 

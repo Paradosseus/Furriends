@@ -191,7 +191,8 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
             etPetDescription.text.toString().trim { it <= ' '},
             mPetImageURL,
             "Pending",
-            "Listed"
+            "Listed",
+            "userPet"
         )
 
         FirestoreClass().uploadPetDetails(this@AddUserPetProfileActivity, pet)

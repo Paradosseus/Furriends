@@ -181,7 +181,8 @@
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/icon_button_background"
                     android:backgroundTint="@color/gray"
-                    android:src="@drawable/favorite_icon" />
+                    android:src="@drawable/favorite_icon"
+                    />
 
                 <ImageButton
                     android:id="@+id/ibMessageAdmin"

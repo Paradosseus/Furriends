@@ -1,9 +1,11 @@
 package com.innovaid.furriends.firestore
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
+import android.nfc.Tag
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -17,9 +19,11 @@ import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.ui.activities.admin.*
 import com.innovaid.furriends.ui.activities.user.*
 import com.innovaid.furriends.ui.fragments.admin.*
+import com.innovaid.furriends.ui.fragments.user.FavoritesStrayFragment
 import com.innovaid.furriends.ui.fragments.user.UserHomeFragment
 import com.innovaid.furriends.ui.fragments.user.UserListingsFragment
 import com.innovaid.furriends.utils.Constants
+import com.innovaid.furriends.utils.GlideLoader
 
 class FirestoreClass {
 
@@ -42,6 +46,7 @@ class FirestoreClass {
                 )
             }
     }
+
     fun getCurrentUserID(): String {
         val currentUser = FirebaseAuth.getInstance().currentUser
 
@@ -76,7 +81,7 @@ class FirestoreClass {
                 )
                 editor.apply()
 
-                when(activity) {
+                when (activity) {
                     is LoginActivity -> {
                         activity.userLoggedInSuccessful(user)
                     }
@@ -100,7 +105,7 @@ class FirestoreClass {
 
             }
             .addOnFailureListener { e ->
-                when(activity) {
+                when (activity) {
                     is LoginActivity -> {
                         activity.hideProgressDialog()
                     }
@@ -121,11 +126,12 @@ class FirestoreClass {
                 )
             }
     }
+
     fun updateUserProfile(activity: Activity, userHashMap: HashMap<String, Any>) {
         fireStore.collection(Constants.USERS).document(getCurrentUserID())
             .update(userHashMap)
             .addOnSuccessListener {
-                when(activity) {
+                when (activity) {
                     is SetUpUserProfileActivity -> {
                         activity.updateUserProfileSuccess()
                     }
@@ -134,8 +140,8 @@ class FirestoreClass {
                     }
                 }
             }
-            .addOnFailureListener{ e->
-                when(activity) {
+            .addOnFailureListener { e ->
+                when (activity) {
                     is SetUpUserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
@@ -147,8 +153,10 @@ class FirestoreClass {
             }
 
     }
+
     fun uploadStrayAnimalAdoptionToStorage(activity: Activity, pdfUri: Uri) {
-        val sRef = FirebaseStorage.getInstance().reference.child("${System.currentTimeMillis()}.pdf")
+        val sRef =
+            FirebaseStorage.getInstance().reference.child("${System.currentTimeMillis()}.pdf")
         val uploadTask = sRef.putFile(pdfUri)
 
         val urlTask = uploadTask.continueWithTask { task ->
@@ -159,7 +167,7 @@ class FirestoreClass {
             }
             sRef.downloadUrl
         }.addOnCompleteListener { task ->
-            when(activity) {
+            when (activity) {
                 is StrayAdoptionActivity -> {
                     val downloadUrl = task.result
                     activity.uploadPdfSuccess(downloadUrl.toString())
@@ -169,8 +177,13 @@ class FirestoreClass {
         }
 
     }
+
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
-        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child( imageType + "." + System.currentTimeMillis() + "." + Constants.getFileExtension(activity, imageFileURI)
+        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+            imageType + "." + System.currentTimeMillis() + "." + Constants.getFileExtension(
+                activity,
+                imageFileURI
+            )
         )
         sRef.putFile(imageFileURI!!).addOnSuccessListener { takeSnapshot ->
             Log.e(
@@ -198,7 +211,7 @@ class FirestoreClass {
                 }
         }
             .addOnFailureListener() { exception ->
-                when(activity) {
+                when (activity) {
                     is SetUpUserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
@@ -217,7 +230,11 @@ class FirestoreClass {
                 )
             }
     }
-    fun uploadStrayAdoptionFormDetails(activity: StrayAdoptionActivity, adoptionFormInfo: StrayAdoptionForm) {
+
+    fun uploadStrayAdoptionFormDetails(
+        activity: StrayAdoptionActivity,
+        adoptionFormInfo: StrayAdoptionForm
+    ) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document()
             .set(adoptionFormInfo, SetOptions.merge())
@@ -234,6 +251,7 @@ class FirestoreClass {
             }
 
     }
+
     fun uploadPetDetails(activity: AddUserPetProfileActivity, petInfo: Pet) {
         fireStore.collection(Constants.PETS)
             .document()
@@ -250,7 +268,11 @@ class FirestoreClass {
                 )
             }
     }
-    fun uploadStrayAnimalDetails(activity: AddStrayAnimalProfileActivity, strayAnimalInfo: StrayAnimal) {
+
+    fun uploadStrayAnimalDetails(
+        activity: AddStrayAnimalProfileActivity,
+        strayAnimalInfo: StrayAnimal
+    ) {
         fireStore.collection(Constants.STRAY_ANIMALS)
             .document()
             .set(strayAnimalInfo, SetOptions.merge())
@@ -266,19 +288,20 @@ class FirestoreClass {
                 )
             }
     }
+
     fun getApplicationStatusList(activity: UserApplicationStatusListActivity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
             .get()
             .addOnSuccessListener { document1 ->
-                        Log.e("User Application List", document1.documents.toString())
-                        val applicationList: ArrayList<StrayAdoptionForm> = ArrayList()
-                        for (i in document1.documents) {
-                            val application = i.toObject(StrayAdoptionForm::class.java)
-                            application!!.applicationId = i.id
+                Log.e("User Application List", document1.documents.toString())
+                val applicationList: ArrayList<StrayAdoptionForm> = ArrayList()
+                for (i in document1.documents) {
+                    val application = i.toObject(StrayAdoptionForm::class.java)
+                    application!!.applicationId = i.id
 
-                            applicationList.add(application)
-                        }
+                    applicationList.add(application)
+                }
                 when (activity) {
                     is UserApplicationStatusListActivity -> {
                         activity.applicationListSuccessful(applicationList)
@@ -289,14 +312,11 @@ class FirestoreClass {
     }
 
 
-
-
-
     fun getApplicationsList(activity: Activity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .whereNotEqualTo(Constants.REVIEW_STATUS, "Complete")
             .get()
-            .addOnSuccessListener {  document ->
+            .addOnSuccessListener { document ->
 
                 Log.e("Applicants List", document.documents.toString())
 
@@ -308,14 +328,14 @@ class FirestoreClass {
 
                     applicantsList.add(applicant)
                 }
-                when(activity) {
+                when (activity) {
                     is ReviewApplicationActivity -> {
                         activity.applicantsListLoadedSuccessfullyFromFirestore(applicantsList)
                     }
                 }
             }
             .addOnFailureListener { e ->
-                when(activity) {
+                when (activity) {
                     is ReviewApplicationActivity -> {
                         activity.hideProgressDialog()
                     }
@@ -325,6 +345,7 @@ class FirestoreClass {
 
             }
     }
+
     fun getApprovedPetLists(fragment: Fragment) {
         fireStore.collection(Constants.PETS)
             .whereEqualTo(Constants.APPROVAL_STATUS, "Approved")
@@ -339,7 +360,7 @@ class FirestoreClass {
 
                     approvedPetList.add(approvedPetPosts)
                 }
-                when(fragment) {
+                when (fragment) {
                     is ApprovedPetPostsFragment -> {
                         fragment.approvedPetPostsLoaded(approvedPetList)
                     }
@@ -348,6 +369,7 @@ class FirestoreClass {
 
             }
     }
+
     fun getDeclinedPetLists(fragment: Fragment) {
         fireStore.collection(Constants.PETS)
             .whereEqualTo(Constants.APPROVAL_STATUS, "Declined")
@@ -362,7 +384,7 @@ class FirestoreClass {
 
                     declinedPetList.add(declinedPetPosts)
                 }
-                when(fragment) {
+                when (fragment) {
                     is DeclinedPetPostsFragment -> {
                         fragment.declinedPetPostsLoaded(declinedPetList)
                     }
@@ -371,6 +393,7 @@ class FirestoreClass {
 
             }
     }
+
     fun getPendingPetLists(fragment: Fragment) {
         fireStore.collection(Constants.PETS)
             .whereEqualTo(Constants.APPROVAL_STATUS, "Pending")
@@ -385,12 +408,12 @@ class FirestoreClass {
 
                     pendingPetList.add(pendingPetPosts)
                 }
-                when(fragment) {
+                when (fragment) {
                     is PendingPetPostsFragment -> {
                         fragment.pendingPetPostsLoaded(pendingPetList)
-                }
+                    }
 
-            }
+                }
 
             }
     }
@@ -404,7 +427,7 @@ class FirestoreClass {
                 Log.e("Pets List", document.documents.toString())
 
                 val petsList: ArrayList<Pet> = ArrayList()
-                for(i in document.documents) {
+                for (i in document.documents) {
 
                     val pet = i.toObject(Pet::class.java)
                     pet!!.petId = i.id
@@ -412,7 +435,7 @@ class FirestoreClass {
                     petsList.add(pet)
                 }
 
-                when(fragment) {
+                when (fragment) {
                     is UserListingsFragment -> {
                         fragment.petListLoadedSuccessfullyFromFireStore(petsList)
                     }
@@ -430,6 +453,7 @@ class FirestoreClass {
             }
 
     }
+
     fun getStrayAnimalList(fragment: Fragment) {
         fireStore.collection(Constants.STRAY_ANIMALS)
             .whereEqualTo(Constants.USER_ID, getCurrentUserID())
@@ -439,7 +463,7 @@ class FirestoreClass {
                 Log.e("Stray List List", document.documents.toString())
 
                 val strayAnimalList: ArrayList<StrayAnimal> = ArrayList()
-                for(i in document.documents) {
+                for (i in document.documents) {
 
                     val strayAnimal = i.toObject(StrayAnimal::class.java)
                     strayAnimal!!.strayAnimalId = i.id
@@ -447,7 +471,7 @@ class FirestoreClass {
                     strayAnimalList.add(strayAnimal)
                 }
 
-                when(fragment) {
+                when (fragment) {
                     is AdminStrayListingsFragment -> {
                         fragment.strayAnimalListLoadedSuccessfullyFromFireStore(strayAnimalList)
                     }
@@ -468,13 +492,18 @@ class FirestoreClass {
             }
 
     }
-    fun getApplicantDetails(activity: ApplicantDetailsActivity, applicantId: String, strayId: String) {
+
+    fun getApplicantDetails(
+        activity: ApplicantDetailsActivity,
+        applicantId: String,
+        strayId: String
+    ) {
 
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS).document(applicantId).get()
             .addOnSuccessListener { document ->
                 Log.e(javaClass.simpleName, document.toString())
                 val applicant = document.toObject(StrayAdoptionForm::class.java)
-                if(applicant != null) {
+                if (applicant != null) {
                     fireStore.collection(Constants.STRAY_ANIMALS).document(strayId).get()
                         .addOnSuccessListener { document ->
                             Log.d(javaClass.simpleName, document.toString())
@@ -489,6 +518,7 @@ class FirestoreClass {
 
 
     }
+
     fun getPostOwnerDetails(activity: Activity, petOwnerId: String) {
         fireStore.collection(Constants.USERS)
             .document(petOwnerId)
@@ -505,6 +535,7 @@ class FirestoreClass {
                 }
             }
     }
+
     fun getPendingPetDetails(activity: Activity, petId: String) {
         fireStore.collection(Constants.PETS)
             .document(petId)
@@ -535,13 +566,13 @@ class FirestoreClass {
                 }
 
             }
-            .addOnFailureListener {
-                e ->
+            .addOnFailureListener { e ->
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while getting the pet details", e)
 
             }
     }
+
     fun getStrayAnimalDetails(activity: StrayAnimalDetailsActivity, strayAnimalId: String) {
         fireStore.collection(Constants.STRAY_ANIMALS)
             .document(strayAnimalId)
@@ -553,12 +584,16 @@ class FirestoreClass {
                     activity.strayAnimalSuccess(strayAnimal)
                 }
             }
-            .addOnFailureListener {
-                e->
+            .addOnFailureListener { e ->
                 activity.hideProgressDialog()
-                Log.e(activity.javaClass.simpleName, "Error while getting the stray animal details", e)
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while getting the stray animal details",
+                    e
+                )
             }
     }
+
     fun deletePet(fragment: UserListingsFragment, petId: String) {
         fireStore.collection(Constants.PETS)
             .document(petId)
@@ -576,6 +611,7 @@ class FirestoreClass {
                 )
             }
     }
+
     fun deleteStrayAnimal(fragment: AdminStrayListingsFragment, strayAnimalId: String) {
         fireStore.collection(Constants.STRAY_ANIMALS)
             .document(strayAnimalId)
@@ -604,7 +640,7 @@ class FirestoreClass {
 
                 val petsList: ArrayList<Pet> = ArrayList()
 
-                for(i in document.documents) {
+                for (i in document.documents) {
 
                     val pet = i.toObject(Pet::class.java)!!
                     pet.petId = i.id
@@ -612,11 +648,31 @@ class FirestoreClass {
                 }
                 fragment.petListSuccessfullyLoadedToHome(petsList)
             }
-            .addOnFailureListener {
-                e ->
+            .addOnFailureListener { e ->
                 fragment.hideProgressDialog()
                 Log.e(fragment.javaClass.simpleName, "Error while getting pets list", e)
             }
+
+    }
+    fun getStrayFavoritesList(fragment: FavoritesStrayFragment) {
+        fireStore.collection(Constants.FAVORITES)
+            .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
+            .whereEqualTo(Constants.CATEGORY, "stray")
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                val strayFavoritesList: ArrayList<Favorites> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val strayFavorite = i.toObject(Favorites::class.java)!!
+                    strayFavorite.favoritesId = i.id
+                    strayFavoritesList.add(strayFavorite)
+                }
+                fragment.strayFavoritesLoadedSuccessfully(strayFavoritesList)
+            }
+
 
     }
     fun getStrayAnimalsListToHome(fragment: AdminHomeFragment) {
@@ -628,7 +684,7 @@ class FirestoreClass {
 
                 val strayAnimalsList: ArrayList<StrayAnimal> = ArrayList()
 
-                for(i in document.documents) {
+                for (i in document.documents) {
 
                     val strayAnimal = i.toObject(StrayAnimal::class.java)!!
                     strayAnimal.strayAnimalId = i.id
@@ -636,8 +692,7 @@ class FirestoreClass {
                 }
                 fragment.strayAnimalListSuccessfullyLoadedToHome(strayAnimalsList)
             }
-            .addOnFailureListener {
-                    e ->
+            .addOnFailureListener { e ->
                 fragment.hideProgressDialog()
                 Log.e(fragment.javaClass.simpleName, "Error while getting pets list", e)
             }
@@ -656,45 +711,58 @@ class FirestoreClass {
                 }
 
             }
-            .addOnFailureListener {
-                    e ->
+            .addOnFailureListener { e ->
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while getting the pet details", e)
 
             }
     }
-    fun changeApprovalStatus(activity: ViewPetPostDetailsActivity, postHashMap: HashMap<String, Any>, petId: String) {
+
+    fun changeApprovalStatus(
+        activity: ViewPetPostDetailsActivity,
+        postHashMap: HashMap<String, Any>,
+        petId: String
+    ) {
         fireStore.collection(Constants.PETS)
             .document(petId)
             .update(postHashMap)
             .addOnSuccessListener {
-                when(activity) {
+                when (activity) {
                     is ViewPetPostDetailsActivity -> {
                         activity.reviewedPostSuccess()
                     }
                 }
             }
     }
-//    fun changeStrayAdoptionStatus(activity: ApplicantDetailsActivity, strayHashMap: HashMap<String, Any>, strayId: String) {
-//        fireStore.collection(Constants.STRAY_ADOPTION_STATUS)
-//            .document(strayId)
-//            .update(strayHashMap)
-//            .addOnSuccessListener {
-//                when(activity) {
-//                    is ApplicantDetailsActivity -> {
-//                        activity.changedStrayAdoptionStatus()
-//                    }
-//
-//                }
-//            }
-//    }
 
-    fun changeReviewStatus(activity: ApplicantDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {
+    fun changeStrayAdoptionStatus(
+        activity: ApplicantDetailsActivity,
+        strayHashMap: HashMap<String, Any>,
+        strayId: String
+    ) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .document(strayId)
+            .update(strayHashMap)
+            .addOnSuccessListener {
+                when (activity) {
+                    is ApplicantDetailsActivity -> {
+                        activity.changedStrayAdoptionStatus()
+                    }
+
+                }
+            }
+    }
+
+    fun changeReviewStatus(
+        activity: ApplicantDetailsActivity,
+        applicantHashMap: HashMap<String, Any>,
+        applicantId: String
+    ) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)
             .update(applicantHashMap)
             .addOnSuccessListener {
-                when(activity) {
+                when (activity) {
                     is ApplicantDetailsActivity -> {
                         activity.reviewedApplicationSuccess()
                     }
@@ -702,26 +770,32 @@ class FirestoreClass {
             }
 
     }
+
     fun getApplicationStatus(activity: UserApplicationStatusActivity, applicantId: String) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)
             .get()
-            .addOnSuccessListener {  document ->
+            .addOnSuccessListener { document ->
                 if (document != null) {
 
-                        Log.i(activity.javaClass.simpleName, document.toString())
-                        val applicant = document.toObject(StrayAdoptionForm::class.java)
-                        if(applicant != null) {
-                            activity.applicationStatusLoaded(applicant)
-                        }
+                    Log.i(activity.javaClass.simpleName, document.toString())
+                    val applicant = document.toObject(StrayAdoptionForm::class.java)
+                    if (applicant != null) {
+                        activity.applicationStatusLoaded(applicant)
                     }
-
-
                 }
 
 
+            }
+
+
     }
-    fun confirmAppointmentDate(activity: UserApplicationStatusActivity, appointmentHashMap: HashMap<String, Any>, applicantId: String) {
+
+    fun confirmAppointmentDate(
+        activity: UserApplicationStatusActivity,
+        appointmentHashMap: HashMap<String, Any>,
+        applicantId: String
+    ) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)
             .update(appointmentHashMap)
@@ -734,20 +808,90 @@ class FirestoreClass {
             }
     }
 
-    fun addToFavorites(activity: Activity, favorites: Favorites) {
-        fireStore.collection(Constants.USERS).document(getCurrentUserID()).collection(Constants.FAVORITES).document()
-            .set(favorites, SetOptions.merge())
-            .addOnSuccessListener { document ->
-                when (activity) {
-                    is UserPetDetailsActivity -> {
-                        activity.addedToFavorites()
+
+
+    fun isAddedToFavorites(activity: Activity, strayId: String) {
+        fireStore.collection(Constants.FAVORITES)
+            .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
+            .whereEqualTo(Constants.PET_ID_FAVORITES, strayId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    if (document != null) {
+                        when (activity) {
+                            is StrayAnimalDetailsActivity -> {
+                                activity.inFavorites()
+                            }
+                        }
                     }
                 }
             }
     }
-    fun removeFromFavorites(activity: Activity, favorites: Favorites) {
-        fireStore.collection(Constants.USERS).document(getCurrentUserID()).collection(Constants.FAVORITES).document()
-            .delete()
+    fun favoritesListener(activity: Activity, strayId: String, favoritesId: String, category: String) {
+        fireStore.collection(Constants.FAVORITES)
+            .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
+            .whereEqualTo(Constants.PET_ID_FAVORITES, strayId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    for (document in querySnapshot) {
+                        document.reference.delete()
+                            .addOnSuccessListener {
+                                when (activity) {
+                                    is StrayAnimalDetailsActivity -> {
+                                        activity.removeFromFavoritesSuccessfully()
+                                    }
+                                }
+                            }
+
+                    }
+                } else {
+                    fireStore.collection(Constants.STRAY_ANIMALS)
+                        .document(strayId)
+                        .get()
+                        .addOnSuccessListener { document ->
+                            if (document != null) {
+                                Log.i(activity.javaClass.simpleName, document.toString())
+                                val strayAnimal = document.toObject(StrayAnimal::class.java)
+                                if (strayAnimal != null) {
+                                    val favorites = Favorites(
+                                        strayId,
+                                        getCurrentUserID(),
+                                        category,
+                                        strayAnimal.userId.toString(),
+                                        strayAnimal.strayAnimalBreed.toString(),
+                                        strayAnimal.strayAnimalBreed.toString(),
+                                        strayAnimal.strayAnimalImage.toString()
+                                    )
+                                    fireStore.collection(Constants.FAVORITES)
+                                        .document()
+                                        .set(favorites, SetOptions.merge())
+                                        .addOnSuccessListener {
+                                            when (activity) {
+                                                is StrayAnimalDetailsActivity -> {
+                                                    activity.addedToFavoritesSuccessfully()
+                                                }
+                                            }
+                                        }
+                                }
+                            }
+                        }
+
+
+                }
+
+            }
+        }
+
+    fun getUserFavorites(activity: Activity) {
+
     }
+
+
 }
+
+
+
+
+
 
