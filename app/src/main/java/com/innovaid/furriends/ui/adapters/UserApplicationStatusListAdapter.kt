@@ -29,7 +29,7 @@ open class UserApplicationStatusListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
-
+        holder.itemView.tvUASLApplicationIdValue.text = model.applicationId
         holder.itemView.tvUASLDateValue.text = model.dateIssued
         holder.itemView.tvUASLTimeValue.text = model.timeIssued
         holder.itemView.tvUASLApplicationStatusValue.text = model.reviewStatus

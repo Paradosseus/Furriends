@@ -1,5 +1,6 @@
 package com.innovaid.furriends.ui.activities.user
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -14,11 +15,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
-import com.innovaid.furriends.ui.activities.*
-import com.innovaid.furriends.ui.adapters.UserApplicationStatusListAdapter
+import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.DonateActivity
+import com.innovaid.furriends.ui.activities.LoginActivity
+import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_user_dashboard.*
 import kotlinx.android.synthetic.main.side_nav_header.*
+
 
 class UserDashboardActivity : BaseActivity() {
 
@@ -46,6 +50,10 @@ class UserDashboardActivity : BaseActivity() {
                 R.id.nav_donate -> startActivity(Intent(this, DonateActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
+                    val sharedPreferences = getSharedPreferences(Constants.FURRIENDS_PREFERENCES, Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.apply()
                     val intent = Intent(this, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
@@ -88,8 +96,11 @@ class UserDashboardActivity : BaseActivity() {
         tvHeaderUserName.text = "${user.firstName} ${user.lastName}"
 
     }
-    private fun updateToken() {
-
+    private fun getToken() {
+        com.google.firebase.messaging.FirebaseMessaging.getInstance().token.addOnSuccessListener(this::updateToken)
+    }
+    private fun updateToken(token: String){
+//        FirestoreClass().getPreference()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

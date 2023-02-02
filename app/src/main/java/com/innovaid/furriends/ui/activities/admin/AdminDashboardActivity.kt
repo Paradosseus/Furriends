@@ -1,5 +1,6 @@
 package com.innovaid.furriends.ui.activities.admin
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.innovaid.furriends.ui.activities.LoginActivity
 import com.innovaid.furriends.ui.activities.user.UserApplicationStatusActivity
 import com.innovaid.furriends.ui.activities.user.UserFavoritesActivity
 import com.innovaid.furriends.ui.activities.user.UserProfileActivity
+import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_admin_dashboard.*
 import kotlinx.android.synthetic.main.activity_user_dashboard.*
@@ -52,6 +54,10 @@ class AdminDashboardActivity : BaseActivity() {
                 R.id.nav_review_applications -> startActivity(Intent(this,ReviewApplicationActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
+                    val sharedPreferences = getSharedPreferences(Constants.FURRIENDS_PREFERENCES, Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.apply()
                     val intent = Intent(this, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)

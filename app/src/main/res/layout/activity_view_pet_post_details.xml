@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOffWhite"
     tools:context=".ui.activities.admin.ViewPetPostDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,7 +20,8 @@
             android:id="@+id/tbViewPetPostDetails"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/sky_blue"
+            app:titleTextColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,97 +69,176 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_margin="10dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Pet Information: "/>
-
-        <TextView
-            android:id="@+id/tvPetPostNameValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"/>
-
-        <TextView
-            android:id="@+id/tvPetPostBreedValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Breed"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:padding="15dp"
+            android:background="@drawable/background_container_application_status">
 
             <TextView
-                android:id="@+id/tvPetPostGenderValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gender"/>
-            <TextView
-                android:id="@+id/tvPetPostColorValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Color"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/PetPostLocationValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location"/>
-
-        <TextView
-            android:id="@+id/tvPetPostAboutValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="About"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Owner Information: "/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/ivPetPostOwnerImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp" />
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Pet Information: "/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvPetPostOwnerNameValue"
+                    android:id="@+id/tvPetPostNameTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Breed"/>
+                    android:textSize="18sp"
+                    android:text="Name: "/>
 
                 <TextView
-                    android:id="@+id/tvPetPostOwnerAddressValue"
+                    android:id="@+id/tvPetPostNameValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address"/>
+                    android:textSize="16sp"
+                    android:text="Name"/>
 
-                <TextView
-                    android:id="@+id/tvPetPostOwnerContactValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact"/>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPetPostBreedTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Breed: "/>
+
+
+                <TextView
+                    android:id="@+id/tvPetPostBreedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Breed"/>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPetPostGenderValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Gender"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" | "/>
+
+
+                <TextView
+                    android:id="@+id/tvPetPostColorValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Color"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:background="@drawable/background_container_application_status">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Owner Information: "/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivPetPostOwnerImage"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name:"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/tvPetPostOwnerNameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="16dp"
+                        android:text="Name"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address:"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tvPetPostOwnerAddressValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="16dp"
+                        android:text="Address"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact number:"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/tvPetPostOwnerContactValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:text="Contact"/>
+
+                </LinearLayout>
+
+        </LinearLayout>
 
         </LinearLayout>
 
@@ -168,6 +249,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:gravity="center">
 
             <Button

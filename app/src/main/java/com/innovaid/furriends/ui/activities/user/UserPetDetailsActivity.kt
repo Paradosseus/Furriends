@@ -2,16 +2,12 @@ package com.innovaid.furriends.ui.activities.user
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
 import android.view.View
 import android.widget.Toast
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
-import com.innovaid.furriends.models.Favorites
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.ui.activities.BaseActivity
-import com.innovaid.furriends.ui.activities.MessageActivity
-import com.innovaid.furriends.ui.activities.admin.StrayAdoptionActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_user_pet_details.*
@@ -79,7 +75,7 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
 //                    addToFavorites()
                 }
                 R.id.ibMessageUser -> {
-                    startActivity(Intent(this, MessageActivity::class.java))
+//                    startActivity(Intent(this, MessageActivity::class.java))
                 }
                 R.id.ibPDBackButton -> {
                     onBackPressed()

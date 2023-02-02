@@ -6,7 +6,6 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.TextView
 import com.innovaid.furriends.R
-import com.innovaid.furriends.ui.activities.MessageActivity
 
 
 class AdminInboxFragment : Fragment() {
@@ -36,12 +35,7 @@ class AdminInboxFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        when (id) {
-            R.id.actionCreateNewMessage -> {
-                startActivity(Intent(activity, MessageActivity::class.java))
-                return true
-            }
-        }
+
         return super.onOptionsItemSelected(item)
     }
 

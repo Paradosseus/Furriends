@@ -15,6 +15,21 @@ object Constants {
     const val STRAY_ANIMALS: String = "stray animals"
     const val STRAY_ANIMAL_ADOPTION_FORMS: String = "applicants"
     const val FAVORITES: String = "favorites"
+    const val CHATS: String = "chats"
+    const val CHATS_ID: String = "messageId"
+
+    const val EMAIL: String = "email"
+    const val PASSWORD: String = "password"
+    const val MESSAGES: String = ""
+
+    const val SENDER: String = "sender"
+    const val RECEIVER: String = "receiver"
+    const val MESSAGE: String = "message"
+    const val IS_SEEN: String = "isSeen"
+    const val MESSAGE_IMAGE_URL: String = "imageUrl"
+    const val EXTRA_MESSAGE_ID: String = "messageId"
+
+
 
     const val FURRIENDS_PREFERENCES: String = "FurriendsPref"
     const val LOGGED_IN_USERNAME: String = "LoggedInUserName"
@@ -31,6 +46,8 @@ object Constants {
     const val IMAGE: String = "image"
     const val BIO: String = "bio"
     const val COMPLETE_PROFILE: String = "profileCompleted"
+    const val ID : String = "id"
+    const val EXTRA_USER_ID : String = "userId"
 
 
     const val PET_IMAGE: String ="petImage"

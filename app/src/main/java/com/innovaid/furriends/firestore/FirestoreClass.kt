@@ -6,10 +6,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.nfc.Tag
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -18,6 +20,9 @@ import com.innovaid.furriends.models.*
 import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.ui.activities.admin.*
 import com.innovaid.furriends.ui.activities.user.*
+import com.innovaid.furriends.ui.adapters.UserAdapter
+import com.innovaid.furriends.ui.fragments.ChatsListFragment
+import com.innovaid.furriends.ui.fragments.SearchUserChatFragment
 import com.innovaid.furriends.ui.fragments.admin.*
 import com.innovaid.furriends.ui.fragments.user.FavoritesStrayFragment
 import com.innovaid.furriends.ui.fragments.user.UserHomeFragment
@@ -28,7 +33,7 @@ import com.innovaid.furriends.utils.GlideLoader
 class FirestoreClass {
 
     private val fireStore = FirebaseFirestore.getInstance()
-
+    var num = 10
     fun registerUser(activity: RegisterActivity, userInfo: User) {
 
         fireStore.collection(Constants.USERS)
@@ -124,6 +129,24 @@ class FirestoreClass {
                 Log.e(
                     activity.javaClass.simpleName, "Error while getting user details", e
                 )
+            }
+    }
+
+    fun getOtherUserDetails(activity: Activity, otherUserId: String) {
+        fireStore.collection(Constants.USERS)
+            .document(otherUserId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(javaClass.simpleName, document.toString())
+                val user = document.toObject(User::class.java)
+                if (user != null) {
+                    when(activity) {
+                        is MessageActivity -> {
+                            activity.otherUserDetailsLoadedSuccess(user)
+                        }
+                    }
+
+                }
             }
     }
 
@@ -288,7 +311,81 @@ class FirestoreClass {
                 )
             }
     }
+    fun getChatId(senderId: String, receiverId: String): String {
+        return if (senderId < receiverId) {
+            "$senderId-$receiverId"
+        } else {
+            "$receiverId-$senderId"
+        }
+    }
+    fun getUserChatList(fragment: ChatsListFragment) {
+        val query1 = fireStore.collection(Constants.CHATS).whereEqualTo("sender", getCurrentUserID())
+        val query2 = fireStore.collection(Constants.CHATS).whereEqualTo("receiver", getCurrentUserID())
+        val chatListQuery = fireStore.collection(Constants.CHATS)
+            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .limit(100)
 
+        val chatList = ArrayList<Chat>()
+
+        query1.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val chat = document.toObject(Chat::class.java)
+                    chat.messageId = document.id
+                    chatList.add(chat)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("MessageActivity", "Listen failed.", exception)
+            }
+
+        query2.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val chat = document.toObject(Chat::class.java)
+                    chat.messageId = document.id
+                    chatList.add(chat)
+                }
+                when (fragment) {
+                    is ChatsListFragment -> {
+                        fragment.userChatListLoaded(chatList)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("MessageActivity", "Listen failed.", exception)
+            }
+
+    }
+
+
+    fun getChatList(activity: MessageActivity, senderId: String, receiverId: String) {
+        fireStore.collection(Constants.CHATS)
+            .document(getChatId(senderId, receiverId))
+            .collection("messages")
+            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .addSnapshotListener { querySnapshot, e ->
+                if (e != null) {
+                    Log.e("MessageActivity", "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+
+                if (querySnapshot != null) {
+                    val chatList = ArrayList<Chat>()
+                    for (document in querySnapshot) {
+                        val chat = document.toObject(Chat::class.java)
+                        chat.messageId = document.id
+
+                        chatList.add(chat)
+                    }
+                    when (activity) {
+                        is MessageActivity -> {
+                            activity.chatListLoadedSuccessfully(chatList)
+                        }
+                    }
+                }
+            }
+    }
     fun getApplicationStatusList(activity: UserApplicationStatusListActivity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
@@ -493,13 +590,11 @@ class FirestoreClass {
 
     }
 
-    fun getApplicantDetails(
-        activity: ApplicantDetailsActivity,
-        applicantId: String,
-        strayId: String
-    ) {
+    fun getApplicantDetails(activity: ApplicantDetailsActivity, applicantId: String, strayId: String) {
 
-        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS).document(applicantId).get()
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .document(applicantId)
+            .get()
             .addOnSuccessListener { document ->
                 Log.e(javaClass.simpleName, document.toString())
                 val applicant = document.toObject(StrayAdoptionForm::class.java)
@@ -629,7 +724,42 @@ class FirestoreClass {
                 )
             }
     }
+    fun query(fragment: Fragment, searchText: String, userList: ArrayList<User>, userAdapter: UserAdapter) {
+        fireStore.collection(Constants.USERS)
+            .orderBy(Constants.FIRST_NAME)
+            .startAt(searchText)
+            .endAt(searchText + "\uf8ff")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                userList.clear()
+                for (document in snapshot.documents) {
+                    val queriedData = document.toObject(User::class.java)
+                    userList.add(queriedData!!)
+                }
+                userAdapter.notifyDataSetChanged()
+            }
+    }
+    fun getUserList(fragment: SearchUserChatFragment) {
+        fireStore.collection(Constants.USERS)
+            .whereNotEqualTo("id", getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
 
+                val userList: ArrayList<User> = ArrayList()
+
+                for (i in document.documents) {
+                    val user  = i.toObject(User::class.java)!!
+                    user.userId = i.id
+                    userList.add(user)
+                }
+                fragment.userListSuccessfullyLoadedToHome(userList)
+            }
+            .addOnFailureListener { e ->
+                fragment.hideProgressDialog()
+                Log.e(fragment.javaClass.simpleName, "Error while getting user list", e)
+            }
+    }
     fun getPetsListToHome(fragment: UserHomeFragment) {
         fireStore.collection(Constants.PETS)
             .whereEqualTo(Constants.APPROVAL_STATUS, "Approved")
@@ -654,6 +784,7 @@ class FirestoreClass {
             }
 
     }
+
     fun getStrayFavoritesList(fragment: FavoritesStrayFragment) {
         fireStore.collection(Constants.FAVORITES)
             .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
@@ -771,6 +902,22 @@ class FirestoreClass {
 
     }
 
+    fun getPetInfo(activity: UserApplicationStatusActivity, petId: String) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .document(petId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+
+                    Log.i(activity.javaClass.simpleName, document.toString())
+                    val stray = document.toObject(StrayAnimal::class.java)
+                    if (stray != null) {
+                        activity.petInfoLoadedSuccessfully(stray)
+                    }
+                }
+            }
+    }
+
     fun getApplicationStatus(activity: UserApplicationStatusActivity, applicantId: String) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)
@@ -882,11 +1029,6 @@ class FirestoreClass {
 
             }
         }
-
-    fun getUserFavorites(activity: Activity) {
-
-    }
-
 
 }
 

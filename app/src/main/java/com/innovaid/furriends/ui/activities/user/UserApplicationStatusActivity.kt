@@ -15,10 +15,11 @@ import androidx.core.content.ContextCompat
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.StrayAdoptionForm
+import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.utils.Constants
-import com.shuhart.stepview.StepView
+import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_user_pet_profile.*
 import kotlinx.android.synthetic.main.activity_set_up_user_profile.view.*
 import kotlinx.android.synthetic.main.activity_user_application_status.*
@@ -110,8 +111,16 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
     private fun applicationStatus() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getApplicationStatus(this,mApplicantStatusId)
+        FirestoreClass().getPetInfo(this, mPetId)
     }
+    fun petInfoLoadedSuccessfully (strayAnimal: StrayAnimal) {
+        llToBeAdoptedPetInfoContainer.visibility = View.VISIBLE
+        GlideLoader(this).loadPetPicture(strayAnimal.strayAnimalImage!!, ivToBeAdoptedPetImage)
+        tvToBeAdoptedPetBreed.text = strayAnimal.strayAnimalBreed
+        ivToBeAdoptedPetColor.text = strayAnimal.strayAnimalColor
+        ivToBeAdoptedPetGender.text = strayAnimal.strayAnimalGender
 
+    }
    fun applicationStatusLoaded(strayAdoptionForm: StrayAdoptionForm) {
 
        hideProgressDialog()

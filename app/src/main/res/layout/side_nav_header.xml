@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_height="180dp"
-    android:background="@color/white">
+    android:layout_height="160dp"
+    android:background="#49B1E6">
 
 
         <androidx.cardview.widget.CardView
@@ -24,12 +24,12 @@
         <TextView
             android:id="@+id/tvHeaderUserName"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
             android:text="User Name"
-            android:textColor="@color/black"
+            android:textColor="@color/colorOffWhite"
             android:textSize="20sp"
             android:textStyle="bold" />
 

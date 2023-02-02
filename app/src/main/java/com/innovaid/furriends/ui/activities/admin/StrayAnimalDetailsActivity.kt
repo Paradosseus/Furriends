@@ -1,17 +1,13 @@
 package com.innovaid.furriends.ui.activities.admin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
-import com.innovaid.furriends.models.Favorites
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.ui.activities.BaseActivity
-import com.innovaid.furriends.ui.activities.MessageActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_stray_animal_profile.*
@@ -95,7 +91,7 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
                    favoritesListener()
                 }
                 R.id.ibMessageAdmin -> {
-                    startActivity(Intent(this, MessageActivity::class.java))
+//                    startActivity(Intent(this, MessageActivity::class.java))
                 }
                 R.id.ibSADBackButton -> {
                     onBackPressed()

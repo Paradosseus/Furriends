@@ -1,5 +1,6 @@
 package com.innovaid.furriends.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -28,6 +29,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         //Getting the instance of Firebase Authentication
         firebaseAuth = FirebaseAuth.getInstance()
         setContentView(R.layout.activity_login)
+
+        val sharedPreferences = getSharedPreferences(Constants.FURRIENDS_PREFERENCES, Context.MODE_PRIVATE)
+        val email = sharedPreferences.getString(Constants.EMAIL, "")
+        val password = sharedPreferences.getString(Constants.PASSWORD, "")
+        if (email != "" && password != "") {
+            etEmailAddress.setText(email)
+            etPassword.setText(password)
+            loginUser()
+        }
 
         btnLogin.setOnClickListener(this)
 
@@ -68,6 +78,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                 if(task.isSuccessful) {
 
+                    val sharedPreferences = getSharedPreferences(Constants.FURRIENDS_PREFERENCES, Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString(Constants.EMAIL, em)
+                    editor.putString(Constants.PASSWORD, pass)
+                    editor.apply()
+
                     FirestoreClass().getUserInfo(this)
 
                 } else {
@@ -78,6 +94,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
 
     }
+
     //Validates if user has entered their login credentials or not
     private fun validateLoginCredentials(): Boolean {
         return when {
@@ -111,5 +128,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
         finish()
     }
+
+
 
 }

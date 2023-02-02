@@ -86,7 +86,7 @@ class ViewPetPostDetailsActivity : BaseActivity() {
         tvPetPostBreedValue.text = pet.petBreed
         tvPetPostGenderValue.text = pet.petGender
         tvPetPostColorValue.text = pet.petColor
-        tvPetPostAboutValue.text = pet.description
+
 
     }
     fun postOwnerLoaded(user: User) {

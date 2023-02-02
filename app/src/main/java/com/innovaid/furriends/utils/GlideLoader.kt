@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.innovaid.furriends.R
+import de.hdodenhof.circleimageview.CircleImageView
 import java.io.IOException
 
 class GlideLoader(val context: Context) {
@@ -19,6 +20,7 @@ class GlideLoader(val context: Context) {
             e.printStackTrace()
         }
     }
+
     fun loadPetPicture(image: Any, imageView: ImageView) {
         try {
             Glide

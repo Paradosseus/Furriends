@@ -23,7 +23,7 @@ class StrayFavoritesListAdapter (
 
     ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ApplicationListAdapter.MyViewHolder(
+        return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.favorite_stray_layout,
                 parent,

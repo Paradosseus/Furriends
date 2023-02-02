@@ -3,6 +3,7 @@ package com.innovaid.furriends.ui.activities.user
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.innovaid.furriends.R
+import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.android.synthetic.main.activity_user_adoption.*
 import kotlinx.android.synthetic.main.activity_user_profile.*
 
@@ -15,13 +16,13 @@ class UserAdoptionActivity : AppCompatActivity() {
     }
     private fun setupActionBar() {
 
-        setSupportActionBar(tbUserAdoptionActivity)
-        supportActionBar!!.title = "Adoption Form"
+        setSupportActionBar(tbMessagingActivity)
+        supportActionBar!!.title = "Message"
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
 
         }
-        tbUserAdoptionActivity.setNavigationOnClickListener { onBackPressed() }
+        tbMessagingActivity.setNavigationOnClickListener { onBackPressed() }
     }
 }
