@@ -181,13 +181,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.activities.DonateActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ui.activities.user.EditUserProfileActivity"
             android:exported="false">
             <meta-data
@@ -222,13 +215,13 @@
             android:name=".ui.activities.LoginActivity"
             android:exported="true" />
 
-        <service
-            android:name=".firestore.FirebaseMessaging"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+<!--        <service-->
+<!--            android:name=".firestore.FirebaseMessaging"-->
+<!--            android:exported="false">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
     </application>
 
 </manifest>

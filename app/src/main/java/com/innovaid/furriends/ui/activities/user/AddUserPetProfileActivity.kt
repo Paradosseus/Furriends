@@ -183,6 +183,7 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
             username,
             etPetName.text.toString().trim { it <= ' ' },
             etPetBreed.text.toString().trim { it <= ' ' },
+            etPetLocation.text.toString().trim { it <= ' ' },
             tvBirthdayValue.text.toString().trim { it <= ' ' },
             etPetColor.text.toString().trim { it <= ' ' },
             spPetType.selectedItem.toString(),

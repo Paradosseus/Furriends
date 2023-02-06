@@ -65,7 +65,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="150dp"
         app:cardCornerRadius="250dp"
         app:layout_constraintBottom_toBottomOf="@+id/cdImageContainer"
@@ -88,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -209,6 +209,7 @@
             android:layout_height="20dp"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="435dp" />
+
 
         <TextView
             android:id="@+id/tvBioHeader"

@@ -16,7 +16,6 @@ import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
-import com.innovaid.furriends.ui.activities.DonateActivity
 import com.innovaid.furriends.ui.activities.LoginActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
@@ -47,7 +46,6 @@ class UserDashboardActivity : BaseActivity() {
                 R.id.nav_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
                 R.id.nav_application_status -> startActivity(Intent(this, UserApplicationStatusListActivity::class.java))
                 R.id.nav_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
-                R.id.nav_donate -> startActivity(Intent(this, DonateActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
                     val sharedPreferences = getSharedPreferences(Constants.FURRIENDS_PREFERENCES, Context.MODE_PRIVATE)

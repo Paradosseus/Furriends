@@ -16,13 +16,13 @@ class UserAdoptionActivity : AppCompatActivity() {
     }
     private fun setupActionBar() {
 
-        setSupportActionBar(tbMessagingActivity)
+        setSupportActionBar(tbUserAdoptionActivity)
         supportActionBar!!.title = "Message"
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
 
         }
-        tbMessagingActivity.setNavigationOnClickListener { onBackPressed() }
+        tbUserAdoptionActivity.setNavigationOnClickListener { onBackPressed() }
     }
 }

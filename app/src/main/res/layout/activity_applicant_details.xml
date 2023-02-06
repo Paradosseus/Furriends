@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOffWhite"
     tools:context=".ui.activities.admin.ApplicantDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -44,15 +45,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="110dp"
+                android:padding="10dp"
+                android:background="@drawable/background_top_application_status"
+                android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
@@ -60,31 +61,43 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="20dp"
+                    android:textColor="@color/white"
                     android:text="Application Status:"/>
 
                 <TextView
                     android:id="@+id/ivADApplicationStatusValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
+                    android:textColor="@color/white"
+                    android:textSize="25dp"
                     android:text="Application Status Value"/>
 
 
             </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:background="@drawable/background_container_application_status"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:text="Pet Information"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
+
+
 
                 <ImageView
                     android:id="@+id/ivADStrayAnimalImage"
@@ -93,8 +106,8 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical">
                     <View
                         android:layout_width="20dp"
@@ -105,6 +118,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
                         android:text="Pet Breed"/>
                     
                     <LinearLayout
@@ -115,6 +130,7 @@
                             android:id="@+id/tvADStrayGender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="16dp"
                             android:text="Gender"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -124,6 +140,7 @@
                             android:id="@+id/tvADStrayColor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="16dp"
                             android:text="Color"/>
                     </LinearLayout>
 
@@ -131,18 +148,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
                         android:text="Location Found: "/>
 
                     <TextView
                         android:id="@+id/tvADStrayLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="16sp"
                         android:text="Location "/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
                         android:text="Date and Time: "/>
 
                     <LinearLayout
@@ -154,76 +176,109 @@
                             android:id="@+id/tvADStrayDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="16dp"
                             android:text="Date"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="16dp"
                             android:text=" at "/>
                         <TextView
                             android:id="@+id/tvADStrayTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="16dp"
                             android:text="Time"/>
 
                     </LinearLayout>
 
+
                 </LinearLayout>
+            </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="250dp"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/background_container_application_status"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/ivADApplicantImage"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="Applicant Information"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="To be adopted by:"/>
 
-                    <TextView
-                        android:id="@+id/tvADApplicantName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Applicant Name"/>
+                    <ImageView
+                        android:id="@+id/ivADApplicantImage"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"/>
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Address"/>
-                    <TextView
-                        android:id="@+id/tvADApplicantAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Applicant Address"/>
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Adoption Form:"/>
-                    <TextView
-                        android:id="@+id/tvADApplicantFormLink"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/sky_blue"
-                        android:text="View Adoption Form here" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:text="To be adopted by:"/>
+
+                        <TextView
+                            android:id="@+id/tvADApplicantName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16dp"
+                            android:text="Applicant Name"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:textColor="@color/black"
+                            android:text="Address"/>
+                        <TextView
+                            android:id="@+id/tvADApplicantAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16dp"
+                            android:text="Applicant Address"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:textColor="@color/black"
+                            android:text="Adoption Form:"/>
+                        <TextView
+                            android:id="@+id/tvADApplicantFormLink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/sky_blue"
+                            android:textSize="17dp"
+                            android:text="View Adoption Form" />
+                    </LinearLayout>
+
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -231,29 +286,53 @@
 
             <LinearLayout
                 android:id="@+id/llBtnContainerReviewApplication"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:background="@drawable/background_container_application_status"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:padding="10dp">
 
-                <Button
-                    android:id="@+id/btnApproveApplication"
-                    android:layout_width="180dp"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginEnd="5dp"
-                    android:text="Approve" />
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:text="Is Applicant Approved for Application?"/>
 
-                <Button
-                    android:id="@+id/btnDeclineApplication"
-                    android:layout_width="180dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginStart="5dp"
-                    android:text="Decline" />
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnApproveApplication"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="@color/green"
+                        android:textColor="@color/black"
+                        android:text="Approve" />
+
+                    <Button
+                        android:id="@+id/btnDeclineApplication"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="5dp"
+                        android:backgroundTint="@color/red"
+                        android:textColor="@color/black"
+                        android:text="Decline" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -276,15 +355,17 @@
 
             <LinearLayout
                 android:id="@+id/llContainerAppointmentScheduleDate"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/background_container_application_status"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -292,13 +373,13 @@
                         android:layout_marginTop="10dp"
                         android:textSize="20dp"
                         android:textStyle="bold"
+                        android:textColor="@color/black"
                         android:text="Date of Appointment: "/>
 
                     <TextView
                         android:id="@+id/tvADAppointmentScheduleValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:textSize="18dp"
                         android:text="Appointment Date Value"/>
 
@@ -311,23 +392,28 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Interview done"/>
+
             </LinearLayout>
 
 
 
             <LinearLayout
                 android:id="@+id/llBtnContainerReviewAssessment"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/background_container_application_status"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textAlignment="center"
                     android:textSize="20dp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:text="Did applicant passed assessment?"/>
 
                 <LinearLayout
@@ -342,6 +428,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:layout_marginEnd="5dp"
+                        android:backgroundTint="@color/green"
+                        android:textColor="@color/black"
                         android:text="Passed" />
 
                     <Button
@@ -350,6 +438,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:layout_marginEnd="5dp"
+                        android:backgroundTint="@color/red"
+                        android:textColor="@color/black"
                         android:text="Failed" />
 
                 </LinearLayout>
@@ -360,8 +450,11 @@
             android:id="@+id/llBtnContainerClaimPet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="5dp"
+            android:background="@drawable/background_container_application_status"
             android:layout_gravity="center">
 
             <TextView
@@ -370,20 +463,22 @@
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:text="Did the applicant claimed his or her pet?"/>
+                android:textAlignment="center"
+                android:text="Did the applicant claimed the pet?"/>
 
             <Button
                 android:id="@+id/btnPetClaimed"
-                android:layout_width="180dp"
+                android:layout_width="250dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:layout_marginEnd="5dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/green"
                 android:text="Pet Claimed" />
 
 
         </LinearLayout>
-            
 
         </LinearLayout>
         

@@ -9,6 +9,7 @@ data class Pet(
     val userName: String? = null,
     val petName: String? = null,
     val petBreed: String? = null,
+    val petLocation: String? = null,
     val petBirthDate: String? = null,
     val petColor: String? =null,
     val petType: String? = null,

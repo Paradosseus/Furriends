@@ -24,6 +24,7 @@ import com.innovaid.furriends.ui.adapters.UserAdapter
 import com.innovaid.furriends.ui.fragments.ChatsListFragment
 import com.innovaid.furriends.ui.fragments.SearchUserChatFragment
 import com.innovaid.furriends.ui.fragments.admin.*
+import com.innovaid.furriends.ui.fragments.user.FavoritesPetFragment
 import com.innovaid.furriends.ui.fragments.user.FavoritesStrayFragment
 import com.innovaid.furriends.ui.fragments.user.UserHomeFragment
 import com.innovaid.furriends.ui.fragments.user.UserListingsFragment
@@ -262,7 +263,26 @@ class FirestoreClass {
             .document()
             .set(adoptionFormInfo, SetOptions.merge())
             .addOnSuccessListener {
-                activity.uploadStrayApplicationFormDetailsSuccess()
+                fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+                    .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for(document in querySnapshot) {
+                            Log.e(javaClass.simpleName, document.toString())
+                            val strayAdoption = document.toObject(StrayAdoptionForm::class.java)
+                            strayAdoption!!.applicationId = document.id
+                            if (strayAdoption != null) {
+                                when(activity) {
+                                    is StrayAdoptionActivity -> {
+                                        activity.uploadStrayApplicationFormDetailsSuccess(strayAdoption)
+                                    }
+                                }
+
+                            }
+                        }
+
+                    }
+//                activity.uploadStrayApplicationFormDetailsSuccess()
             }
             .addOnFailureListener { e ->
                 activity.hideProgressDialog()
@@ -763,7 +783,7 @@ class FirestoreClass {
     fun getPetsListToHome(fragment: UserHomeFragment) {
         fireStore.collection(Constants.PETS)
             .whereEqualTo(Constants.APPROVAL_STATUS, "Approved")
-            .whereNotEqualTo(Constants.PET_ADOPTION_STATUS, "Adopted")
+            .whereEqualTo(Constants.PET_ADOPTION_STATUS, "Listed")
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.documents.toString())
@@ -785,6 +805,27 @@ class FirestoreClass {
 
     }
 
+    fun getPetFavoritesList(fragment: FavoritesPetFragment) {
+        fireStore.collection(Constants.FAVORITES)
+            .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
+            .whereEqualTo(Constants.CATEGORY, "userPet")
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                val petFavoritesList: ArrayList<Favorites> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val petFavorite = i.toObject(Favorites::class.java)!!
+                    petFavorite.favoritesId = i.id
+                    petFavoritesList.add(petFavorite)
+                }
+                fragment.petFavoritesLoadedSuccessfully(petFavoritesList)
+            }
+
+
+    }
     fun getStrayFavoritesList(fragment: FavoritesStrayFragment) {
         fireStore.collection(Constants.FAVORITES)
             .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
@@ -808,7 +849,7 @@ class FirestoreClass {
     }
     fun getStrayAnimalsListToHome(fragment: AdminHomeFragment) {
         fireStore.collection(Constants.STRAY_ANIMALS)
-            .whereNotEqualTo(Constants.STRAY_ADOPTION_STATUS, "Adopted")
+            .whereEqualTo(Constants.STRAY_ADOPTION_STATUS, "Listed")
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.documents.toString())
@@ -867,7 +908,7 @@ class FirestoreClass {
     }
 
     fun changeStrayAdoptionStatus(
-        activity: ApplicantDetailsActivity,
+        activity: Activity,
         strayHashMap: HashMap<String, Any>,
         strayId: String
     ) {
@@ -878,6 +919,9 @@ class FirestoreClass {
                 when (activity) {
                     is ApplicantDetailsActivity -> {
                         activity.changedStrayAdoptionStatus()
+                    }
+                    is StrayAdoptionActivity -> {
+                        activity.changedStrayAdoptionStatusSuccess()
                     }
 
                 }
@@ -955,7 +999,23 @@ class FirestoreClass {
             }
     }
 
-
+    fun isAddedToPetFavorites(activity: Activity, petId: String) {
+        fireStore.collection(Constants.FAVORITES)
+            .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
+            .whereEqualTo(Constants.PET_ID_FAVORITES, petId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    if (document != null) {
+                        when (activity) {
+                            is UserPetDetailsActivity -> {
+                                activity.inFavorites()
+                            }
+                        }
+                    }
+                }
+            }
+    }
 
     fun isAddedToFavorites(activity: Activity, strayId: String) {
         fireStore.collection(Constants.FAVORITES)
@@ -974,6 +1034,7 @@ class FirestoreClass {
                 }
             }
     }
+
     fun favoritesListener(activity: Activity, strayId: String, favoritesId: String, category: String) {
         fireStore.collection(Constants.FAVORITES)
             .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
@@ -1029,7 +1090,61 @@ class FirestoreClass {
 
             }
         }
+    fun petFavoritesListener(activity: Activity, petId: String, category: String) {
+        fireStore.collection(Constants.FAVORITES)
+            .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
+            .whereEqualTo(Constants.PET_ID_FAVORITES, petId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    for (document in querySnapshot) {
+                        document.reference.delete()
+                            .addOnSuccessListener {
+                                when (activity) {
+                                    is UserPetDetailsActivity -> {
+                                        activity.removeFromFavoritesSuccessfully()
+                                    }
+                                }
+                            }
 
+                    }
+                } else {
+                    fireStore.collection(Constants.PETS)
+                        .document(petId)
+                        .get()
+                        .addOnSuccessListener { document ->
+                            if (document != null) {
+                                Log.i(activity.javaClass.simpleName, document.toString())
+                                val pet = document.toObject(Pet::class.java)
+                                if (pet != null) {
+                                    val favorites = Favorites(
+                                        petId,
+                                        getCurrentUserID(),
+                                        category,
+                                        pet.userId.toString(),
+                                        pet.petBreed.toString(),
+                                        pet.petLocation.toString(),
+                                        pet.image.toString(),
+                                        pet.petName.toString()
+
+                                    )
+                                    fireStore.collection(Constants.FAVORITES)
+                                        .document()
+                                        .set(favorites, SetOptions.merge())
+                                        .addOnSuccessListener {
+                                            when (activity) {
+                                                is UserPetDetailsActivity -> {
+                                                    activity.addedToFavoritesSuccessfully()
+                                                }
+                                            }
+                                        }
+                                }
+                            }
+                        }
+
+                }
+            }
+    }
 }
 
 

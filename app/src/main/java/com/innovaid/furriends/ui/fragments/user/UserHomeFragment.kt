@@ -1,5 +1,6 @@
 package com.innovaid.furriends.ui.fragments.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.ui.activities.user.UserPetDetailsActivity
 import com.innovaid.furriends.ui.adapters.HomePetsListAdapter
 import com.innovaid.furriends.ui.fragments.BaseFragment
+import com.innovaid.furriends.utils.Constants
 import kotlinx.android.synthetic.main.fragment_user_home.*
 
 
@@ -48,13 +51,13 @@ class UserHomeFragment : BaseFragment() {
             val adapterPets = HomePetsListAdapter(requireActivity(), homePetsList)
             rvHomePetListings.adapter = adapterPets
 
-//            adapterPets.setOnClickListener(object: HomePetsListAdapter.OnClickListener {
-//                override fun onClick(position: Int, pet: Pet) {
-//                    val intent = Intent(context, PetDetailsActivity::class.java)
-//                    intent.putExtra(Constants.EXTRA_PET_ID,pet.petId)
-//                    startActivity(intent)
-//                }
-//            })
+            adapterPets.setOnClickListener(object: HomePetsListAdapter.OnClickListener {
+                override fun onClick(position: Int, pet: Pet) {
+                    val intent = Intent(context, UserPetDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PET_ID,pet.petId)
+                    startActivity(intent)
+                }
+            })
         } else {
             rvHomePetListings.visibility = View.GONE
             tvHomeNoListings.visibility = View.VISIBLE

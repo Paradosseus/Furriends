@@ -10,9 +10,9 @@
             android:title="View Profile"/>
 
         <item
-            android:id="@+id/nav_admin_application_status"
+            android:id="@+id/nav_admin_manage_posts"
             android:icon="@drawable/ic_baseline_application_24"
-            android:title="Application Status" />
+            android:title="Manage Posts" />
         <item
             android:id="@+id/nav_admin_favorites"
             android:icon="@drawable/ic_baseline_favorite_24"

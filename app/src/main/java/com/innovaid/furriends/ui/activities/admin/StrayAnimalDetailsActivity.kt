@@ -46,9 +46,9 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
 
         }
 
+
         getStrayAnimalDetails()
         FirestoreClass().isAddedToFavorites(this,mStrayAnimalId)
-
 
         btnAdoptStrayAnimal.setOnClickListener(this)
         ibAddStrayAnimalToFavorite.setOnClickListener(this)
@@ -64,6 +64,12 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
     }
     fun strayAnimalSuccess(strayAnimal: StrayAnimal) {
         hideProgressDialog()
+
+        if (strayAnimal.adoptionStatus.toString() == "Ongoing") {
+            btnAdoptStrayAnimal.visibility = View.GONE
+            ibAddStrayAnimalToFavorite.visibility = View.GONE
+            ibMessageAdmin.visibility = View.GONE
+        }
         GlideLoader(this@StrayAnimalDetailsActivity).loadPetPicture(strayAnimal.strayAnimalImage!!, ivStrayAnimalDetailImage)
         tvStrayAnimalDetailBreed.text = strayAnimal.strayAnimalBreed
         tvStrayAnimalDetailGender.text = strayAnimal.strayAnimalGender
@@ -85,6 +91,7 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
                 R.id.btnAdoptStrayAnimal -> {
                     val intent = Intent(this, StrayAdoptionActivity::class.java)
                     intent.putExtra(Constants.EXTRA_STRAY_ANIMAL_ID, mStrayAnimalId)
+                    finish()
                     startActivity(intent)
                 }
                 R.id.ibAddStrayAnimalToFavorite -> {

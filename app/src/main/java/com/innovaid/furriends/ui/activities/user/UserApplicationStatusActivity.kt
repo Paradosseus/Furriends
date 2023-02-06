@@ -1,6 +1,8 @@
 package com.innovaid.furriends.ui.activities.user
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -18,8 +20,10 @@ import com.innovaid.furriends.models.StrayAdoptionForm
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.admin.StrayAnimalDetailsActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_add_stray_animal_profile.*
 import kotlinx.android.synthetic.main.activity_add_user_pet_profile.*
 import kotlinx.android.synthetic.main.activity_set_up_user_profile.view.*
 import kotlinx.android.synthetic.main.activity_user_application_status.*
@@ -31,6 +35,7 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
 
     private var mPetId: String = ""
     private var mApplicantStatusId: String = ""
+    private var mStrayAnimalOwnerId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +54,7 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
 
         btnSelectSchedule.setOnClickListener(this)
         btnConfirmAdoptionDate.setOnClickListener(this)
-
+        ivViewPetProfile.setOnClickListener(this)
         setupActionBar()
 
     }
@@ -63,16 +68,24 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
                 R.id.btnConfirmAdoptionDate -> {
                     confirmAppointmentDate()
                 }
+                R.id.ivViewPetProfile -> {
+                    viewPetProfile()
+                }
             }
         }
     }
-
+    private fun viewPetProfile() {
+        val intent = Intent(this, StrayAnimalDetailsActivity::class.java)
+        intent.putExtra(Constants.EXTRA_STRAY_ANIMAL_ID,mPetId)
+        intent.putExtra(Constants.EXTRA_STRAY_OWNER_ID,mStrayAnimalOwnerId)
+        this.startActivity(intent)
+    }
     private fun confirmAppointmentDate() {
         showProgressDialog(resources.getString(R.string.please_wait))
-
+        val appointmentTime = tvAppointmentTimeValue.text.toString().trim{ it <= ' '}
         val appointmentDate = tvAppointmentDateValue.text.toString().trim{ it <= ' '}
         val appointmentHashMap = HashMap<String, Any>()
-        appointmentHashMap[Constants.APPOINTMENT_DATE] = appointmentDate
+        appointmentHashMap[Constants.APPOINTMENT_DATE] = "${appointmentDate} at ${appointmentTime}"
         FirestoreClass().confirmAppointmentDate(this, appointmentHashMap, mApplicantStatusId)
     }
 
@@ -91,6 +104,7 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateTable(myCalendar)
+            setTime()
         }
 
         DatePickerDialog(
@@ -102,11 +116,23 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
         ).show()
     }
 
+
     private fun updateTable(myCalendar: Calendar) {
         val myFormat = "MM-dd-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
         tvAppointmentDateValue.setText(sdf.format(myCalendar.time))
     }
+    private fun setTime() {
+        tvDateTimeConnector.visibility = View.VISIBLE
+        val currentTime  = Calendar.getInstance()
+        val startHour = currentTime.get(Calendar.HOUR_OF_DAY)
+        val startMinute = currentTime.get(Calendar.MINUTE)
+
+        TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+            tvAppointmentTimeValue.setText("$hourOfDay: $minute")
+        }, startHour, startMinute, false).show()
+    }
+
 
     private fun applicationStatus() {
         showProgressDialog(resources.getString(R.string.please_wait))
@@ -119,6 +145,8 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
         tvToBeAdoptedPetBreed.text = strayAnimal.strayAnimalBreed
         ivToBeAdoptedPetColor.text = strayAnimal.strayAnimalColor
         ivToBeAdoptedPetGender.text = strayAnimal.strayAnimalGender
+
+        mStrayAnimalOwnerId = strayAnimal.userId.toString()
 
     }
    fun applicationStatusLoaded(strayAdoptionForm: StrayAdoptionForm) {
@@ -156,7 +184,7 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
                claimPet()
            }
            "Complete" -> {
-               Complete()
+               adoptionComplete()
            }
        }
 
@@ -186,31 +214,50 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
     private fun reviewingAssessment() {
         ivStepOneIcon.setImageResource(R.drawable.done_step)
         tvStepOneTextValue.setTextColor(ContextCompat.getColor(this, R.color.gray))
+        ivStepLineOne.setImageResource(R.drawable.line_reach)
         ivStepTwoIcon.setImageResource(R.drawable.done_step)
         tvStepThreeTextValue.setTextColor(ContextCompat.getColor(this, R.color.sky_blue))
+        ivStepLineTwo.setImageResource(R.drawable.line_reach)
         ivStepThreeIcon.setImageResource(R.drawable.step_three)
         tvApplicationMessage.text = "Your assessment is being reviewed"
     }
     private fun assessmentFailed() {
         ivStepOneIcon.setImageResource(R.drawable.done_step)
         tvStepOneTextValue.setTextColor(ContextCompat.getColor(this, R.color.gray))
+        ivStepLineOne.setImageResource(R.drawable.line_reach)
         ivStepTwoIcon.setImageResource(R.drawable.done_step)
         tvStepThreeTextValue.setTextColor(ContextCompat.getColor(this, R.color.red))
         tvStepThreeTextValue.text = "You did not pass the interview"
+        ivStepLineTwo.setImageResource(R.drawable.line_reach)
         ivStepThreeIcon.setImageResource(R.drawable.step_decline)
         tvApplicationMessage.text = "You failed the assessment"
     }
     private fun claimPet() {
         ivStepOneIcon.setImageResource(R.drawable.done_step)
         tvStepOneTextValue.setTextColor(ContextCompat.getColor(this, R.color.gray))
+        ivStepLineOne.setImageResource(R.drawable.line_reach)
         ivStepTwoIcon.setImageResource(R.drawable.done_step)
+        ivStepLineTwo.setImageResource(R.drawable.line_reach)
         ivStepThreeIcon.setImageResource(R.drawable.done_step)
+        ivStepLineThree.setImageResource(R.drawable.line_reach)
         ivStepFourIcon.setImageResource(R.drawable.step_four)
         tvStepFourTextValue.setTextColor(ContextCompat.getColor(this, R.color.sky_blue))
         tvApplicationMessage.text = "You passed the assessment. Claim your pet "
     }
-    private fun Complete() {
+    private fun adoptionComplete() {
+        ivStepOneIcon.setImageResource(R.drawable.done_step)
+        tvStepOneTextValue.setTextColor(ContextCompat.getColor(this, R.color.gray))
+        ivStepLineOne.setImageResource(R.drawable.line_reach)
+        ivStepTwoIcon.setImageResource(R.drawable.done_step)
+        ivStepLineTwo.setImageResource(R.drawable.line_reach)
+        ivStepThreeIcon.setImageResource(R.drawable.done_step)
+        ivStepLineThree.setImageResource(R.drawable.line_reach)
+        ivStepFourIcon.setImageResource(R.drawable.done_step)
+        ivStepLineFour.setImageResource(R.drawable.line_reach)
+        ivStepFiveIcon.setImageResource(R.drawable.done_step)
+        tvStepFiveTextValue.setTextColor(ContextCompat.getColor(this, R.color.sky_blue))
 
+        tvApplicationMessage.text = "Application Complete! Take care of your newly-adopted furbaby "
     }
 
     override fun onResume() {

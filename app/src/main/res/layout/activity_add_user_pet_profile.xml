@@ -7,24 +7,26 @@
     tools:context=".ui.activities.user.AddUserPetProfileActivity">
 
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-91dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
 
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,253 +49,408 @@
                     android:backgroundTint="@drawable/ib_state"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_baseline_add_a_photo_24" />
+
                 <ImageButton
                     android:id="@+id/ibAPDBackButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_baseline_arrow_back_24"
-                    android:backgroundTint="@drawable/ib_state"/>
+                    android:backgroundTint="@drawable/ib_state"
+                    android:src="@drawable/ic_baseline_arrow_back_24" />
 
             </FrameLayout>
 
-
-            <EditText
-                android:id="@+id/etPetName"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toStartOf="@+id/etPetBreed"
-                app:layout_constraintStart_toStartOf="@+id/tvPetName"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetName" />
-
-            <EditText
-                android:id="@+id/etPetBreed"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/etPetName"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetBreed" />
-
-            <TextView
-                android:id="@+id/tvPetType"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="152dp"
-                android:text="Type"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/tvPetGender"
-                app:layout_constraintStart_toStartOf="@+id/tvBirthdayValue"
-                app:layout_constraintTop_toBottomOf="@+id/tvBirthdayValue" />
-
-            <Spinner
-                android:id="@+id/spPetType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/pet_types"
-                app:layout_constraintStart_toStartOf="@+id/tvPetType"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetType" />
-
-            <TextView
-                android:id="@+id/tvBirthdayValue"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="6"
-                android:gravity="center"
-                android:hint="Select a Date"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/etPetColor"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/tvPetBirthday"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetBirthday" />
-
-            <TextView
-                android:id="@+id/tvPetBirthday"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Birthday"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/etPetName"
-                app:layout_constraintTop_toBottomOf="@+id/etPetName" />
-
-            <TextView
-                android:id="@+id/tvPetGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Gender"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/etPetColor"
-                app:layout_constraintTop_toBottomOf="@+id/etPetColor" />
-
-            <RadioGroup
-                android:id="@+id/rgPetGender"
-                android:layout_width="145dp"
-                android:layout_height="31dp"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@+id/tvPetGender"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetGender">
-
-                <RadioButton
-                    android:id="@+id/rbPetMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Male" />
-
-                <RadioButton
-                    android:id="@+id/rbPetFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Female" />
-            </RadioGroup>
-
-            <ImageView
-                android:id="@+id/ivCalendar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvBirthdayValue"
-                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
-                app:layout_constraintTop_toTopOf="@+id/tvBirthdayValue"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
-
-
-            <TextView
-                android:id="@+id/tvSpayedNeutered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Spayed or Neutered"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/spPetType"
-                app:layout_constraintTop_toBottomOf="@+id/spPetType" />
-
-            <RadioGroup
-                android:id="@+id/rgSpayedNeutered"
-                android:layout_width="111dp"
-                android:layout_height="33dp"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
-                app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
-
-                <RadioButton
-                    android:id="@+id/rbSNYes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yes" />
-
-                <RadioButton
-                    android:id="@+id/rbSNNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No" />
-
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/tvPetName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="15dp"
-                android:text="Name"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/frameLayout"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
-
-            <TextView
-                android:id="@+id/tvPetBreed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Breed"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/etPetBreed"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
-
-            <TextView
-                android:id="@+id/tvPetColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Color"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/tvPetBreed"
-                app:layout_constraintTop_toBottomOf="@+id/etPetBreed" />
-
-            <EditText
-                android:id="@+id/etPetColor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.994"
-                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
-                app:layout_constraintStart_toStartOf="@+id/etPetBreed"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetColor" />
-
-            <EditText
-                android:id="@+id/etPetDescription"
-                android:layout_width="0dp"
-                android:layout_height="250dp"
-                android:background="@drawable/edit_text_border"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="@+id/etPetBreed"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tvPetDescription"
-                app:layout_constraintTop_toBottomOf="@+id/tvPetDescription" />
-
-            <Button
-                android:id="@+id/btnSetupPetProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:text="Set-up Profile"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etPetDescription"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
-            <TextView
-                android:id="@+id/tvPetDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Description"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/rgSpayedNeutered"
-                app:layout_constraintTop_toBottomOf="@+id/rgSpayedNeutered" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="205dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Pet Name"
+                            android:textColor="@color/black" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
+
+                            <EditText
+                                android:id="@+id/etPetName"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@color/transparent"
+                                android:inputType="text" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="205dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Breed"
+                            android:textColor="@color/black" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
+
+                            <EditText
+                                android:id="@+id/etPetBreed"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@color/transparent"
+                                android:inputType="text" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Location"
+                        android:textColor="@color/black" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="380dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
+
+                        <EditText
+                            android:id="@+id/etPetLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:background="@color/transparent"
+                            android:inputType="text" />
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="205dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Birthday"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="5dp">
+
+                                <TextView
+                                    android:id="@+id/tvBirthdayValue"
+                                    android:layout_width="150dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginStart="5dp"
+                                    android:inputType="text" />
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <ImageView
+                                android:id="@+id/ivCalendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/tvBirthdayValue"
+                                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
+                                app:layout_constraintTop_toTopOf="@+id/tvBirthdayValue"
+                                app:layout_constraintVertical_bias="0.0"
+                                app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="205dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Color"
+                            android:textColor="@color/black" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="180dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
+
+                            <EditText
+                                android:id="@+id/etPetColor"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@color/transparent"
+                                android:inputType="text" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="205dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Type"
+                            android:textColor="@color/black" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="180dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
+
+                            <Spinner
+                                android:id="@+id/spPetType"
+                                android:layout_width="180dp"
+                                android:layout_height="40dp"
+                                android:entries="@array/pet_types"
+                                app:layout_constraintStart_toStartOf="@+id/tvPetType"
+                                app:layout_constraintTop_toBottomOf="@+id/tvPetType" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="205dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Gender"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rgPetGender"
+                            android:layout_width="180dp"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="@+id/tvPetGender"
+                            app:layout_constraintTop_toBottomOf="@+id/tvPetGender">
+
+                            <RadioButton
+                                android:id="@+id/rbPetMale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Male" />
+
+                            <RadioButton
+                                android:id="@+id/rbPetFemale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Female" />
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="205dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Spayed or Neutered"
+                        android:textColor="@color/black" />
+
+                    <RadioGroup
+                        android:id="@+id/rgSpayedNeutered"
+                        android:layout_width="180dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
+                        app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
+
+                        <RadioButton
+                            android:id="@+id/rbSNYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes" />
+
+                        <RadioButton
+                            android:id="@+id/rbSNNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Description"
+                        android:textColor="@color/black" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
+
+                        <EditText
+                            android:id="@+id/etPetDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:gravity="start|top"
+                            android:background="@color/transparent"
+                            android:inputType="textMultiLine" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Button
+                        android:id="@+id/btnSetupPetProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Set-up Profile" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
     </ScrollView>
 
 

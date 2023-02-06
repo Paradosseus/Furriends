@@ -23,7 +23,6 @@ class UserApplicationStatusListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_application_status_list)
-
         setupActionBar()
     }
 

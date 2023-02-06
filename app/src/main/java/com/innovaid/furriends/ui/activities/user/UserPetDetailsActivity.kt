@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_user_pet_details.*
 class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
 
     private var mPetId: String = ""
+    private var mCategory: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +33,19 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
 
         if(FirestoreClass().getCurrentUserID() == petOwnerId) {
             btnAdopt.visibility = View.GONE
-            ibAddtoFavorite.visibility = View.GONE
+            ibAddToFavorite.visibility = View.GONE
             ibMessageUser.visibility = View.GONE
         } else{
             btnAdopt.visibility = View.VISIBLE
-            ibAddtoFavorite.visibility = View.VISIBLE
+            ibAddToFavorite.visibility = View.VISIBLE
 
             ibMessageUser.visibility = View.VISIBLE
         }
         getPetDetails()
+        FirestoreClass().isAddedToPetFavorites(this,mPetId)
 
         btnAdopt.setOnClickListener(this)
-        ibAddtoFavorite.setOnClickListener(this)
+        ibAddToFavorite.setOnClickListener(this)
         ibMessageUser.setOnClickListener(this)
         ibPDBackButton.setOnClickListener(this)
     }
@@ -59,8 +61,10 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
         tvPetDetailName.text = pet.petName
         tvPetDetailGender.text = pet.petGender
         tvPetDetailColor.text = pet.petColor
-        //Add Location
+        tvPetDetailLocation.text = pet.petLocation
         tvPetDetailDescription.text = pet.description
+
+        mCategory = pet.category.toString()
     }
 
     override fun onClick(p0: View?) {
@@ -69,10 +73,8 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
                 R.id.btnAdopt -> {
                     startActivity(Intent(this, UserAdoptionActivity::class.java))
                 }
-                R.id.ibAddtoFavorite -> {
-//                    Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
-//                    ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
-//                    addToFavorites()
+                R.id.ibAddToFavorite -> {
+                    favoritesListener()
                 }
                 R.id.ibMessageUser -> {
 //                    startActivity(Intent(this, MessageActivity::class.java))
@@ -84,17 +86,26 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
         }
     }
 
-//    private fun addToFavorites() {
-//
-//        val favorites = Favorites(
-//            mPetId,
-//            FirestoreClass().getCurrentUserID(),
-//            true
-//        )
-//        FirestoreClass().addToFavorites(this, favorites)
-//    }
+    private fun favoritesListener() {
+        FirestoreClass().petFavoritesListener(this, mPetId, mCategory)
+    }
+
+    fun addedToFavoritesSuccessfully(){
+        ibAddToFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+        Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
+    }
+    fun removeFromFavoritesSuccessfully() {
+        ibAddToFavorite.setImageResource(R.drawable.favorite_icon)
+        Toast.makeText(this, "Remove from Favorites", Toast.LENGTH_SHORT).show()
+    }
+    fun inFavorites() {
+        ibAddToFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+//        mFavoriteId = favoritesId
+    }
+
+
     fun addedToFavorites() {
-        ibAddtoFavorite.setImageResource(R.drawable.added_to_favorite_icon)
+        ibAddToFavorite.setImageResource(R.drawable.added_to_favorite_icon)
         Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
     }
 }

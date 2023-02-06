@@ -56,6 +56,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     fun getApplicantDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getApplicantDetails(this, mApplicantId, mStrayId)
+
     }
     fun applicantDetailSuccess(StrayAdoptionForm: StrayAdoptionForm, strayAnimal : StrayAnimal) {
 

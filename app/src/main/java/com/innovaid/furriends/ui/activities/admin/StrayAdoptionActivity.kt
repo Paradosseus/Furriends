@@ -39,6 +39,7 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
 
     private var mStrayAnimalFormURL: String = ""
     private var mStrayAnimalId: String = ""
+    private var mApplicantId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,17 +143,26 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
             "Application is being reviewed",
             mStrayAnimalFormURL,
             mStrayAnimalId,
-            "none"
+            "none",
         )
         FirestoreClass().uploadStrayAdoptionFormDetails(this@StrayAdoptionActivity, strayAdoptionForm)
 
     }
-    fun uploadStrayApplicationFormDetailsSuccess() {
+    fun uploadStrayApplicationFormDetailsSuccess(strayAdoptionForm: StrayAdoptionForm) {
         hideProgressDialog()
+        val strayHashMap = HashMap<String, Any>()
+        strayHashMap[Constants.STRAY_ADOPTION_STATUS] = "Ongoing"
+        FirestoreClass().changeStrayAdoptionStatus(this, strayHashMap, mStrayAnimalId)
+        mApplicantId = strayAdoptionForm.applicationId.toString()
+
+    }
+    fun changedStrayAdoptionStatusSuccess() {
+        val intent = Intent(this, UserApplicationStatusActivity::class.java)
+        intent.putExtra(Constants.EXTRA_APPLICATION_ID,mApplicantId)
+        intent.putExtra(Constants.EXTRA_STRAY_ID, mStrayAnimalId)
         Toast.makeText(this,"Your adoption is successfully submitted", Toast.LENGTH_SHORT).show()
         finish()
-
-
+        startActivity(intent)
 
     }
 

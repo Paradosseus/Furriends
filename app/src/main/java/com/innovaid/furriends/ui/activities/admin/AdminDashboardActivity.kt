@@ -2,7 +2,6 @@ package com.innovaid.furriends.ui.activities.admin
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -18,15 +17,12 @@ import com.innovaid.furriends.ReviewApplicationActivity
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
-import com.innovaid.furriends.ui.activities.DonateActivity
 import com.innovaid.furriends.ui.activities.LoginActivity
-import com.innovaid.furriends.ui.activities.user.UserApplicationStatusActivity
 import com.innovaid.furriends.ui.activities.user.UserFavoritesActivity
 import com.innovaid.furriends.ui.activities.user.UserProfileActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_admin_dashboard.*
-import kotlinx.android.synthetic.main.activity_user_dashboard.*
 import kotlinx.android.synthetic.main.side_nav_header.*
 
 class AdminDashboardActivity : BaseActivity() {
@@ -49,7 +45,7 @@ class AdminDashboardActivity : BaseActivity() {
         adminSideNavigationMenu.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_admin_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
-                R.id.nav_admin_application_status -> startActivity(Intent(this, ManagePostsActivity::class.java))
+                R.id.nav_admin_manage_posts -> startActivity(Intent(this, ManagePostsActivity::class.java))
                 R.id.nav_admin_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
                 R.id.nav_review_applications -> startActivity(Intent(this,ReviewApplicationActivity::class.java))
                 R.id.nav_logout -> {
