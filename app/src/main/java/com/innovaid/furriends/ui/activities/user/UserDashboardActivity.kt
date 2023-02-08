@@ -94,9 +94,6 @@ class UserDashboardActivity : BaseActivity() {
         tvHeaderUserName.text = "${user.firstName} ${user.lastName}"
 
     }
-    private fun getToken() {
-        com.google.firebase.messaging.FirebaseMessaging.getInstance().token.addOnSuccessListener(this::updateToken)
-    }
     private fun updateToken(token: String){
 //        FirestoreClass().getPreference()
     }

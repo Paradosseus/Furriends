@@ -46,7 +46,7 @@ class FavoritesPetFragment : BaseFragment() {
         }
         if(petFavoritesList.size > 0) {
             rvPetFavoriteList.visibility = View.VISIBLE
-            tvNoStrayFavoritesList.visibility = View.GONE
+            tvNoPetFavoritesList.visibility = View.GONE
 
             rvPetFavoriteList.layoutManager = LinearLayoutManager(activity)
             rvPetFavoriteList.setHasFixedSize(true)

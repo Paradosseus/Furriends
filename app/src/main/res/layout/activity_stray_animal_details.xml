@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOffWhite"
     tools:context=".ui.activities.admin.StrayAnimalDetailsActivity">
 
     <ScrollView
@@ -54,7 +55,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp"
+                android:background="@drawable/background_container_application_status"
+                android:layout_margin="10dp"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/flImageContainer">
@@ -122,6 +125,18 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/background_container_application_status"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
             <TextView
                 android:id="@+id/tvStrayAnimalDetailAboutTitle"
                 android:layout_width="match_parent"
@@ -150,6 +165,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvStrayAnimalDetailAboutTitle" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
