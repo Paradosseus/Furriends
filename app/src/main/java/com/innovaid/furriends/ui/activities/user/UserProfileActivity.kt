@@ -27,21 +27,6 @@ class UserProfileActivity : BaseActivity() {
         }
 
     }
-    private fun setupActionBar() {
-
-        setSupportActionBar(tbProfileActivity)
-        supportActionBar!!.title = "User Profile"
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-
-        }
-        tbProfileActivity.setNavigationOnClickListener { onBackPressed() }
-    }
-    override fun onResume() {
-        super.onResume()
-        getUserDetails()
-    }
     private fun getUserDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getUserInfo(this)
@@ -57,6 +42,21 @@ class UserProfileActivity : BaseActivity() {
         tvUserEmail.text = user.email
         tvUserPhoneNumber.text = user.phoneNumber.toString()
         tvUserBio.text = user.bio
+    }
+    override fun onResume() {
+        super.onResume()
+        getUserDetails()
+    }
+    private fun setupActionBar() {
+
+        setSupportActionBar(tbProfileActivity)
+        supportActionBar!!.title = "User Profile"
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+
+        }
+        tbProfileActivity.setNavigationOnClickListener { onBackPressed() }
     }
 
 
