@@ -1,12 +1,9 @@
 package com.innovaid.furriends.firestore
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
-import android.nfc.Tag
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -21,15 +18,14 @@ import com.innovaid.furriends.ui.activities.*
 import com.innovaid.furriends.ui.activities.admin.*
 import com.innovaid.furriends.ui.activities.user.*
 import com.innovaid.furriends.ui.adapters.UserAdapter
-import com.innovaid.furriends.ui.fragments.ChatsListFragment
 import com.innovaid.furriends.ui.fragments.SearchUserChatFragment
 import com.innovaid.furriends.ui.fragments.admin.*
-import com.innovaid.furriends.ui.fragments.user.FavoritesPetFragment
-import com.innovaid.furriends.ui.fragments.user.FavoritesStrayFragment
-import com.innovaid.furriends.ui.fragments.user.UserHomeFragment
-import com.innovaid.furriends.ui.fragments.user.UserListingsFragment
+import com.innovaid.furriends.ui.fragments.user.*
 import com.innovaid.furriends.utils.Constants
-import com.innovaid.furriends.utils.GlideLoader
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class FirestoreClass {
 
@@ -51,6 +47,11 @@ class FirestoreClass {
                     activity.javaClass.simpleName, "Error while registering the user.", e
                 )
             }
+    }
+    private fun generateTimestamp(): String {
+        val current = Calendar.getInstance().time
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        return format.format(current)
     }
 
     fun getCurrentUserID(): String {
@@ -255,10 +256,7 @@ class FirestoreClass {
             }
     }
 
-    fun uploadStrayAdoptionFormDetails(
-        activity: StrayAdoptionActivity,
-        adoptionFormInfo: StrayAdoptionForm
-    ) {
+    fun uploadStrayAdoptionFormDetails(activity: StrayAdoptionActivity, adoptionFormInfo: StrayAdoptionForm) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document()
             .set(adoptionFormInfo, SetOptions.merge())
@@ -282,7 +280,6 @@ class FirestoreClass {
                         }
 
                     }
-//                activity.uploadStrayApplicationFormDetailsSuccess()
             }
             .addOnFailureListener { e ->
                 activity.hideProgressDialog()
@@ -293,6 +290,30 @@ class FirestoreClass {
                 )
             }
 
+    }
+    fun uploadPetAdoptionFormDetails(activity: UserAdoptionActivity, userAdoptionFormInfo: UserAdoptionForm) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .document()
+            .set(userAdoptionFormInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+                    .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for(document in querySnapshot) {
+                            Log.e(javaClass.simpleName, document.toString())
+                            val petAdoption = document.toObject(UserAdoptionForm::class.java)
+                            petAdoption.applicationId = document.id
+                            if(petAdoption != null) {
+                                when(activity) {
+                                    is UserAdoptionActivity -> {
+                                        activity.uploadPetAdoptionFormDetailsSuccess(petAdoption)
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
     }
 
     fun uploadPetDetails(activity: AddUserPetProfileActivity, petInfo: Pet) {
@@ -331,6 +352,9 @@ class FirestoreClass {
                 )
             }
     }
+
+
+
     fun getChatId(senderId: String, receiverId: String): String {
         return if (senderId < receiverId) {
             "$senderId-$receiverId"
@@ -338,46 +362,6 @@ class FirestoreClass {
             "$receiverId-$senderId"
         }
     }
-    fun getUserChatList(fragment: ChatsListFragment) {
-        val query1 = fireStore.collection(Constants.CHATS).whereEqualTo("sender", getCurrentUserID())
-        val query2 = fireStore.collection(Constants.CHATS).whereEqualTo("receiver", getCurrentUserID())
-        val chatListQuery = fireStore.collection(Constants.CHATS)
-            .orderBy("timestamp", Query.Direction.ASCENDING)
-            .limit(100)
-
-        val chatList = ArrayList<Chat>()
-
-        query1.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val chat = document.toObject(Chat::class.java)
-                    chat.messageId = document.id
-                    chatList.add(chat)
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.e("MessageActivity", "Listen failed.", exception)
-            }
-
-        query2.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val chat = document.toObject(Chat::class.java)
-                    chat.messageId = document.id
-                    chatList.add(chat)
-                }
-                when (fragment) {
-                    is ChatsListFragment -> {
-                        fragment.userChatListLoaded(chatList)
-                    }
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.e("MessageActivity", "Listen failed.", exception)
-            }
-
-    }
-
 
     fun getChatList(activity: MessageActivity, senderId: String, receiverId: String) {
         fireStore.collection(Constants.CHATS)
@@ -406,6 +390,112 @@ class FirestoreClass {
                 }
             }
     }
+    fun sendMessageToUser(senderId: String, receiverId: String, message: String) {
+        val chatRef = fireStore.collection(Constants.CHATS).document(getChatId(senderId, receiverId))
+        val messagesRef = chatRef.collection("messages")
+
+        val chat = hashMapOf(
+            "sender" to senderId,
+            "receiver" to receiverId,
+            "message" to message,
+            "isSeen" to false,
+            "imageUrl" to "",
+            "timestamp" to generateTimestamp()
+
+        )
+        messagesRef.add(chat)
+        val receiver = chat["receiver"].toString()
+        val message = chat["message"].toString()
+        val timestamp = chat["timestamp"].toString()
+
+
+        fireStore.collection(Constants.USERS)
+            .document(receiver)
+            .get()
+            .addOnSuccessListener { userDocument ->
+                val user = userDocument.toObject(User::class.java)
+                if(user != null) {
+                    val ref = fireStore.collection(Constants.RECENT_CHATS).document(getChatId(getCurrentUserID(), user.id))
+                    val prop = hashMapOf(
+                        "sender" to senderId,
+                        "receiver" to receiverId,
+                    )
+                    ref.set(prop)
+
+                    fireStore.collection(Constants.RECENT_CHATS).document(getChatId(getCurrentUserID(), user.id)).collection("messages")
+                        .get()
+                        .addOnSuccessListener { recentChats ->
+                            if (recentChats.isEmpty) {
+                                fireStore.collection(Constants.RECENT_CHATS).document(getChatId(getCurrentUserID(), user.id)).collection("messages")
+                                    .add(
+                                        RecentChats(
+                                            user.id,
+                                            getCurrentUserID(),
+                                            user.firstName,
+                                            user.lastName,
+                                            user.image,
+                                            message,
+                                            timestamp,
+
+                                        )
+                                    )
+                            } else {
+                                recentChats.documents[0].reference.update("lastMessage", message)
+                                recentChats.documents[0].reference.update("timestamp", timestamp)
+                            }
+                        }
+                }
+
+            }
+    }
+//    fun addToRecentChats(fragment: ChatsListFragment) {
+//        val recentChatList: ArrayList<RecentChats> = ArrayList()
+//        fireStore.collection(Constants.RECENT_CHATS)
+//            .whereEqualTo("sender" , getCurrentUserID())
+//            .get()
+//            .addOnSuccessListener { querySnapshot ->
+//                if(querySnapshot != null) {
+//                    for (document in querySnapshot) {
+//                        document.reference.collection("messages")
+//                            .get()
+//                            .addOnSuccessListener { document1 ->
+//                                Log.e("User Application List", document1.documents.toString())
+//                                for (i in document1.documents) {
+//                                    val recentChat = i.toObject(RecentChats::class.java)
+//                                    recentChat!!.messageId = i.id
+//                                        recentChatList.add(recentChat)
+//                                }
+//
+//                                fireStore.collection(Constants.RECENT_CHATS)
+//                                    .whereEqualTo("receiver" , getCurrentUserID())
+//                                    .get()
+//                                    .addOnSuccessListener { querySnapshot ->
+//                                        if(querySnapshot != null) {
+//                                            for (document in querySnapshot) {
+//                                                document.reference.collection("messages")
+//                                                    .get()
+//                                                    .addOnSuccessListener { document1 ->
+//                                                        Log.e("User Application List", document1.documents.toString())
+//                                                        for (i in document1.documents) {
+//                                                            val recentChat = i.toObject(RecentChats::class.java)
+//                                                            recentChat!!.messageId = i.id
+//
+//                                                            recentChatList.add(recentChat)
+//                                                        }
+//                                                        fragment.recentChatListLoaded(recentChatList)
+//                                                    }
+//
+//                                            }
+//                                        }
+//                                    }
+//
+//                            }
+//
+//                    }
+//                }
+//            }
+//
+//    }
     fun getApplicationStatusList(activity: UserApplicationStatusListActivity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
@@ -804,7 +894,41 @@ class FirestoreClass {
             }
 
     }
+    fun getUserPetApplicationStatus(fragment: PetApplicationStatusListFragment) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
 
+                val petUserApplicationList: ArrayList<UserAdoptionForm> = ArrayList()
+
+                for (i in document.documents) {
+                    val petUserApplication = i.toObject(UserAdoptionForm::class.java)
+                    petUserApplication!!.applicationId = i.id
+                    petUserApplicationList.add(petUserApplication)
+                }
+                fragment.userPetApplicationStatusListLoadedSuccessfully(petUserApplicationList)
+
+            }
+    }
+    fun getUserStrayApplicationStatusList(fragment: StrayApplicationStatusListFragment) {
+        fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
+            .whereEqualTo(Constants.APPLICANT_USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                val strayUserApplicationList: ArrayList<StrayAdoptionForm> = ArrayList()
+
+                for (i in document.documents) {
+                    val strayUserApplication = i.toObject(StrayAdoptionForm::class.java)!!
+                    strayUserApplication.applicationId = i.id
+                    strayUserApplicationList.add(strayUserApplication)
+                }
+                fragment.userStrayApplicationStatusListLoadedSuccessfully(strayUserApplicationList)
+            }
+    }
     fun getPetFavoritesList(fragment: FavoritesPetFragment) {
         fireStore.collection(Constants.FAVORITES)
             .whereEqualTo(Constants.USER_ID_FAVORITES, getCurrentUserID())
@@ -906,12 +1030,19 @@ class FirestoreClass {
                 }
             }
     }
-
-    fun changeStrayAdoptionStatus(
-        activity: Activity,
-        strayHashMap: HashMap<String, Any>,
-        strayId: String
-    ) {
+    fun changePetAdoptionStatus(activity: Activity, petHashMap: HashMap<String, Any>, petId: String) {
+        fireStore.collection(Constants.PETS)
+            .document(petId)
+            .update(petHashMap)
+            .addOnSuccessListener {
+                when (activity)  {
+                    is UserAdoptionActivity -> {
+                        activity.changedPetAdoptionStatusSuccess()
+                    }
+                }
+            }
+    }
+    fun changeStrayAdoptionStatus(activity: Activity, strayHashMap: HashMap<String, Any>, strayId: String) {
         fireStore.collection(Constants.STRAY_ANIMALS)
             .document(strayId)
             .update(strayHashMap)
@@ -946,7 +1077,22 @@ class FirestoreClass {
 
     }
 
-    fun getPetInfo(activity: UserApplicationStatusActivity, petId: String) {
+    fun getPetInfo(activity: PetUserApplicationStatusActivity, petId: String) {
+        fireStore.collection(Constants.PETS)
+            .document(petId)
+            .get()
+            .addOnSuccessListener { document ->
+                if(document != null) {
+
+                    Log.i(activity.javaClass.simpleName, document.toString())
+                    val pet = document.toObject(Pet::class.java)
+                    if(pet != null) {
+                        activity.petInfoLoadedSuccessfully(pet)
+                    }
+                }
+            }
+    }
+    fun getStrayInfo(activity: UserApplicationStatusActivity, petId: String) {
         fireStore.collection(Constants.STRAY_ANIMALS)
             .document(petId)
             .get()
@@ -956,12 +1102,27 @@ class FirestoreClass {
                     Log.i(activity.javaClass.simpleName, document.toString())
                     val stray = document.toObject(StrayAnimal::class.java)
                     if (stray != null) {
-                        activity.petInfoLoadedSuccessfully(stray)
+                        activity.strayInfoLoadedSuccessfully(stray)
                     }
                 }
             }
     }
 
+    fun getPetUserApplicationStatus(activity: PetUserApplicationStatusActivity, applicantId: String) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .document(applicantId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+
+                    Log.i(activity.javaClass.simpleName, document.toString())
+                    val applicant = document.toObject(UserAdoptionForm::class.java)
+                    if(applicant != null) {
+                        activity.applicationStatusLoaded(applicant)
+                    }
+                }
+            }
+    }
     fun getApplicationStatus(activity: UserApplicationStatusActivity, applicantId: String) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)
@@ -982,10 +1143,19 @@ class FirestoreClass {
 
     }
 
-    fun confirmAppointmentDate(
-        activity: UserApplicationStatusActivity,
-        appointmentHashMap: HashMap<String, Any>,
-        applicantId: String
+    fun confirmPetUserAppointmentDate(activity: PetUserApplicationStatusActivity, appointmentHashMap: HashMap<String, Any>, applicantId: String) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .document(applicantId)
+            .update(appointmentHashMap)
+            .addOnSuccessListener { document ->
+                when (activity) {
+                    is PetUserApplicationStatusActivity -> {
+                        activity.confirmAppointmentDateSuccess()
+                    }
+                }
+            }
+    }
+    fun confirmAppointmentDate(activity: UserApplicationStatusActivity, appointmentHashMap: HashMap<String, Any>, applicantId: String
     ) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)

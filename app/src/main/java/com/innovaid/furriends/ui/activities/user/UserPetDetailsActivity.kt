@@ -8,14 +8,17 @@ import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.MessageActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_stray_animal_details.*
 import kotlinx.android.synthetic.main.activity_user_pet_details.*
 
 class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
 
     private var mPetId: String = ""
     private var mCategory: String = ""
+    private var petOwnerId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +28,7 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
             mPetId = intent.getStringExtra(Constants.EXTRA_PET_ID)!!
 
         }
-        var petOwnerId: String = ""
+
 
         if (intent.hasExtra(Constants.EXTRA_PET_OWNER_ID)) {
             petOwnerId = intent.getStringExtra(Constants.EXTRA_PET_OWNER_ID)!!
@@ -56,6 +59,13 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
 
     fun petDetailsSuccess(pet: Pet) {
         hideProgressDialog()
+
+        if (pet.adoptionStatus.toString() == "Ongoing") {
+            btnAdopt.visibility = View.GONE
+            ibAddToFavorite.visibility = View.GONE
+            ibMessageUser.visibility = View.GONE
+        }
+
         GlideLoader(this@UserPetDetailsActivity).loadPetPicture(pet.image!!, ivPetDetailImage)
         tvPetDetailBreed.text = pet.petBreed
         tvPetDetailName.text = pet.petName
@@ -71,13 +81,17 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
         if (p0 != null) {
             when (p0.id) {
                 R.id.btnAdopt -> {
-                    startActivity(Intent(this, UserAdoptionActivity::class.java))
+                    val intent = Intent(this, UserAdoptionActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PET_ID, mPetId)
+                    startActivity(intent)
                 }
                 R.id.ibAddToFavorite -> {
                     favoritesListener()
                 }
                 R.id.ibMessageUser -> {
-//                    startActivity(Intent(this, MessageActivity::class.java))
+                    val intent = Intent(this, MessageActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_USER_ID, petOwnerId)
+                    startActivity(intent)
                 }
                 R.id.ibPDBackButton -> {
                     onBackPressed()

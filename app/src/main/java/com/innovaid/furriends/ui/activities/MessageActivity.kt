@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Chat
+import com.innovaid.furriends.models.RecentChats
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.adapters.MessageAdapter
 import com.innovaid.furriends.ui.adapters.UserApplicationStatusListAdapter
@@ -69,25 +70,7 @@ class MessageActivity : AppCompatActivity() {
         return format.format(current)
     }
     private fun sendMessageToUser(senderId: String, receiverId: String, message: String) {
-
-        val db = FirebaseFirestore.getInstance()
-        val chatRef = db.collection(Constants.CHATS).document(getChatId(senderId, receiverId))
-        val messagesRef = chatRef.collection("messages")
-//        val messageId  = chatRef.document().id
-
-         val chat = hashMapOf(
-             "sender" to senderId,
-             "receiver" to receiverId,
-             "message" to message,
-             "isSeen" to false,
-             "imageUrl" to "",
-             "timestamp" to generateTimestamp()
-
-         )
-
-        messagesRef.add(chat)
-
-
+        FirestoreClass().sendMessageToUser(senderId, receiverId, message)
     }
     private fun getOtherUserDetails() {
         FirestoreClass().getOtherUserDetails(this, otherUserId)

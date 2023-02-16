@@ -30,7 +30,8 @@ import kotlinx.android.synthetic.main.activity_user_application_status.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
+class
+UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
 
 
     private var mPetId: String = ""
@@ -75,6 +76,7 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
         }
     }
     private fun viewPetProfile() {
+
         val intent = Intent(this, StrayAnimalDetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_STRAY_ANIMAL_ID,mPetId)
         intent.putExtra(Constants.EXTRA_STRAY_OWNER_ID,mStrayAnimalOwnerId)
@@ -137,9 +139,9 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
     private fun applicationStatus() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getApplicationStatus(this,mApplicantStatusId)
-        FirestoreClass().getPetInfo(this, mPetId)
+        FirestoreClass().getStrayInfo(this, mPetId)
     }
-    fun petInfoLoadedSuccessfully (strayAnimal: StrayAnimal) {
+    fun strayInfoLoadedSuccessfully (strayAnimal: StrayAnimal) {
         llToBeAdoptedPetInfoContainer.visibility = View.VISIBLE
         GlideLoader(this).loadPetPicture(strayAnimal.strayAnimalImage!!, ivToBeAdoptedPetImage)
         tvToBeAdoptedPetBreed.text = strayAnimal.strayAnimalBreed

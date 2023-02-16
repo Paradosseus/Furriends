@@ -10,6 +10,7 @@ import com.innovaid.furriends.ui.activities.BaseActivity
 object Constants {
 
     //Collections
+
     const val USERS: String = "users"
     const val PETS: String = "pets"
     const val STRAY_ANIMALS: String = "stray animals"
@@ -17,6 +18,19 @@ object Constants {
     const val FAVORITES: String = "favorites"
     const val CHATS: String = "chats"
     const val CHATS_ID: String = "messageId"
+    const val RECENT_CHATS: String = "recentChats"
+    const val USER_PET_ADOPTION_FORM: String = "user pet applicants"
+
+
+    const val USER_ID_1 = "userId"
+    const val USER_ID_2 = "userId2"
+    const val MESSAGE_FIRST_NAME = "firstName"
+    const val MESSAGE_LAST_NAME = "lastName"
+    const val MESSAGE_USER_IMAGE = "userImage"
+    const val LAST_MESSAGE = "lastMessage"
+    const val LAST_MESSAGE_TIMESTAMP = "timestamp"
+
+
 
     const val EMAIL: String = "email"
     const val PASSWORD: String = "password"
@@ -64,10 +78,11 @@ object Constants {
     const val STRAY_ADOPTION_STATUS = "adoptionStatus"
     const val CATEGORY = "category"
 
-    //Applicant
+    //Applicant for Stray Adoption
     const val APPLICANT_NAME: String = "applicantName"
     const val APPLICANT_ADDRESS = "applicantAddress"
     const val APPLICANT_USER_ID = "userId"
+    const val PET_APPLICANT_USER_ID = "userId"
     const val EXTRA_APPLICANT_USER_ID = "extraApplicantUserId"
     const val DATE_ISSUED: String = "dateIssued"
     const val TIME_ISSUED: String = "timeIssued"
@@ -79,25 +94,15 @@ object Constants {
     const val APPLICATION_ID = "applicationId"
     const val EXTRA_APPLICATION_ID = "extraApplicationId"
 
+    //Applicant for Pet Adoption
+
+
+
+
     //Favorites
     const val PET_ID_FAVORITES = "petId"
     const val USER_ID_FAVORITES = "userId"
 
-    const val FCM_TOKEN: String = "fcmToken"
-
-
-
-
-//    const val OTHER_PET_DETAILS: String = "OtherPetDetails"
-//    const val PET_NAME: String ="petName"
-//    const val PET_BREED: String ="petBreed"
-//    const val PET_BIRTHDATE: String ="petBirthDate"
-//    const val PET_COLOR: String ="petColor"
-//    const val PET_TYPE: String ="petType"
-//    const val PET_GENDER: String ="petGender"
-//    const val PET_SPAYED_OR_NEUTERED: String ="spayedOrNeutered"
-//    const val PET_DESCRIPTION: String ="description"
-//    const val PET_STATUS: String ="status"
 
 
 

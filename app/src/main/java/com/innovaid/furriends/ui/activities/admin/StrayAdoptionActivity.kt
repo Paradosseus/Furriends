@@ -160,7 +160,7 @@ class StrayAdoptionActivity : BaseActivity(), View.OnClickListener {
         val intent = Intent(this, UserApplicationStatusActivity::class.java)
         intent.putExtra(Constants.EXTRA_APPLICATION_ID,mApplicantId)
         intent.putExtra(Constants.EXTRA_STRAY_ID, mStrayAnimalId)
-        Toast.makeText(this,"Your adoption is successfully submitted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"Your adoption form is successfully submitted", Toast.LENGTH_SHORT).show()
         finish()
         startActivity(intent)
 

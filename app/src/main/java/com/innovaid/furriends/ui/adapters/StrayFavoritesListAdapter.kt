@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.pet_home_layout.view.*
 
 class StrayFavoritesListAdapter (
     private val context: Context,
-    private val list: ArrayList<Favorites>,
+    private val list: ArrayList<Favorites>
 
     ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

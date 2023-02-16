@@ -68,6 +68,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etUserPetApplicantName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="5dp"
@@ -84,11 +85,11 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etUserPetApplicantContactNumber"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/edit_text_border"
-
                 android:hint="09*********"
                 android:textSize="15sp" />
 
@@ -101,6 +102,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etUserPetApplicantAddress"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="5dp"
@@ -117,6 +119,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etUserPetApplicantOccupation"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="15dp"
@@ -147,6 +150,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etUserQuestionOne"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginBottom="10dp"
@@ -164,6 +168,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etUserQuestionTwo"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginBottom="10dp"
@@ -182,6 +187,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rgUserQuestionThree"
                 android:layout_width="111dp"
                 android:layout_height="33dp"
                 android:layout_marginBottom="10dp"
@@ -210,6 +216,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rgUserQuestionFour"
                 android:layout_width="111dp"
                 android:layout_height="33dp"
                 android:orientation="horizontal"
@@ -238,6 +245,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rgUserQuestionFive"
                 android:layout_width="111dp"
                 android:layout_height="33dp"
                 android:layout_marginBottom="10dp"
@@ -258,6 +266,7 @@
             </RadioGroup>
 
             <Button
+                android:id="@+id/btnSubmitUserPetAdoptionForm"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

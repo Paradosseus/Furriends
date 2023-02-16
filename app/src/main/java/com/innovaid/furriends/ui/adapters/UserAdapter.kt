@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.user_search_item_layout.view.*
 
 open class UserAdapter(
     private val context: Context,
+
     private val list: ArrayList<User>,
     private var isChatCheck: Boolean
 

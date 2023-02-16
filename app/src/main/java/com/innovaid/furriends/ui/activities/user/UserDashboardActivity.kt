@@ -44,7 +44,7 @@ class UserDashboardActivity : BaseActivity() {
         sideNavigationMenu.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
-                R.id.nav_application_status -> startActivity(Intent(this, UserApplicationStatusListActivity::class.java))
+                R.id.nav_application_status -> startActivity(Intent(this, ApplicationStatusActivity::class.java))
                 R.id.nav_favorites -> startActivity(Intent(this, UserFavoritesActivity::class.java))
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()
