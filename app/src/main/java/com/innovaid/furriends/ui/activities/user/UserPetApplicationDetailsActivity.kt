@@ -85,8 +85,8 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
             "Approved for interview" -> {
                 llUPContainerWaitingForAppointmentSchedule.visibility = View.VISIBLE
                 if(userPetApplicant.appointmentDate != "none") {
-                    llContainerWaitingForAppointmentSchedule.visibility = View.GONE
-                    llContainerAppointmentScheduleDate.visibility = View.VISIBLE
+                    llUPContainerWaitingForAppointmentSchedule.visibility = View.GONE
+                    llUPContainerAppointmentScheduleDate.visibility = View.VISIBLE
                 }
             }
             "Reviewing Assessment" -> {
@@ -158,7 +158,7 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
         applicantHashMap[Constants.REVIEW_STATUS] ="Approved for interview"
         FirestoreClass().changeUserPetReviewStatus(this, applicantHashMap, mApplicantId)
     }
-    fun changedStrayAdoptionStatus() {
+    fun changedPetAdoptionStatus() {
         val applicantHashMap = HashMap<String, Any>()
         applicantHashMap[Constants.REVIEW_STATUS] ="Complete"
         FirestoreClass().changeUserPetReviewStatus(this, applicantHashMap, mApplicantId)

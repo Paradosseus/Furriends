@@ -107,16 +107,16 @@ class PetUserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
     private fun updateTable(myCalendar: Calendar) {
         val myFormat = "MM-dd-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-        tvAppointmentDateValue.setText(sdf.format(myCalendar.time))
+        tvPetUserAppointmentDateValue.setText(sdf.format(myCalendar.time))
     }
     private fun setTime() {
-        tvDateTimeConnector.visibility = View.VISIBLE
+        tvPetUserDateTimeConnector.visibility = View.VISIBLE
         val currentTime  = Calendar.getInstance()
         val startHour = currentTime.get(Calendar.HOUR_OF_DAY)
         val startMinute = currentTime.get(Calendar.MINUTE)
 
         TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-            tvAppointmentTimeValue.setText("$hourOfDay: $minute")
+            tvPetUserAppointmentTimeValue.setText("$hourOfDay: $minute")
         }, startHour, startMinute, false).show()
     }
 

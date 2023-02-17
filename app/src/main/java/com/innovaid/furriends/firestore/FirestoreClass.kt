@@ -1089,9 +1089,13 @@ class FirestoreClass {
                     is UserAdoptionActivity -> {
                         activity.changedPetAdoptionStatusSuccess()
                     }
+                    is UserPetApplicationDetailsActivity -> {
+                        activity.changedPetAdoptionStatus()
+                    }
                 }
             }
     }
+
     fun changeStrayAdoptionStatus(activity: Activity, strayHashMap: HashMap<String, Any>, strayId: String) {
         fireStore.collection(Constants.STRAY_ANIMALS)
             .document(strayId)
