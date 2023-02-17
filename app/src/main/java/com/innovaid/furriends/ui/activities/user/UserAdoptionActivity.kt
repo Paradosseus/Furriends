@@ -21,6 +21,7 @@ class UserAdoptionActivity : AppCompatActivity() {
 
     private var mPetId: String = ""
     private var mApplicantId: String = ""
+    private var petOwnerId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,10 @@ class UserAdoptionActivity : AppCompatActivity() {
         if(intent.hasExtra(Constants.EXTRA_PET_ID)) {
             mPetId = intent.getStringExtra(Constants.EXTRA_PET_ID)!!
         }
+        if(intent.hasExtra(Constants.EXTRA_PET_OWNER_ID)) {
+            petOwnerId = intent.getStringExtra(Constants.EXTRA_PET_OWNER_ID)!!
+        }
+
 
         setupActionBar()
 
@@ -48,9 +53,11 @@ class UserAdoptionActivity : AppCompatActivity() {
 
 
         val userAdoptionForm = UserAdoptionForm(
+            petOwnerId,
             etUserPetApplicantName.text.toString().trim { it <= ' '},
             etUserPetApplicantContactNumber.text.toString().trim { it <= ' '},
             etUserPetApplicantAddress.text.toString().trim { it <= ' '},
+
             FirestoreClass().getCurrentUserID(),
             etUserPetApplicantOccupation.text.toString().trim { it <= ' '},
             etUserQuestionOne.text.toString().trim { it <= ' '},

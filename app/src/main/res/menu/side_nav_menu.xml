@@ -8,6 +8,11 @@
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="View Profile"/>
+    <item
+        android:id="@+id/nav_review_user_pet_applications"
+        android:icon="@drawable/ic_review_24"
+        android:title="Review Applications" />
+
 
     <item
         android:id="@+id/nav_application_status"

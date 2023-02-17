@@ -93,7 +93,7 @@ object Constants {
     const val APPOINTMENT_DATE: String = "appointmentDate"
     const val APPLICATION_ID = "applicationId"
     const val EXTRA_APPLICATION_ID = "extraApplicationId"
-
+    const val REVIEWER_ID = "reviewerId"
     //Applicant for Pet Adoption
 
 

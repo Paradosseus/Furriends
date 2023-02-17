@@ -83,6 +83,7 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
                 R.id.btnAdopt -> {
                     val intent = Intent(this, UserAdoptionActivity::class.java)
                     intent.putExtra(Constants.EXTRA_PET_ID, mPetId)
+                    intent.putExtra(Constants.EXTRA_PET_OWNER_ID, petOwnerId)
                     startActivity(intent)
                 }
                 R.id.ibAddToFavorite -> {

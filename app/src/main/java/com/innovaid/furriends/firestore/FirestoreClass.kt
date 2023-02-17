@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.innovaid.furriends.ReviewApplicationActivity
@@ -517,7 +518,28 @@ class FirestoreClass {
 
             }
     }
+    fun getPetUserApplicationsList(activity: Activity) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .whereEqualTo(Constants.REVIEWER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
 
+                Log.e("User Pet Applicants List", document.documents.toString())
+
+                val userPetApplicantsList: ArrayList<UserAdoptionForm> = ArrayList()
+                for (i in document.documents)  {
+                    val userPetApplicant = i.toObject(UserAdoptionForm::class.java)
+                    userPetApplicant!!.applicationId = i.id
+
+                    userPetApplicantsList.add(userPetApplicant)
+                }
+                when (activity) {
+                    is ReviewUserPetApplicationActivity -> {
+                        activity.userPetApplicantsListLoadedSuccessfullyFromFirestore(userPetApplicantsList)
+                    }
+                }
+            }
+    }
 
     fun getApplicationsList(activity: Activity) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
@@ -699,7 +721,35 @@ class FirestoreClass {
             }
 
     }
+    fun getUserPetApplicantDetails(activity: UserPetApplicationDetailsActivity, applicantId: String, petId: String) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .document(applicantId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(javaClass.simpleName, document.toString())
+                val userPetApplicant = document.toObject(UserAdoptionForm::class.java)
+                if (userPetApplicant != null ) {
+                    fireStore.collection(Constants.PETS).document(petId).get()
+                        .addOnSuccessListener { document ->
+                            Log.d(javaClass.simpleName, document.toString())
+                            val pet = document.toObject(Pet::class.java)
+                            if (pet != null) {
+                                fireStore.collection(Constants.USERS)
+                                    .document(userPetApplicant.userId!!)
+                                    .get()
+                                    .addOnSuccessListener { document ->
+                                        Log.d(javaClass.simpleName, document.toString())
+                                        val otherUserDetails = document.toObject(User::class.java)
 
+                                        activity.userPetApplicantDetailsSuccessfullyLoaded(userPetApplicant, pet, otherUserDetails!!)
+                                    }
+
+                            }
+
+                        }
+                }
+            }
+    }
     fun getApplicantDetails(activity: ApplicantDetailsActivity, applicantId: String, strayId: String) {
 
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
@@ -1059,10 +1109,20 @@ class FirestoreClass {
             }
     }
 
-    fun changeReviewStatus(
-        activity: ApplicantDetailsActivity,
-        applicantHashMap: HashMap<String, Any>,
-        applicantId: String
+    fun changeUserPetReviewStatus(activity: UserPetApplicationDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .document(applicantId)
+            .update(applicantHashMap)
+            .addOnSuccessListener {
+                when(activity) {
+                    is UserPetApplicationDetailsActivity -> {
+                        activity.userPetReviewedApplicationSuccess()
+                    }
+                }
+            }
+
+    }
+    fun changeReviewStatus(activity: ApplicantDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String
     ) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)

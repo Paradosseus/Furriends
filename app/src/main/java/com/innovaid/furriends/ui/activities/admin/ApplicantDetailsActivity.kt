@@ -11,6 +11,7 @@ import com.innovaid.furriends.ReviewApplicationActivity
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.StrayAdoptionForm
 import com.innovaid.furriends.models.StrayAnimal
+import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
@@ -53,11 +54,13 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
 
     }
 
-    fun getApplicantDetails() {
+
+    private fun getApplicantDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getApplicantDetails(this, mApplicantId, mStrayId)
 
     }
+
     fun applicantDetailSuccess(StrayAdoptionForm: StrayAdoptionForm, strayAnimal : StrayAnimal) {
 
         hideProgressDialog()
