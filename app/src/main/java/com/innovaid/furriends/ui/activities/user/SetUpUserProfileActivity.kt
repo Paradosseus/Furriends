@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.messaging.FirebaseMessaging
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
@@ -91,8 +92,11 @@ class SetUpUserProfileActivity : BaseActivity(), View.OnClickListener {
             userHashMap[Constants.IMAGE] = userProfileImageURL
         }
 
+
         userHashMap[Constants.COMPLETE_PROFILE] = 1
         //showProgressDialog(resources.getString(R.string.please_wait))
+
+
 
         FirestoreClass().updateUserProfile(this, userHashMap)
         Toast.makeText(this, "Your details are saved", Toast.LENGTH_SHORT).show()

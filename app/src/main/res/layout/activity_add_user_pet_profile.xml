@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOffWhite"
     tools:context=".ui.activities.user.AddUserPetProfileActivity">
 
 
@@ -17,6 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,7 +28,7 @@
             <FrameLayout
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
-
+                android:layout_marginBottom="10dp"
                 android:layout_height="300dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -59,97 +62,100 @@
 
             </FrameLayout>
 
-            <LinearLayout
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linearLayout10"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout9"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:layout_width="205dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Pet Name"
+                        android:textColor="@color/black" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="Pet Name"
-                            android:textColor="@color/black" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
 
-                        <androidx.cardview.widget.CardView
+                        <EditText
+                            android:id="@+id/etPetName"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="5dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="5dp">
+                            android:layout_marginStart="5dp"
+                            android:background="@color/transparent"
+                            android:inputType="text" />
 
-                            <EditText
-                                android:id="@+id/etPetName"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginStart="5dp"
-                                android:background="@color/transparent"
-                                android:inputType="text" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout10"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:layout_width="205dp"
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Breed"
+                        android:textColor="@color/black" />
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="Breed"
-                            android:textColor="@color/black" />
-
-                        <androidx.cardview.widget.CardView
+                        <EditText
+                            android:id="@+id/etPetBreed"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="5dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="5dp">
+                            android:layout_marginStart="5dp"
+                            android:background="@color/transparent"
+                            android:inputType="text" />
 
-                            <EditText
-                                android:id="@+id/etPetBreed"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginStart="5dp"
-                                android:background="@color/transparent"
-                                android:inputType="text" />
-
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linearLayout15"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -160,7 +166,7 @@
                         android:textColor="@color/black" />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="380dp"
+                        android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
@@ -182,188 +188,198 @@
 
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linearLayout22"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout21"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Birthday"
+                        android:textColor="@color/black" />
 
                     <LinearLayout
-                        android:layout_width="205dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
                             android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="Birthday"
-                            android:textColor="@color/black" />
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <androidx.cardview.widget.CardView
+                            <TextView
+                                android:id="@+id/tvBirthdayValue"
                                 android:layout_width="150dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
-                                app:cardCornerRadius="5dp"
-                                app:cardElevation="5dp">
-
-                                <TextView
-                                    android:id="@+id/tvBirthdayValue"
-                                    android:layout_width="150dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="5dp"
-                                    android:inputType="text" />
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <ImageView
-                                android:id="@+id/ivCalendar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="4dp"
-                                app:layout_constraintBottom_toBottomOf="@+id/tvBirthdayValue"
-                                app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
-                                app:layout_constraintTop_toTopOf="@+id/tvBirthdayValue"
-                                app:layout_constraintVertical_bias="0.0"
-                                app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="205dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="Color"
-                            android:textColor="@color/black" />
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="180dp"
-                            android:layout_height="40dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="5dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="5dp">
-
-                            <EditText
-                                android:id="@+id/etPetColor"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
                                 android:layout_marginStart="5dp"
-                                android:background="@color/transparent"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:gravity="center_vertical"
                                 android:inputType="text" />
 
+
                         </androidx.cardview.widget.CardView>
+
+                        <ImageView
+                            android:id="@+id/ivCalendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvBirthdayValue"
+                            app:layout_constraintStart_toEndOf="@+id/tvBirthdayValue"
+                            app:layout_constraintTop_toTopOf="@+id/tvBirthdayValue"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linearLayout21"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout22"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
 
 
-                    <LinearLayout
-                        android:layout_width="205dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Color"
+                        android:textColor="@color/black" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="Type"
-                            android:textColor="@color/black" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="180dp"
+                        <EditText
+                            android:id="@+id/etPetColor"
+                            android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="5dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="5dp">
+                            android:layout_marginStart="5dp"
+                            android:background="@color/transparent"
+                            android:inputType="text" />
 
-                            <Spinner
-                                android:id="@+id/spPetType"
-                                android:layout_width="180dp"
-                                android:layout_height="40dp"
-                                android:entries="@array/pet_types"
-                                app:layout_constraintStart_toStartOf="@+id/tvPetType"
-                                app:layout_constraintTop_toBottomOf="@+id/tvPetType" />
+                    </androidx.cardview.widget.CardView>
 
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
+                </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="205dp"
+
+                <LinearLayout
+                    android:id="@+id/linearLayout24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout23"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout22">
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Type"
+                        android:textColor="@color/black" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="180dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
+
+                        <Spinner
+                            android:id="@+id/spPetType"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:entries="@array/pet_types"
+                            app:layout_constraintStart_toStartOf="@+id/tvPetType"
+                            app:layout_constraintTop_toBottomOf="@+id/tvPetType" />
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout23"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout24"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout21">
 
 
-                        <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Gender"
+                        android:textColor="@color/black" />
+
+                    <RadioGroup
+                        android:id="@+id/rgPetGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="@+id/tvPetGender"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPetGender">
+
+                        <RadioButton
+                            android:id="@+id/rbPetMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Male" />
+
+                        <RadioButton
+                            android:id="@+id/rbPetFemale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="Gender"
-                            android:textColor="@color/black" />
-
-                        <RadioGroup
-                            android:id="@+id/rgPetGender"
-                            android:layout_width="180dp"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal"
-                            app:layout_constraintStart_toStartOf="@+id/tvPetGender"
-                            app:layout_constraintTop_toBottomOf="@+id/tvPetGender">
-
-                            <RadioButton
-                                android:id="@+id/rbPetMale"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="Male" />
-
-                            <RadioButton
-                                android:id="@+id/rbPetFemale"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Female" />
-                        </RadioGroup>
-
-
-                    </LinearLayout>
+                            android:text="Female" />
+                    </RadioGroup>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearLayout25"
                     android:layout_width="205dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout24">
 
 
                     <TextView
@@ -376,7 +392,7 @@
 
                     <RadioGroup
                         android:id="@+id/rgSpayedNeutered"
-                        android:layout_width="180dp"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="10dp"
                         android:orientation="horizontal"
@@ -401,9 +417,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout25">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -416,10 +436,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="5dp"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="5dp">
 
@@ -427,8 +445,8 @@
                             android:id="@+id/etPetDescription"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:gravity="start|top"
                             android:background="@color/transparent"
+                            android:gravity="start|top"
                             android:inputType="textMultiLine" />
 
                     </androidx.cardview.widget.CardView>
@@ -437,15 +455,15 @@
                         android:id="@+id/btnSetupPetProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_gravity="center_horizontal"
                         android:text="Set-up Profile" />
 
                 </LinearLayout>
 
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>

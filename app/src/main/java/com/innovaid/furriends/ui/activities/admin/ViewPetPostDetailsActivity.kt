@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.RemoteMessage
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
@@ -14,6 +17,8 @@ import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_applicant_details.*
 import kotlinx.android.synthetic.main.activity_user_application_status.*
 import kotlinx.android.synthetic.main.activity_view_pet_post_details.*
+import java.util.*
+import kotlin.collections.HashMap
 
 class ViewPetPostDetailsActivity : BaseActivity() {
 
@@ -42,6 +47,7 @@ class ViewPetPostDetailsActivity : BaseActivity() {
             declinePost()
         }
     }
+
     private fun approvePost() {
         showProgressDialog(resources.getString(R.string.please_wait))
         val postHashMap = HashMap<String, Any>()
@@ -53,6 +59,7 @@ class ViewPetPostDetailsActivity : BaseActivity() {
         val postHashMap = HashMap<String, Any>()
         postHashMap[Constants.APPROVAL_STATUS] ="Declined"
         FirestoreClass().changeApprovalStatus(this, postHashMap, mPetId)
+
     }
     fun reviewedPostSuccess() {
         hideProgressDialog()
@@ -95,6 +102,8 @@ class ViewPetPostDetailsActivity : BaseActivity() {
         tvPetPostOwnerAddressValue.text = user.address
         tvPetPostOwnerContactValue.text = user.phoneNumber.toString()
     }
+
+
 
     private fun setupActionBar() {
 

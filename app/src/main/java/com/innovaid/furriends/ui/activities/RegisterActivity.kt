@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : BaseActivity() {
 
+    private var fcmToken: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -60,27 +61,21 @@ class RegisterActivity : BaseActivity() {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener { task ->
 
-
                     if (task.isSuccessful){
 
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-
                         val user = User(
                             firebaseUser.uid,
                             userFirstName,
                             userLastName,
                             userEmail,
+                            "",
                             userAccessLevel
 
                         )
 
                         FirestoreClass().registerUser(this@RegisterActivity, user)
 
-//                        val intent = Intent(this, DashboardActivity::class.java)
-//                        startActivity(intent)
-
-//                        FirebaseAuth.getInstance().signOut()
-//                        finish()
                     }
                 }
             }else {

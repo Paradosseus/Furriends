@@ -115,6 +115,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     fun userLoggedInSuccessful(user: User) {
 
         hideProgressDialog()
+
         if (user.userType == "admin") {
             startActivity(Intent(this, AdminDashboardActivity::class.java))
         } else {

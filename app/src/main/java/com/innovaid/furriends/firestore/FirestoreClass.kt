@@ -65,7 +65,6 @@ class FirestoreClass {
 
         return currentUserID
     }
-
     fun getUserInfo(activity: Activity) {
         fireStore.collection(Constants.USERS)
             .document(getCurrentUserID())
@@ -405,49 +404,7 @@ class FirestoreClass {
 
         )
         messagesRef.add(chat)
-        val receiver = chat["receiver"].toString()
-        val message = chat["message"].toString()
-        val timestamp = chat["timestamp"].toString()
 
-
-        fireStore.collection(Constants.USERS)
-            .document(receiver)
-            .get()
-            .addOnSuccessListener { userDocument ->
-                val user = userDocument.toObject(User::class.java)
-                if(user != null) {
-                    val ref = fireStore.collection(Constants.RECENT_CHATS).document(getChatId(getCurrentUserID(), user.id))
-                    val prop = hashMapOf(
-                        "sender" to senderId,
-                        "receiver" to receiverId,
-                    )
-                    ref.set(prop)
-
-                    fireStore.collection(Constants.RECENT_CHATS).document(getChatId(getCurrentUserID(), user.id)).collection("messages")
-                        .get()
-                        .addOnSuccessListener { recentChats ->
-                            if (recentChats.isEmpty) {
-                                fireStore.collection(Constants.RECENT_CHATS).document(getChatId(getCurrentUserID(), user.id)).collection("messages")
-                                    .add(
-                                        RecentChats(
-                                            user.id,
-                                            getCurrentUserID(),
-                                            user.firstName,
-                                            user.lastName,
-                                            user.image,
-                                            message,
-                                            timestamp,
-
-                                        )
-                                    )
-                            } else {
-                                recentChats.documents[0].reference.update("lastMessage", message)
-                                recentChats.documents[0].reference.update("timestamp", timestamp)
-                            }
-                        }
-                }
-
-            }
     }
 //    fun addToRecentChats(fragment: ChatsListFragment) {
 //        val recentChatList: ArrayList<RecentChats> = ArrayList()
@@ -1095,6 +1052,12 @@ class FirestoreClass {
                 }
             }
     }
+    fun declinedPetAdoptionStatus(activity: Activity, petHashMap: HashMap<String, Any>, petId: String) {
+        fireStore.collection(Constants.PETS)
+            .document(petId)
+            .update(petHashMap)
+
+    }
 
     fun changeStrayAdoptionStatus(activity: Activity, strayHashMap: HashMap<String, Any>, strayId: String) {
         fireStore.collection(Constants.STRAY_ANIMALS)
@@ -1108,9 +1071,13 @@ class FirestoreClass {
                     is StrayAdoptionActivity -> {
                         activity.changedStrayAdoptionStatusSuccess()
                     }
-
                 }
             }
+    }
+    fun declinedStrayAdoptionStatus(activity: Activity, strayHashMap: HashMap<String, Any>, strayId: String) {
+        fireStore.collection(Constants.STRAY_ANIMALS)
+            .document(strayId)
+            .update(strayHashMap)
     }
 
     fun changeUserPetReviewStatus(activity: UserPetApplicationDetailsActivity, applicantHashMap: HashMap<String, Any>, applicantId: String) {

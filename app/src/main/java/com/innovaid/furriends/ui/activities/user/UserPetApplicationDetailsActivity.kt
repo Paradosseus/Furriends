@@ -24,6 +24,7 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_pet_application_details)
 
+
         if(intent.hasExtra(Constants.EXTRA_APPLICANT_USER_ID)) {
             mApplicantId = intent.getStringExtra(Constants.EXTRA_APPLICANT_USER_ID)!!
         }
@@ -144,6 +145,9 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
     private fun failedAssessment() {
         val applicantHashMap = HashMap<String, Any>()
         applicantHashMap[Constants.REVIEW_STATUS] ="Assessment Failed"
+        val petHashMap = HashMap<String, Any>()
+        petHashMap[Constants.PET_ADOPTION_STATUS] = "Listed"
+        FirestoreClass().declinedPetAdoptionStatus(this, petHashMap, mPetId)
         FirestoreClass().changeUserPetReviewStatus(this, applicantHashMap, mApplicantId)
     }
 
@@ -165,6 +169,9 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
     }
     private fun declineApplication() {
         val applicantHashMap = HashMap<String, Any>()
+        val petHashMap = HashMap<String, Any>()
+        petHashMap[Constants.PET_ADOPTION_STATUS] = "Listed"
+        FirestoreClass().declinedPetAdoptionStatus(this, petHashMap, mPetId)
         applicantHashMap[Constants.REVIEW_STATUS] ="Declined"
         FirestoreClass().changeUserPetReviewStatus(this, applicantHashMap, mApplicantId)
     }

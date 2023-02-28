@@ -62,7 +62,7 @@ object Constants {
     const val COMPLETE_PROFILE: String = "profileCompleted"
     const val ID : String = "id"
     const val EXTRA_USER_ID : String = "userId"
-
+    const val FCM_TOKEN : String ="fcmToken"
 
     const val PET_IMAGE: String ="petImage"
     const val USER_ID: String = "userId"

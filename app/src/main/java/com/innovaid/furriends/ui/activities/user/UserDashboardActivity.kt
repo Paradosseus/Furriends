@@ -12,6 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.User
@@ -25,6 +27,7 @@ import kotlinx.android.synthetic.main.side_nav_header.*
 
 class UserDashboardActivity : BaseActivity() {
 
+
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
     private lateinit var userDetails:User
@@ -32,6 +35,15 @@ class UserDashboardActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_dashboard)
+
+        FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+            val user = FirebaseAuth.getInstance().currentUser
+            if (user != null) {
+                val db = FirebaseFirestore.getInstance()
+                val userRef = db.collection(Constants.USERS).document(user.uid)
+                userRef.update("fcmToken", token)
+            }
+        }
 
         //Side Navigation Menu
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -94,9 +106,6 @@ class UserDashboardActivity : BaseActivity() {
         GlideLoader(this).loadUserPicture(user.image, ivHeaderUserImage)
         tvHeaderUserName.text = "${user.firstName} ${user.lastName}"
 
-    }
-    private fun updateToken(token: String){
-//        FirestoreClass().getPreference()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

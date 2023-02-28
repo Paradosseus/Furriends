@@ -59,45 +59,70 @@ class SearchUserChatFragment : BaseFragment() {
             rvUserListings.layoutManager = LinearLayoutManager(activity)
             rvUserListings.setHasFixedSize(true)
 
-            val adapterUser = UserAdapter(requireActivity(), userList,true)
+            val adapterUser = UserAdapter(requireActivity(), userList, true)
             rvUserListings.adapter = adapterUser
 
-            if(etSearchUser != null) {
-                etSearchUser.addTextChangedListener(object: TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            if (etSearchUser != null) {
+                etSearchUser.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
 
                     }
 
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
 
                     }
 
                     override fun afterTextChanged(s: Editable?) {
-                        val searchText = s.toString()
+                        val searchText = s.toString().toLowerCase()
                         val query = FirebaseFirestore.getInstance()
                             .collection(Constants.USERS)
                             .orderBy(Constants.FIRST_NAME)
-                            .startAt(searchText)
-                            .endAt(searchText + "\uf8ff")
                         query.get().addOnSuccessListener { QuerySnapshot ->
-                            Log.d("SearchResults", "Number of documents found: ${QuerySnapshot.documents.size}")
+                            Log.d(
+                                "SearchResults",
+                                "Number of documents found: ${QuerySnapshot.documents.size}"
+                            )
                             userList.clear()
                             for (document in QuerySnapshot.documents) {
-                                Log.d("SearchResults", "Number of documents found: ${QuerySnapshot.documents.size}")
                                 val data = document.toObject(User::class.java)
-                                userList.add(data!!)
+                                val firstName =
+                                    data?.firstName?.toLowerCase() // Convert the value in the database to lowercase for comparison
+                                val lastName =
+                                    data?.lastName?.toLowerCase() // Convert the value in the database to lowercase for comparison
+                                val fullName = "$firstName $lastName"
+                                if (data?.id != FirestoreClass().getCurrentUserID() && fullName.containsIgnoreCase(
+                                        searchText
+                                    )
+                                ) { // Use the custom containsIgnoreCase() function to check if the fullName contains the searchText
+                                    userList.add(data!!)
+                                }
+
                             }
                             adapterUser.notifyDataSetChanged()
                         }
                     }
 
                 })
+            } else {
+                rvUserListings.visibility = View.GONE
+                tvNoUser.visibility = View.VISIBLE
             }
-        } else {
-            rvUserListings.visibility = View.GONE
-            tvNoUser.visibility = View.VISIBLE
         }
 
+    }
+
+    fun String.containsIgnoreCase(other: String): Boolean {
+        return this.toLowerCase().contains(other.toLowerCase())
     }
     override fun onResume() {
         super.onResume()

@@ -151,6 +151,9 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
 
     private fun FailedAssessment() {
         val applicantHashMap = HashMap<String, Any>()
+        val strayHashMap = HashMap<String, Any>()
+        strayHashMap[Constants.STRAY_ADOPTION_STATUS] = "Listed"
+        FirestoreClass().declinedStrayAdoptionStatus(this,strayHashMap, mStrayId)
         applicantHashMap[Constants.REVIEW_STATUS] ="Assessment Failed"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }
@@ -177,6 +180,9 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     }
     private fun declineApplication() {
         val applicantHashMap = HashMap<String, Any>()
+        val strayHashMap = HashMap<String, Any>()
+        strayHashMap[Constants.STRAY_ADOPTION_STATUS] = "Listed"
+        FirestoreClass().declinedStrayAdoptionStatus(this,strayHashMap, mStrayId)
         applicantHashMap[Constants.REVIEW_STATUS] ="Declined"
         FirestoreClass().changeReviewStatus(this, applicantHashMap, mApplicantId)
     }

@@ -1,8 +1,10 @@
 package com.innovaid.furriends.ui.activities.admin
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
@@ -12,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import com.innovaid.furriends.R
 import com.innovaid.furriends.ReviewApplicationActivity
 import com.innovaid.furriends.firestore.FirestoreClass
@@ -42,6 +45,9 @@ class AdminDashboardActivity : BaseActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
+
+
         adminSideNavigationMenu.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_admin_profile -> startActivity(Intent(this, UserProfileActivity::class.java))
@@ -71,7 +77,7 @@ class AdminDashboardActivity : BaseActivity() {
                 R.id.nav_dashboard,
                 R.id.nav_admin_stray_listings,
                 R.id.nav_admin_notifications,
-                R.id.nav_admin_inbox
+                R.id.nav_inbox
             ),drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

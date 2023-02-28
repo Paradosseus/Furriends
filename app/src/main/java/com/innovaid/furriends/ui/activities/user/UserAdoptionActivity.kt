@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.UserAdoptionForm
+import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.utils.Constants
 import kotlinx.android.synthetic.main.activity_add_user_pet_profile.*
 import kotlinx.android.synthetic.main.activity_message.*
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class UserAdoptionActivity : AppCompatActivity() {
+class UserAdoptionActivity : BaseActivity() {
 
     private var mPetId: String = ""
     private var mApplicantId: String = ""
@@ -46,7 +47,7 @@ class UserAdoptionActivity : AppCompatActivity() {
 
     }
     private fun submitUserPetAdoptionForm() {
-
+        showProgressDialog(resources.getString(R.string.please_wait))
         val userQuestionThree = findViewById<RadioButton>(rgUserQuestionThree.checkedRadioButtonId)
         val userQuestionFour = findViewById<RadioButton>(rgUserQuestionFour.checkedRadioButtonId)
         val userQuestionFive = findViewById<RadioButton>(rgUserQuestionFive.checkedRadioButtonId)
@@ -75,15 +76,16 @@ class UserAdoptionActivity : AppCompatActivity() {
     }
 
     fun uploadPetAdoptionFormDetailsSuccess(userAdoptionForm: UserAdoptionForm) {
+        hideProgressDialog()
         val petHashMap = HashMap<String, Any>()
         petHashMap[Constants.PET_ADOPTION_STATUS] = "Ongoing"
         FirestoreClass().changePetAdoptionStatus(this, petHashMap, mPetId)
         mApplicantId = userAdoptionForm.applicationId.toString()
     }
     fun changedPetAdoptionStatusSuccess() {
-        val intent = Intent(this, UserApplicationStatusActivity::class.java)
+        val intent = Intent(this, PetUserApplicationStatusActivity::class.java)
         intent.putExtra(Constants.EXTRA_APPLICATION_ID,mApplicantId)
-        intent.putExtra(Constants.EXTRA_STRAY_ID, mPetId)
+        intent.putExtra(Constants.EXTRA_PET_ID, mPetId)
         Toast.makeText(this,"Your adoption form is successfully submitted", Toast.LENGTH_SHORT).show()
         finish()
         startActivity(intent)

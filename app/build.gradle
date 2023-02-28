@@ -10,12 +10,14 @@ android {
 
     defaultConfig {
         applicationId "com.innovaid.furriends"
-        minSdk 23
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [ FCM_SERVER_LEY: "AAAA-re22tk:APA91bFgNZtC_1onu7oOyXOCjw2WHOYAT75V2nwYQ9Oe3UydgCZX28RWbLVDhKD3puaZM35azxjdfubLUb0F8J5Q8Dk82whuzH4t3GqQ_yDNDG2lNbny3iTvDNRDksNKB5SHbrDHlkzX"]
     }
 
     androidExtensions {
@@ -51,6 +53,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.android.car.ui:car-ui-lib:2.0.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -62,22 +65,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation platform('com.google.firebase:firebase-bom:31.0.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging:23.1.0'
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 
-//    def nav_version = "2.5.2"
-//    // Kotlin
-//    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-//    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-//
-//    def room_version = "2.4.2"
-//
-//    implementation "androidx.room:room-ktx:$room_version"
-//    implementation "androidx.room:room-runtime:$room_version"
-//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
-//    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+    implementation 'com.google.android.material:material:1.4.0'
+
 
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
@@ -88,14 +83,13 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 
-
-
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
     implementation 'com.itextpdf:itextpdf:5.5.13'
 
-
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+
 
 
 }
