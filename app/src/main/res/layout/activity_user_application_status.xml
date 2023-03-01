@@ -77,26 +77,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:layout_marginBottom="10dp"
-                android:background="@color/white"
+                android:background="@drawable/background_container_application_status"
                 android:gravity="center"
                 android:padding="5dp">
 
 
                 <LinearLayout
                     android:id="@+id/linearLayout5"
-                    android:layout_width="180dp"
+                    android:layout_width="185dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/tvAppointDateTitle"
-                        android:layout_width="180dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Appointment Schedule:"
                         android:textColor="@color/black"

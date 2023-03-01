@@ -146,6 +146,9 @@ class FirestoreClass {
                         is MessageActivity -> {
                             activity.otherUserDetailsLoadedSuccess(user)
                         }
+                        is ApplicantDetailsActivity -> {
+                            activity.userDetailLoadedSuccess(user)
+                        }
                     }
 
                 }

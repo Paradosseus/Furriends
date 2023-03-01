@@ -77,6 +77,14 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
         tvStrayAnimalDetailLocationFoundedValue.text = strayAnimal.locationFounded
         tvStrayAnimalDetailDateAndTimeFounded.text = "${strayAnimal.dateFounded} at ${strayAnimal.timeFounded}"
         tvStrayAnimalDetailDescription.text = strayAnimal.strayAnimalDescription
+        tvStrayAnimalVaccinationStatusValue.text = strayAnimal.vaccinationStatus
+        if(strayAnimal.vaccinationBrand != "") {
+            llStrayAnimalVaccinationBrandContainer.visibility = View.VISIBLE
+            tvStrayAnimalVaccinationBrandValue.text = strayAnimal.vaccinationBrand
+        } else {
+            llStrayAnimalVaccinationBrandContainer.visibility = View.GONE
+        }
+
 
         mCategory = strayAnimal.category.toString()
         mBreed = strayAnimal.strayAnimalBreed.toString()

@@ -20,6 +20,7 @@ import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_add_stray_animal_profile.*
 import kotlinx.android.synthetic.main.activity_add_user_pet_profile.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -39,6 +40,16 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
         btnSetupPetProfile.setOnClickListener(this)
         ivCalendar.setOnClickListener(this)
         ibAPDBackButton.setOnClickListener(this)
+
+        val rbPetVaccinated = findViewById<RadioButton>(R.id.rbPetVSVaccinated)
+
+        rbPetVaccinated.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                llPetVaccinationBrand.visibility = View.VISIBLE
+            } else {
+                llPetVaccinationBrand.visibility = View.GONE
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -160,6 +171,10 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
                 Toast.makeText(this, "Please specify if your Pet is spayed and neutered or not", Toast.LENGTH_SHORT).show()
                 false
             }
+            rgPetVaccinationStatus.checkedRadioButtonId == -1 -> {
+                Toast.makeText(this, "Please specify if your Pet is vaccinated or not", Toast.LENGTH_SHORT).show()
+                false
+            }
             etPetDescription.text.toString().trim { it <= ' ' }.isEmpty()-> {
                 Toast.makeText(this, "Please Enter your pet's description", Toast.LENGTH_SHORT).show()
                 false
@@ -176,6 +191,7 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
                 .getString(Constants.LOGGED_IN_USERNAME, "")!!
         val petGender = findViewById<RadioButton>(rgPetGender.checkedRadioButtonId)
         val petSpayedOrNeutered = findViewById<RadioButton>(rgSpayedNeutered.checkedRadioButtonId)
+        val petVaccinationStatus = findViewById<RadioButton>(rgPetVaccinationStatus.checkedRadioButtonId)
 
 
         val pet = Pet(
@@ -189,6 +205,8 @@ class AddUserPetProfileActivity : BaseActivity(), View.OnClickListener {
             spPetType.selectedItem.toString(),
             petGender.text.toString().trim { it <= ' ' },
             petSpayedOrNeutered.text.toString().trim { it <= ' ' },
+            petVaccinationStatus.text.toString().trim {it <= ' '},
+            etPetVaccinationBrand.text.toString(),
             etPetDescription.text.toString().trim { it <= ' '},
             mPetImageURL,
             "Pending",

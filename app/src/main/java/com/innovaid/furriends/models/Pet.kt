@@ -15,6 +15,8 @@ data class Pet(
     val petType: String? = null,
     val petGender: String?  =null,
     val spayedOrNeutered: String? =null,
+    val vaccinationStatus: String? = null,
+    val vaccinationBrand: String? = null,
     val description: String? = null,
     val image: String? = null,
     val approvalStatus: String? = null,

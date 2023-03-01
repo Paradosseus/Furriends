@@ -1,16 +1,19 @@
 package com.innovaid.furriends.ui.activities.admin
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.RadioButton
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,6 +26,7 @@ import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_stray_animal_profile.*
 import kotlinx.android.synthetic.main.activity_add_user_pet_profile.*
 import kotlinx.android.synthetic.main.activity_set_up_user_profile.*
+import kotlinx.android.synthetic.main.activity_set_up_user_profile.view.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,6 +35,7 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
 
     private var mSelectedImageFileUri: Uri? = null
     private var mStrayAnimalImageURL: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +49,15 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
         ivSelectTime.setOnClickListener(this)
         ibASAPBackButton.setOnClickListener(this)
 
+        val rbStrayAnimalVaccinated = findViewById<RadioButton>(R.id.rbSAVSVaccinated)
+
+        rbStrayAnimalVaccinated.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+               llStrayAnimalVaccinationBrand.visibility = View.VISIBLE
+            } else {
+                llStrayAnimalVaccinationBrand.visibility = View.GONE
+            }
+        }
     }
 
 
@@ -94,7 +108,7 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
             Calendar.DAY_OF_MONTH)).show()
     }
     private fun updateTable(myCalendar: Calendar) {
-        val myFormat = "dd-MM-yyyy"
+        val myFormat = "MM-dd-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
         tvStrayAnimalDateFoundedValue.setText(sdf.format(myCalendar.time))
     }
@@ -178,6 +192,10 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
                 Toast.makeText(this, "Please Enter your pet's description", Toast.LENGTH_SHORT).show()
                 false
             }
+            rgStrayAnimalVaccinationStatus.checkedRadioButtonId == -1 -> {
+                Toast.makeText(this, "Please specify if your Pet is vaccinated or not", Toast.LENGTH_SHORT).show()
+                false
+            }
             else -> {
                 true
             }
@@ -190,6 +208,7 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
             .getString(Constants.LOGGED_IN_USERNAME, "")!!
         val strayAnimalGender = findViewById<RadioButton>(rgStrayAnimalGender.checkedRadioButtonId)
         val strayAnimalSpayedNeutered = findViewById<RadioButton>(rgStrayAnimalSpayedNeutered.checkedRadioButtonId)
+        val strayAnimalVaccinationStatus = findViewById<RadioButton>(rgStrayAnimalVaccinationStatus.checkedRadioButtonId)
 
 
         val strayAnimal = StrayAnimal(
@@ -202,6 +221,8 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
             etStrayAnimalLocationFoundedValue.text.toString().trim { it <= ' ' },
             tvStrayAnimalDateFoundedValue.text.toString().trim { it <= ' ' },
             tvStrayAnimalTimeFoundedValue.text.toString().trim { it <= ' ' },
+            strayAnimalVaccinationStatus.text.toString(),
+            etStrayAnimalVaccinationBrand.text.toString(),
             etStrayAnimalDescription.text.toString().trim { it <= ' ' },
             mStrayAnimalImageURL,
             "Listed",
@@ -237,12 +258,53 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
         finish()
     }
     private fun setTime() {
-        val currentTime  = Calendar.getInstance()
+
+        val currentTime = Calendar.getInstance()
         val startHour = currentTime.get(Calendar.HOUR_OF_DAY)
         val startMinute = currentTime.get(Calendar.MINUTE)
 
-        TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-            tvStrayAnimalTimeFoundedValue.setText("$hourOfDay: $minute")
-        }, startHour, startMinute, false).show()
+        val timePickerView = TimePicker(this)
+        timePickerView.setOnTimeChangedListener { view, hourOfDay, minute ->
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            calendar.set(Calendar.MINUTE, minute)
+        }
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Select Time")
+            .setView(timePickerView)
+            .setPositiveButton("OK") { _, _ ->
+                val hour = timePickerView.hour
+                val minute = timePickerView.minute
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.HOUR_OF_DAY, hour)
+                calendar.set(Calendar.MINUTE, minute)
+                val dateFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+                tvStrayAnimalTimeFoundedValue.text = dateFormat.format(calendar.time)
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+
+        dialog.show()
+
+        // Set initial time
+        timePickerView.hour = startHour
+        timePickerView.minute = startMinute
+
+        // Disable minutes and seconds
+        try {
+            val minuteSpinnerId = Resources.getSystem().getIdentifier("minute", "id", "android")
+            val minuteSpinner = timePickerView.findViewById<View>(minuteSpinnerId)
+            minuteSpinner?.visibility = View.GONE
+
+            val secondSpinnerId = Resources.getSystem().getIdentifier("second", "id", "android")
+            val secondSpinner = timePickerView.findViewById<View>(secondSpinnerId)
+            secondSpinner?.visibility = View.GONE
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        // Set selectable range
+        timePickerView.setIs24HourView(false)
     }
 }

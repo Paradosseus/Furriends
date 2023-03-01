@@ -71,27 +71,29 @@
         android:padding="6dp"
         android:layout_alignParentBottom="true">
 
-        <ImageView
-            android:id="@+id/ivAttachImageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_attach_file"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true">
+<!--        <ImageView-->
+<!--            android:id="@+id/ivAttachImageButton"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_attach_file"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentLeft="true">-->
 
-        </ImageView>
-        
+<!--        </ImageView>-->
+
         <EditText
             android:id="@+id/tvTextMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:hint="Write a message"
-            android:layout_toRightOf="@+id/ivAttachImageButton"
-            android:layout_toLeftOf="@+id/ivSendMessageButton"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+
+            android:layout_marginStart="12dp"
             android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"/>
+            android:layout_marginRight="6dp"
+            android:layout_toLeftOf="@+id/ivSendMessageButton"
+            android:background="@android:color/transparent"
+            android:hint="Write a message" />
 
         <ImageView
             android:id="@+id/ivSendMessageButton"

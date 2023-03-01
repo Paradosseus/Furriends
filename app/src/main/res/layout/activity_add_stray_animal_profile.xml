@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:text="Birthday"
+                        android:text="Date Founded"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:text="Birthday"
+                        android:text="Time Founded"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -321,8 +321,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout16"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout12"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
 
@@ -360,9 +359,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout17"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout18"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
 
 
                     <TextView
@@ -443,15 +441,108 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
+
+
+                    <TextView
+                        android:id="@+id/tvStrayAnimalVaccinationStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Vaccination Status"
+                        android:textColor="@color/black" />
+
+                    <RadioGroup
+                        android:id="@+id/rgStrayAnimalVaccinationStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="@+id/tvSpayedNeutered"
+                        app:layout_constraintTop_toBottomOf="@+id/tvSpayedNeutered">
+
+                        <RadioButton
+                            android:id="@+id/rbSAVSVaccinated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vaccinated" />
+
+                        <RadioButton
+                            android:id="@+id/rbSAVSNotVaccinated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Not Vaccinated" />
+
+                        <RadioButton
+                            android:id="@+id/rbSAVSNotKnown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Not known" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
 
                 <LinearLayout
+                    android:id="@+id/llStrayAnimalVaccinationBrand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/match_parent">
+
+                    <TextView
+                        android:id="@+id/tvStrayAnimalVaccinationBrand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/black"
+                        android:text="What vaccination brand was used?" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
+
+                        <EditText
+                            android:id="@+id/etStrayAnimalVaccinationBrand"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:background="@color/transparent"
+                            android:inputType="text" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
+                    app:layout_constraintTop_toBottomOf="@+id/llStrayAnimalVaccinationBrand">
 
                     <TextView
                         android:id="@+id/tvStrayAnimalDescription"

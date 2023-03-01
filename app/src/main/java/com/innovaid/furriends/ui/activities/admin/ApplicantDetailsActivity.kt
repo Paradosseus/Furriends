@@ -24,19 +24,24 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     private var mApplicantId: String =""
     private var mStrayId: String  = ""
     private var mApplicantName: String =""
+    private var mApplicantUserId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_applicant_details)
 
 
-        if(intent.hasExtra(Constants.EXTRA_APPLICANT_USER_ID)) {
-            mApplicantId = intent.getStringExtra(Constants.EXTRA_APPLICANT_USER_ID)!!
+        if(intent.hasExtra(Constants.EXTRA_APPLICATION_ID)) {
+            mApplicantId = intent.getStringExtra(Constants.EXTRA_APPLICATION_ID)!!
         }
 
         if(intent.hasExtra(Constants.EXTRA_STRAY_ID)) {
             mStrayId = intent.getStringExtra(Constants.EXTRA_STRAY_ID)!!
         }
+        if(intent.hasExtra(Constants.EXTRA_APPLICANT_USER_ID)) {
+            mApplicantUserId = intent.getStringExtra(Constants.EXTRA_APPLICANT_USER_ID)!!
+        }
+
 
 
         getApplicantDetails()
@@ -58,7 +63,11 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     private fun getApplicantDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getApplicantDetails(this, mApplicantId, mStrayId)
+        FirestoreClass().getOtherUserDetails(this, mApplicantUserId)
 
+    }
+    fun userDetailLoadedSuccess(user: User) {
+        GlideLoader(this).loadUserPicture(user.image!!, ivADApplicantImage)
     }
 
     fun applicantDetailSuccess(StrayAdoptionForm: StrayAdoptionForm, strayAnimal : StrayAnimal) {
@@ -97,7 +106,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
             intent.setDataAndType(Uri.parse(StrayAdoptionForm.strayAnimalAdoptionForm), "application/pdf")
             startActivity(intent)
         }
-//        GlideLoader(this).loadUserPicture(strayAnimal.strayAnimalImage!!, ivADStrayAnimalImage)
+//        GlideLoader(this).loadUserPicture(strayAnimal.strayAnimalImage!!, ivADApplicantImage)
         tvADApplicantName.text = StrayAdoptionForm.applicantName
         tvADApplicantAddress.text = StrayAdoptionForm.applicantAddress
 

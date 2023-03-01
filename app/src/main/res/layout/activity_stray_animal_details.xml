@@ -137,6 +137,49 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:text="Vaccination Status"/>
+
+                <TextView
+                    android:id="@+id/tvStrayAnimalVaccinationStatusValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Vaccination Status Value"/>
+
+                <LinearLayout
+                    android:id="@+id/llStrayAnimalVaccinationBrandContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:text="Brand: "/>
+
+                    <TextView
+                        android:id="@+id/tvStrayAnimalVaccinationBrandValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brand Value"/>
+
+
+                </LinearLayout>
+
             <TextView
                 android:id="@+id/tvStrayAnimalDetailAboutTitle"
                 android:layout_width="match_parent"

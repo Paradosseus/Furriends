@@ -11,6 +11,7 @@ import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.ui.activities.MessageActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_add_user_pet_profile.*
 import kotlinx.android.synthetic.main.activity_stray_animal_details.*
 import kotlinx.android.synthetic.main.activity_user_pet_details.*
 
@@ -73,6 +74,14 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
         tvPetDetailColor.text = pet.petColor
         tvPetDetailLocation.text = pet.petLocation
         tvPetDetailDescription.text = pet.description
+        tvPetVaccinationStatusValue.text = pet.vaccinationStatus
+        if(pet.vaccinationBrand != "") {
+            llPetVaccinationBrandContainer.visibility = View.VISIBLE
+            tvPetVaccinationBrandValue.text = pet.vaccinationBrand
+        } else {
+            llPetVaccinationBrandContainer.visibility = View.GONE
+        }
+
 
         mCategory = pet.category.toString()
     }

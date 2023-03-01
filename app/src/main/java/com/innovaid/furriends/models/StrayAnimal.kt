@@ -14,6 +14,8 @@ data class StrayAnimal(
     val locationFounded: String? = null,
     val dateFounded: String? = null,
     val timeFounded: String? = null,
+    val vaccinationStatus: String? = null,
+    val vaccinationBrand: String? = null,
     val strayAnimalDescription: String? = null,
     val strayAnimalImage: String? = null,
     val adoptionStatus: String? = null,
