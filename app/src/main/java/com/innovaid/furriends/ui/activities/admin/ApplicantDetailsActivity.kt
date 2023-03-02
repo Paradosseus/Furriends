@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.innovaid.furriends.R
 import com.innovaid.furriends.ReviewApplicationActivity
 import com.innovaid.furriends.firestore.FirestoreClass
@@ -13,6 +14,7 @@ import com.innovaid.furriends.models.StrayAdoptionForm
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.VideoCallActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_applicant_details.*
@@ -55,6 +57,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
         btnPassedAssessment.setOnClickListener(this)
         btnFailedAssessment.setOnClickListener(this)
         btnPetClaimed.setOnClickListener(this)
+        ibStrayUserApplicantStartCall.setOnClickListener(this)
 
 
     }
@@ -68,6 +71,7 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
     }
     fun userDetailLoadedSuccess(user: User) {
         GlideLoader(this).loadUserPicture(user.image!!, ivADApplicantImage)
+
     }
 
     fun applicantDetailSuccess(StrayAdoptionForm: StrayAdoptionForm, strayAnimal : StrayAnimal) {
@@ -138,10 +142,17 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
                 R.id.btnPetClaimed -> {
                     PetClaimed()
                 }
+                R.id.ibStrayUserApplicantStartCall -> {
+                    makeCall()
+                }
             }
         }
     }
-
+    private fun makeCall(){
+        val intent = Intent(this, VideoCallActivity::class.java)
+        intent.putExtra(Constants.EXTRA_APPLICATION_ID,mApplicantId)
+        startActivity(intent)
+    }
     private fun doneInterview() {
         val applicantHashMap = HashMap<String, Any>()
         applicantHashMap[Constants.REVIEW_STATUS] ="Reviewing Assessment"

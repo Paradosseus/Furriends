@@ -149,6 +149,9 @@ class FirestoreClass {
                         is ApplicantDetailsActivity -> {
                             activity.userDetailLoadedSuccess(user)
                         }
+                        is VideoCallActivity -> {
+                            activity.startCall(user)
+                        }
                     }
 
                 }

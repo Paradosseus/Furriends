@@ -15,6 +15,7 @@ import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.models.UserAdoptionForm
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.VideoCallActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_pet_user_application_status.*
@@ -47,6 +48,7 @@ class PetUserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
         btnPetUserSelectTime.setOnClickListener(this)
         btnPetUserConfirmAdoptionDate.setOnClickListener(this)
         ivPetUserViewPetProfile.setOnClickListener(this)
+        ibPetUserApplicantJoinCall.setOnClickListener(this)
         setupActionBar()
 
     }
@@ -65,11 +67,19 @@ class PetUserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
                 R.id.ivPetUserViewPetProfile -> {
                     viewPetProfile()
                 }
-                R.id.btnSelectTime -> {
+                R.id.btnPetUserSelectTime -> {
                     setTime()
+                }
+                R.id.ibPetUserApplicantJoinCall -> {
+                    joinCall()
                 }
             }
         }
+    }
+    private fun joinCall() {
+        val intent = Intent(this, VideoCallActivity::class.java)
+        intent.putExtra(Constants.EXTRA_APPLICATION_ID,mApplicantStatusId)
+        startActivity(intent)
     }
     private fun viewPetProfile() {
         val intent = Intent(this, UserPetDetailsActivity::class.java)
@@ -257,8 +267,9 @@ class PetUserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
                     tvPetUserApplicationMessage.text = "Application Approved! Set your Appointment"
                     clPetUserAppointmentScheduleContainer.visibility = View.VISIBLE
                 } else {
-                    tvPetUserStepTwoTextValue.text = "Visit the Veterinary at the scheduled date"
-                    tvPetUserApplicationMessage.text = "Appointment Set! Visit the Veterinary for the interview on ${userAdoptionForm.appointmentDate}"
+                    tvPetUserStepTwoTextValue.text = "Attend the Virtual Interview at the scheduled date"
+                    tvPetUserApplicationMessage.text = "Appointment Set! Prepare for the virtual interview on ${userAdoptionForm.appointmentDate}"
+                    clPetUserApplicantVideoCallContainer.visibility = View.VISIBLE
                 }
             }
             "Declined" -> {

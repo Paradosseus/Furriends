@@ -94,6 +94,7 @@ object Constants {
     const val APPLICATION_ID = "applicationId"
     const val EXTRA_APPLICATION_ID = "extraApplicationId"
     const val REVIEWER_ID = "reviewerId"
+    const val EXTRA_USER_NAME = "name"
     //Applicant for Pet Adoption
 
 

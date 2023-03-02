@@ -24,6 +24,7 @@ import com.innovaid.furriends.models.StrayAdoptionForm
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.VideoCallActivity
 import com.innovaid.furriends.ui.activities.admin.StrayAnimalDetailsActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
@@ -40,6 +41,7 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
     private var mPetId: String = ""
     private var mApplicantStatusId: String = ""
     private var mStrayAnimalOwnerId: String = ""
+    private var mUserName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +58,16 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
 
             mPetId = intent.getStringExtra(Constants.EXTRA_STRAY_ID)!!
         }
+        if(intent.hasExtra(Constants.EXTRA_USER_NAME)) {
 
+            mUserName = intent.getStringExtra(Constants.EXTRA_USER_NAME)!!
+        }
 
         btnSelectSchedule.setOnClickListener(this)
         btnSelectTime.setOnClickListener(this)
         btnConfirmAdoptionDate.setOnClickListener(this)
         ivViewPetProfile.setOnClickListener(this)
+        ibStrayUserApplicantJoinCall.setOnClickListener(this)
         setupActionBar()
 
     }
@@ -81,8 +87,16 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
                 R.id.btnSelectTime-> {
                     setTime()
                 }
+                R.id.ibStrayUserApplicantJoinCall ->{
+                    joinCall()
+                }
             }
         }
+    }
+    private fun joinCall() {
+        val intent = Intent(this, VideoCallActivity::class.java)
+        intent.putExtra(Constants.EXTRA_APPLICATION_ID,mApplicantStatusId)
+        startActivity(intent)
     }
     private fun viewPetProfile() {
 
@@ -272,8 +286,9 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
                    tvApplicationMessage.text = "Application Approved! Set your Appointment"
                    clAppointmentScheduleContainer.visibility = View.VISIBLE
                } else {
-                   tvStepTwoTextValue.text = "Visit the Veterinary at the scheduled date"
-                   tvApplicationMessage.text = "Appointment Set! Visit the Veterinary for the interview on ${strayAdoptionForm.appointmentDate}"
+                   tvStepTwoTextValue.text = "Attend the Virtual Interview at the scheduled date"
+                   tvApplicationMessage.text = "Appointment Set! Prepare for the virtual interview on ${strayAdoptionForm.appointmentDate}"
+                   clStrayUserApplicantVideoCallContainer.visibility = View.VISIBLE
                }
            }
            "Declined" -> {

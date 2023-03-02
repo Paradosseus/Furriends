@@ -1,6 +1,8 @@
 package com.innovaid.furriends.ui.activities.user
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.view.View
 import com.innovaid.furriends.R
@@ -9,6 +11,7 @@ import com.innovaid.furriends.models.Pet
 import com.innovaid.furriends.models.User
 import com.innovaid.furriends.models.UserAdoptionForm
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.VideoCallActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_applicant_details.*
@@ -42,6 +45,7 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
         btnUPPassedAssessment.setOnClickListener(this)
         btnUPFailedAssessment.setOnClickListener(this)
         btnUPPetClaimed.setOnClickListener(this)
+        ibPetUserApplicantStartCall.setOnClickListener(this)
 
     }
     override fun onClick(v: View?) {
@@ -65,10 +69,17 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
                 R.id.btnUPPetClaimed -> {
                     petClaimed()
                 }
+                R.id.ibPetUserApplicantStartCall -> {
+                    makeCall()
+                }
             }
         }
     }
-
+    private fun makeCall(){
+        val intent = Intent(this, VideoCallActivity::class.java)
+        intent.putExtra(Constants.EXTRA_APPLICATION_ID,mApplicantId)
+        startActivity(intent)
+    }
 
     private fun getUserPetApplicantDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
@@ -102,7 +113,6 @@ class UserPetApplicationDetailsActivity : BaseActivity(), View.OnClickListener {
         tvUPPetName.text = pet.petName
         tvUPPetLocation.text = pet.petLocation
         tvUPPetBirthday.text = pet.petBirthDate
-
 
         tvUPApplicantName.text = userPetApplicant.applicantName
         tvUPApplicantAddress.text = userPetApplicant.applicantAddress
