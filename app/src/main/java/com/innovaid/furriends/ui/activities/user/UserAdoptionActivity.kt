@@ -144,7 +144,7 @@ class UserAdoptionActivity : BaseActivity() {
     private fun setupActionBar() {
 
         setSupportActionBar(tbUserAdoptionActivity)
-        supportActionBar!!.title = "Message"
+        supportActionBar!!.title = "Adoption Form"
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)

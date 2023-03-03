@@ -38,7 +38,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout8"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <LinearLayout
@@ -51,26 +51,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:padding="10dp"
                 android:background="@drawable/background_top_application_status"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
+                    android:text="Application Status:"
                     android:textColor="@color/white"
-                    android:text="Application Status:"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/ivUPApplicationStatusValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Application Status Value"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
-                    android:text="Application Status Value"/>
+                    android:textSize="25dp" />
 
 
             </LinearLayout>
@@ -80,18 +80,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:padding="10dp"
                 android:background="@drawable/background_container_application_status"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:text="Pet Information"
                     android:textColor="@color/black"
-                    android:text="Pet Information"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,74 +100,77 @@
                     android:orientation="horizontal">
 
 
-
                     <ImageView
                         android:id="@+id/ivUPPetImage"
                         android:layout_width="200dp"
-                        android:layout_height="200dp"/>
+                        android:layout_height="200dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
+
                         <View
                             android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_height="20dp" />
 
                         <TextView
                             android:id="@+id/tvUPPetName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
+                            android:text="Name"
                             android:textColor="@color/black"
-                            android:text="Name"/>
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:id="@+id/tvUPPetGender"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="16dp"
-                                android:text="Gender"/>
+                                android:text="Gender"
+                                android:textSize="16dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" | "/>
+                                android:text=" | " />
+
                             <TextView
                                 android:id="@+id/tvUPPetcolor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="16dp"
-                                android:text="Color"/>
+                                android:text="Color"
+                                android:textSize="16dp" />
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
+                            android:text="Address "
                             android:textColor="@color/black"
-                            android:text="Address "/>
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvUPPetLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="Location "/>
+                            android:text="Location "
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:text="Birthday"
                             android:textColor="@color/black"
                             android:textSize="18dp"
-                            android:text="Birthday"/>
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -177,8 +181,8 @@
                                 android:id="@+id/tvUPPetBirthday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="16dp"
-                                android:text="Date"/>
+                                android:text="Date"
+                                android:textSize="16dp" />
 
                         </LinearLayout>
 
@@ -192,17 +196,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
                 android:layout_marginTop="10dp"
-                android:padding="10dp"
                 android:background="@drawable/background_container_application_status"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:text="Applicant Information"
                     android:textColor="@color/black"
-                    android:text="Applicant Information"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -214,8 +218,8 @@
                         android:id="@+id/ivUPApplicantImage"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp" />
 
                     <LinearLayout
                         android:layout_width="200dp"
@@ -226,59 +230,62 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:text="To be adopted by:"
                             android:textColor="@color/black"
                             android:textSize="18dp"
-                            android:text="To be adopted by:"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvUPApplicantName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:text="Applicant Name"/>
+                            android:text="Applicant Name"
+                            android:textSize="16dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="18dp"
+                            android:text="Address"
                             android:textColor="@color/black"
-                            android:text="Address"/>
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvUPApplicantAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:text="Applicant Address"/>
+                            android:text="Applicant Address"
+                            android:textSize="16dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="18dp"
+                            android:text="Phone Number"
                             android:textColor="@color/black"
-                            android:text="Phone Number"/>
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvUPApplicantContactNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:text="Contact Number"/>
+                            android:text="Contact Number"
+                            android:textSize="16dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="18dp"
+                            android:text="Occupation"
                             android:textColor="@color/black"
-                            android:text="Occupation"/>
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvUPApplicantOccupation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:text="Occupation"/>
+                            android:text="Occupation"
+                            android:textSize="16dp" />
 
 
                     </LinearLayout>
@@ -291,17 +298,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:padding="10dp"
                 android:background="@drawable/background_container_application_status"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:text="Questionnaire Answers:"
                     android:textColor="@color/black"
-                    android:text="Questionnaire Answers:"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -311,109 +318,106 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
+                        android:text="For whom are you adopting for?"
                         android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:text="For whom are you adopting for?"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvUPQuestionOneAnswer"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:textSize="16dp"
-                        android:text="Answer"/>
+                        android:text="Answer"
+                        android:textSize="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
+                        android:text="Tell us why you want to adopt?"
                         android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:text="Tell us why you want to adopt?"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvUPQuestionTwoAnswer"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:textSize="16dp"
-                        android:text="Answer"/>
+                        android:text="Answer"
+                        android:textSize="16dp" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
+                        android:text="Do you have any other pets in your household?"
                         android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:text="Do you have any other pets in your household?"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvUPQuestionThreeAnswer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:text="Applicant Name"/>
+                        android:text="Applicant Name"
+                        android:textSize="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
+                        android:text="Are you able to provide the basic needs of your pet (such as food, water, and shelter)?"
                         android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:text="Are you able to provide the basic needs of your pet (such as food, water, and shelter)?"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvUPQuestionFourAnswer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:text="Answer"/>
+                        android:text="Answer"
+                        android:textSize="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
+                        android:text="Are you willing to take full responsibility of your pet?"
                         android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:text="Are you willing to take full responsibility of your pet?"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvUPQuestionFiveAnswer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:text="Answer"/>
-
+                        android:text="Answer"
+                        android:textSize="16dp" />
 
 
                 </LinearLayout>
 
 
-
             </LinearLayout>
-
 
 
             <LinearLayout
                 android:id="@+id/llUPBtnContainerReviewApplication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_container_application_status"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
+                android:background="@drawable/background_container_application_status"
                 android:gravity="center"
-                android:padding="10dp">
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:text="Is Applicant Approved for Application?"
                     android:textAlignment="center"
-                    android:text="Is Applicant Approved for Application?"/>
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -425,22 +429,22 @@
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
                         android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="20dp"
                         android:backgroundTint="@color/green"
-                        android:textColor="@color/black"
-                        android:text="Approve" />
+                        android:text="Approve"
+                        android:textColor="@color/black" />
 
                     <Button
                         android:id="@+id/btnUPDeclineApplication"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="5dp"
                         android:backgroundTint="@color/red"
-                        android:textColor="@color/black"
-                        android:text="Decline" />
+                        android:text="Decline"
+                        android:textColor="@color/black" />
 
 
                 </LinearLayout>
@@ -450,17 +454,17 @@
 
             <LinearLayout
                 android:id="@+id/llUPContainerWaitingForAppointmentSchedule"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:text="Waiting for Applicant to schedule his or her appointment"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:text="Waiting for Applicant to schedule his or her appointment"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -468,9 +472,12 @@
                 android:id="@+id/llUPContainerAppointmentScheduleDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/background_container_application_status"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
                 android:visibility="gone"
+                android:background="@drawable/background_container_application_status"
+
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -506,7 +513,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tap the Video Call Icon to start Virtual Interview"/>
+                            android:text="Tap the Video Call Icon to start Virtual Interview" />
 
                     </LinearLayout>
 
@@ -526,13 +533,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                 <Button
                     android:id="@+id/btnUPDoneInterview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Interview done"/>
+                    android:text="Interview done" />
 
             </LinearLayout>
 
@@ -541,12 +547,12 @@
                 android:id="@+id/llUPBtnContainerReviewAssessment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_container_application_status"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
-android:visibility="gone"
+                android:background="@drawable/background_container_application_status"
                 android:gravity="center"
-                android:padding="10dp">
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView2"
@@ -568,10 +574,10 @@ android:visibility="gone"
                         android:id="@+id/btnUPPassedAssessment"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/green"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
                         android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="20dp"
+                        android:backgroundTint="@color/green"
                         android:text="Passed"
                         android:textColor="@color/black" />
 
@@ -579,10 +585,10 @@ android:visibility="gone"
                         android:id="@+id/btnUPFailedAssessment"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/red"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
                         android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="20dp"
+                        android:backgroundTint="@color/red"
                         android:text="Failed"
                         android:textColor="@color/black" />
 
@@ -595,32 +601,32 @@ android:visibility="gone"
                 android:id="@+id/llUPBtnContainerClaimPet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:padding="5dp"
                 android:background="@drawable/background_container_application_status"
-                android:layout_gravity="center">
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:text="Did the applicant claimed the pet?"
                     android:textAlignment="center"
-                    android:text="Did the applicant claimed the pet?"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnUPPetClaimed"
                     android:layout_width="250dp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
-                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
                     android:backgroundTint="@color/green"
-                    android:text="Pet Claimed" />
+                    android:text="Pet Claimed"
+                    android:textColor="@color/black" />
 
 
             </LinearLayout>
