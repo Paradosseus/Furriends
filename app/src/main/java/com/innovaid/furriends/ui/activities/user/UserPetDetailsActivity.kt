@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.Pet
+import com.innovaid.furriends.models.User
 import com.innovaid.furriends.ui.activities.BaseActivity
 import com.innovaid.furriends.ui.activities.MessageActivity
 import com.innovaid.furriends.utils.Constants
@@ -46,6 +47,7 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
             ibMessageUser.visibility = View.VISIBLE
         }
         getPetDetails()
+        getOwnerDetails()
         FirestoreClass().isAddedToPetFavorites(this,mPetId)
 
         btnAdopt.setOnClickListener(this)
@@ -57,7 +59,15 @@ class UserPetDetailsActivity : BaseActivity(),  View.OnClickListener {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getPetDetails(this, mPetId)
     }
-
+    fun getOwnerDetails() {
+        FirestoreClass().getOtherUserDetails(this,petOwnerId)
+    }
+    fun loadPetOwnerDetails(user: User) {
+        ivPetOwnerImageValue
+        GlideLoader(this@UserPetDetailsActivity).loadUserPicture(user.image!!, ivPetOwnerImageValue)
+        tvPetOwnerNameValue.text = "${user.firstName} ${user.lastName}"
+        tvPetOwnerAddressValue.text = "+63-${user.phoneNumber}"
+    }
     fun petDetailsSuccess(pet: Pet) {
         hideProgressDialog()
 

@@ -8,6 +8,7 @@ import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.StrayAnimal
 import com.innovaid.furriends.ui.activities.BaseActivity
+import com.innovaid.furriends.ui.activities.MessageActivity
 import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_stray_animal_profile.*
@@ -22,6 +23,7 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
     private var mCategory: String = ""
     private var mBreed: String = ""
     private var mLocation: String = ""
+    private var mUserId:String =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +87,7 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
             llStrayAnimalVaccinationBrandContainer.visibility = View.GONE
         }
 
-
+        mUserId = strayAnimal.userId.toString()
         mCategory = strayAnimal.category.toString()
         mBreed = strayAnimal.strayAnimalBreed.toString()
         mLocation = strayAnimal.locationFounded.toString()
@@ -106,7 +108,9 @@ class StrayAnimalDetailsActivity : BaseActivity(), View.OnClickListener {
                    favoritesListener()
                 }
                 R.id.ibMessageAdmin -> {
-//                    startActivity(Intent(this, MessageActivity::class.java))
+                    val intent = Intent(this, MessageActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_USER_ID, mUserId)
+                    startActivity(intent)
                 }
                 R.id.ibSADBackButton -> {
                     onBackPressed()

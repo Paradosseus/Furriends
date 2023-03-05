@@ -47,7 +47,6 @@ class ApplicantDetailsActivity :BaseActivity(), View.OnClickListener {
 
 
         getApplicantDetails()
-
         setupActionBar()
 
 

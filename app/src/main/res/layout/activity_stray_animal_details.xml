@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Breed"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
 
                 <LinearLayout
@@ -79,17 +79,20 @@
                         android:id="@+id/tvStrayAnimalDetailGender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="18sp"
                         android:text="Gender" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:text=" | " />
 
                     <TextView
                         android:id="@+id/tvStrayAnimalDetailColor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="18sp"
                         android:text="Color" />
 
                 </LinearLayout>
@@ -100,13 +103,14 @@
                     android:layout_height="wrap_content"
                     android:text="Location Found:"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvStrayAnimalDetailLocationFoundedValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="18sp"
                     android:text="Location" />
 
                 <TextView
@@ -114,20 +118,21 @@
                     android:layout_height="wrap_content"
                     android:text="Date and Time:"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvStrayAnimalDetailDateAndTimeFounded"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18sp"
                     android:text="Date and Time" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/background_container_application_status"
                 android:orientation="vertical"
@@ -140,11 +145,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="Vaccination Status"/>
 
@@ -152,15 +156,14 @@
                     android:id="@+id/tvStrayAnimalVaccinationStatusValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
                     android:text="Vaccination Status Value"/>
 
                 <LinearLayout
                     android:id="@+id/llStrayAnimalVaccinationBrandContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="horizontal">
 
@@ -169,12 +172,14 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
+                        android:textSize="18sp"
                         android:text="Brand: "/>
 
                     <TextView
                         android:id="@+id/tvStrayAnimalVaccinationBrandValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="18sp"
                         android:text="Brand Value"/>
 
 
@@ -184,12 +189,10 @@
                 android:id="@+id/tvStrayAnimalDetailAboutTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:text="About"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -201,9 +204,9 @@
                 android:id="@+id/tvStrayAnimalDetailDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Description..."
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

@@ -152,6 +152,9 @@ class FirestoreClass {
                         is VideoCallActivity -> {
                             activity.startCall(user)
                         }
+                        is UserPetDetailsActivity -> {
+                            activity.loadPetOwnerDetails(user)
+                        }
                     }
 
                 }
