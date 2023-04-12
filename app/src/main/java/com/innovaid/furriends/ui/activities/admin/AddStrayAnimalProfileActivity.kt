@@ -41,8 +41,6 @@ class AddStrayAnimalProfileActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_stray_animal_profile)
 
-
-
         ivAddStrayAnimalImage.setOnClickListener(this)
         btnSetupStrayAnimalProfile.setOnClickListener(this)
         ivDateSelector.setOnClickListener(this)

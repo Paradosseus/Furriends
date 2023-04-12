@@ -111,7 +111,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
-    //A Function that notifies the user has logged in successfully and redirects them to the Dashboard Activity
+    //A Function that checks if account type is user or admin and redirects to their respective sections in the app
     fun userLoggedInSuccessful(user: User) {
 
         hideProgressDialog()

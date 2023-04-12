@@ -107,41 +107,18 @@
         app:layout_constraintStart_toStartOf="@+id/etRPassword"
         app:layout_constraintTop_toBottomOf="@+id/etRPassword" />
 
-    <LinearLayout
-        android:id="@+id/ll_terms_and_condition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etRConfirmPassword">
-
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/cb_terms_and_condition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:checked="false" />
-
-        <TextView
-            android:id="@+id/tv_terms_condition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="I agree to the terms and conditions" />
-    </LinearLayout>
 
     <Button
         android:id="@+id/btnRCreateAccount"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="@color/sky_blue"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_terms_and_condition" />
+        app:layout_constraintTop_toBottomOf="@+id/etRConfirmPassword" />
 
     <LinearLayout
         android:layout_width="wrap_content"

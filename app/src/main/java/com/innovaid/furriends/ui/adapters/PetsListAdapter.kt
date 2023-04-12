@@ -38,11 +38,6 @@ open class PetsListAdapter(
             GlideLoader(context).loadPetPicture(model.image!!, holder.itemView.ivPetImage)
             holder.itemView.tvListPetName.text = model.petName
             holder.itemView.tvListPetBreed.text = model.petBreed
-            holder.itemView.ibEditPetProfile.setOnClickListener {
-                val intent = Intent(context, EditUserPetProfileActivity::class.java)
-                intent.putExtra(Constants.EXTRA_PET_ID,model.petId)
-                context.startActivity(intent)
-            }
             holder.itemView.ibDeletePetProfile.setOnClickListener {
                 fragment.deletePet(model.petId!!)
             }

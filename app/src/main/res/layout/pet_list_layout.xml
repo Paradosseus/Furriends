@@ -72,18 +72,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
     <ImageButton
-        android:id="@+id/ibEditPetProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="image"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:padding="5dp"
-        android:src="@drawable/ic_baseline_edit_24"
-        app:layout_constraintStart_toEndOf="@+id/llPetDescriptionContainer"
-        tools:layout_editor_absoluteY="10dp" />
-
-    <ImageButton
         android:id="@+id/ibDeletePetProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

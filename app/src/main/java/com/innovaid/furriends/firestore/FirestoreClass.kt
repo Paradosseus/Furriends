@@ -240,6 +240,10 @@ class FirestoreClass {
                         is AddStrayAnimalProfileActivity -> {
                             activity.imageUploadSuccess(uri.toString())
                         }
+                        is EditUserPetProfileActivity -> {
+                            activity.imageUploadSuccess(uri.toString())
+                        }
+
                     }
 
                 }
@@ -1030,11 +1034,7 @@ class FirestoreClass {
             }
     }
 
-    fun changeApprovalStatus(
-        activity: ViewPetPostDetailsActivity,
-        postHashMap: HashMap<String, Any>,
-        petId: String
-    ) {
+    fun changeApprovalStatus(activity: ViewPetPostDetailsActivity, postHashMap: HashMap<String, Any>, petId: String) {
         fireStore.collection(Constants.PETS)
             .document(petId)
             .update(postHashMap)
@@ -1042,6 +1042,18 @@ class FirestoreClass {
                 when (activity) {
                     is ViewPetPostDetailsActivity -> {
                         activity.reviewedPostSuccess()
+                    }
+                }
+            }
+    }
+    fun updatePetProfile(activity: EditUserPetProfileActivity, petHashMap: HashMap<String, Any>, petId: String) {
+        fireStore.collection(Constants.PETS)
+            .document(petId)
+            .update(petHashMap)
+            .addOnSuccessListener{
+                when(activity) {
+                    is EditUserPetProfileActivity -> {
+                        activity.updatePetProfileSuccess()
                     }
                 }
             }
@@ -1195,15 +1207,28 @@ class FirestoreClass {
                 }
             }
     }
-    fun confirmAppointmentDate(activity: UserApplicationStatusActivity, appointmentHashMap: HashMap<String, Any>, applicantId: String
+    fun confirmAppointmentDate(activity: ApplicantDetailsActivity, appointmentHashMap: HashMap<String, Any>, applicantId: String
     ) {
         fireStore.collection(Constants.STRAY_ANIMAL_ADOPTION_FORMS)
             .document(applicantId)
             .update(appointmentHashMap)
             .addOnCompleteListener { document ->
                 when (activity) {
-                    is UserApplicationStatusActivity -> {
+                    is ApplicantDetailsActivity -> {
                         activity.confirmAppointmentDateSuccess()
+                    }
+                }
+            }
+    }
+    fun confirmUserAppointmentDate(activity: UserPetApplicationDetailsActivity, appointmentHashMap: HashMap<String, Any>, applicantId: String
+    ) {
+        fireStore.collection(Constants.USER_PET_ADOPTION_FORM)
+            .document(applicantId)
+            .update(appointmentHashMap)
+            .addOnCompleteListener { document ->
+                when (activity) {
+                    is UserPetApplicationDetailsActivity -> {
+                        activity.confirmUserAppointmentDateSuccess()
                     }
                 }
             }

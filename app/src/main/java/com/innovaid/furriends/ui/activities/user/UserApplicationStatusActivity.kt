@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.firebase.storage.internal.Util.parseDateTime
 import com.innovaid.furriends.R
 import com.innovaid.furriends.firestore.FirestoreClass
 import com.innovaid.furriends.models.StrayAdoptionForm
@@ -30,13 +31,23 @@ import com.innovaid.furriends.utils.Constants
 import com.innovaid.furriends.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_stray_animal_profile.*
 import kotlinx.android.synthetic.main.activity_add_user_pet_profile.*
+import kotlinx.android.synthetic.main.activity_applicant_details.*
 import kotlinx.android.synthetic.main.activity_set_up_user_profile.view.*
 import kotlinx.android.synthetic.main.activity_user_application_status.*
 import java.text.SimpleDateFormat
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatterBuilder
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
 
 class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
 
+    private lateinit var scheduledExecutorService: ScheduledExecutorService
 
     private var mPetId: String = ""
     private var mApplicantStatusId: String = ""
@@ -63,9 +74,6 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
             mUserName = intent.getStringExtra(Constants.EXTRA_USER_NAME)!!
         }
 
-        btnSelectSchedule.setOnClickListener(this)
-        btnSelectTime.setOnClickListener(this)
-        btnConfirmAdoptionDate.setOnClickListener(this)
         ivViewPetProfile.setOnClickListener(this)
         ibStrayUserApplicantJoinCall.setOnClickListener(this)
         setupActionBar()
@@ -75,17 +83,8 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v != null) {
             when (v.id) {
-                R.id.btnSelectSchedule -> {
-                    setDate()
-                }
-                R.id.btnConfirmAdoptionDate -> {
-                    confirmAppointmentDate()
-                }
                 R.id.ivViewPetProfile -> {
                     viewPetProfile()
-                }
-                R.id.btnSelectTime-> {
-                    setTime()
                 }
                 R.id.ibStrayUserApplicantJoinCall ->{
                     joinCall()
@@ -105,14 +104,6 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
         intent.putExtra(Constants.EXTRA_STRAY_OWNER_ID,mStrayAnimalOwnerId)
         this.startActivity(intent)
     }
-    private fun confirmAppointmentDate() {
-        showProgressDialog(resources.getString(R.string.please_wait))
-        val appointmentTime = tvAppointmentTimeValue.text.toString().trim{ it <= ' '}
-        val appointmentDate = tvAppointmentDateValue.text.toString().trim{ it <= ' '}
-        val appointmentHashMap = HashMap<String, Any>()
-        appointmentHashMap[Constants.APPOINTMENT_DATE] = "${appointmentDate} at ${appointmentTime}"
-        FirestoreClass().confirmAppointmentDate(this, appointmentHashMap, mApplicantStatusId)
-    }
 
 
     fun confirmAppointmentDateSuccess() {
@@ -122,137 +113,6 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    private fun setDate() {
-        val myCalendar = Calendar.getInstance()
-        val today = Calendar.getInstance()
-        today.set(Calendar.HOUR_OF_DAY, 0)
-        today.set(Calendar.MINUTE, 0)
-        today.set(Calendar.SECOND, 0)
-        today.set(Calendar.MILLISECOND, 0)
-        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            myCalendar.set(Calendar.YEAR, year)
-            myCalendar.set(Calendar.MONTH, month)
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateTable(myCalendar)
-
-        }
-        val dialog = DatePickerDialog(
-            this,
-            datePicker,
-            myCalendar.get(Calendar.YEAR),
-            myCalendar.get(Calendar.MONTH),
-            myCalendar.get(Calendar.DAY_OF_MONTH)
-        )
-
-        dialog.datePicker.minDate = today.timeInMillis
-
-        dialog.datePicker.init(myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)) { datePicker, year, monthOfYear, dayOfMonth ->
-            val selectedCalendar = Calendar.getInstance()
-            selectedCalendar.set(Calendar.YEAR, year)
-            selectedCalendar.set(Calendar.MONTH, monthOfYear)
-            selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            if (selectedCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || selectedCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-                Toast.makeText(this, "The City Pound is closed during weekends. Please select another day.", Toast.LENGTH_SHORT).show()
-                // You can also prevent the user from selecting the date by setting it to the current date
-                datePicker.updateDate(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
-            }
-        }
-
-        dialog.show()
-    }
-    private fun updateTable(myCalendar: Calendar) {
-        val myFormat = "MM-dd-yyyy"
-        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-        tvAppointmentDateValue.setText(sdf.format(myCalendar.time))
-    }
-    private fun setTime() {
-
-        val currentTime = Calendar.getInstance()
-        val startHour = currentTime.get(Calendar.HOUR_OF_DAY)
-        val startMinute = currentTime.get(Calendar.MINUTE)
-
-        val timePickerView = TimePicker(this)
-        timePickerView.setOnTimeChangedListener { view, hourOfDay, minute ->
-            val selectedTime = Calendar.getInstance()
-            selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            selectedTime.set(Calendar.MINUTE, minute)
-            if (selectedTime.before(getStartTime()) || selectedTime.after(getEndTime())) {
-                // Selected time is outside the allowed range
-                val nearestTime = getNearestTime(selectedTime)
-                timePickerView.hour = nearestTime.get(Calendar.HOUR_OF_DAY)
-                timePickerView.minute = nearestTime.get(Calendar.MINUTE)
-                Toast.makeText(this, "Please select a time between 8:30 AM and 4:30 PM", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        val dialog = AlertDialog.Builder(this)
-            .setTitle("Select Time")
-            .setView(timePickerView)
-            .setPositiveButton("OK") { _, _ ->
-                val hour = timePickerView.hour
-                val minute = timePickerView.minute
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.HOUR_OF_DAY, hour)
-                calendar.set(Calendar.MINUTE, minute)
-                val dateFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-                tvAppointmentTimeValue.text = dateFormat.format(calendar.time)
-            }
-            .setNegativeButton("Cancel", null)
-            .create()
-
-        dialog.show()
-
-        // Set initial time
-        timePickerView.hour = startHour
-        timePickerView.minute = startMinute
-
-        // Disable minutes and seconds
-        try {
-            val minuteSpinnerId = Resources.getSystem().getIdentifier("minute", "id", "android")
-            val minuteSpinner = timePickerView.findViewById<View>(minuteSpinnerId)
-            minuteSpinner?.visibility = View.GONE
-
-            val secondSpinnerId = Resources.getSystem().getIdentifier("second", "id", "android")
-            val secondSpinner = timePickerView.findViewById<View>(secondSpinnerId)
-            secondSpinner?.visibility = View.GONE
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        // Set selectable range
-        timePickerView.setIs24HourView(false)
-    }
-
-    private fun getStartTime(): Calendar {
-        val startTime = Calendar.getInstance()
-        startTime.set(Calendar.HOUR_OF_DAY, 8)
-        startTime.set(Calendar.MINUTE, 30)
-        startTime.set(Calendar.SECOND, 0)
-        startTime.set(Calendar.MILLISECOND, 0)
-        return startTime
-    }
-
-    private fun getEndTime(): Calendar {
-        val endTime = Calendar.getInstance()
-        endTime.set(Calendar.HOUR_OF_DAY, 16)
-        endTime.set(Calendar.MINUTE, 30)
-        endTime.set(Calendar.SECOND, 0)
-        endTime.set(Calendar.MILLISECOND, 0)
-        return endTime
-    }
-
-    private fun getNearestTime(time: Calendar): Calendar {
-        val startTime = getStartTime()
-        val endTime = getEndTime()
-        return if (time.before(startTime)) {
-            startTime
-        } else if (time.after(endTime)) {
-            endTime
-        } else {
-            time
-        }
-    }
 
     private fun applicationStatus() {
         showProgressDialog(resources.getString(R.string.please_wait))
@@ -283,12 +143,19 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
                approvedForInterview()
 
                if(strayAdoptionForm.appointmentDate == "none") {
-                   tvApplicationMessage.text = "Application Approved! Set your Appointment"
-                   clAppointmentScheduleContainer.visibility = View.VISIBLE
+                   tvApplicationMessage.text = "Application Approved! Wait for your schedule date of Interview"
+                   tvStepTwoTextValue.text = "City Veterinary is setting the date for your interview"
                } else {
+                   appointmentScheduleContainer.visibility = View.VISIBLE
                    tvStepTwoTextValue.text = "Attend the Virtual Interview at the scheduled date"
-                   tvApplicationMessage.text = "Appointment Set! Prepare for the virtual interview on ${strayAdoptionForm.appointmentDate}"
-                   clStrayUserApplicantVideoCallContainer.visibility = View.VISIBLE
+                   tvApplicationMessage.text = "Appointment Set! Prepare for the virtual interview on ${strayAdoptionForm.appointmentDate}. An icon will appear for the call"
+                   val dateTimeString = strayAdoptionForm.appointmentDate!!
+                   val regex = Regex("(\\d{2}-\\d{2}-\\d{4}) at (\\d{1,2}:\\d{2} [aApP][mM])")
+                   val matchResult = regex.find(dateTimeString)
+                   val dateString: String? = matchResult?.groupValues?.get(1)
+                   val timeString: String? = matchResult?.groupValues?.get(2)
+                   val appointSchedule = parseDateTime(dateString!!, timeString!!)
+                   scheduleViewVisibility(clStrayUserApplicantVideoCallContainer, appointSchedule)
                }
            }
            "Declined" -> {
@@ -318,7 +185,11 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
             actionBar.setDisplayHomeAsUpEnabled(true)
 
         }
-        tbApplicationStatusActivity.setNavigationOnClickListener { onBackPressed() }
+        tbApplicationStatusActivity.setNavigationOnClickListener {
+            val intent = Intent(this, UserDashboardActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
     }
     private fun approvedForInterview() {
         ivStepOneIcon.setImageResource(R.drawable.done_step)
@@ -379,6 +250,37 @@ class UserApplicationStatusActivity : BaseActivity(), View.OnClickListener {
         tvStepFiveTextValue.setTextColor(ContextCompat.getColor(this, R.color.sky_blue))
 
         tvApplicationMessage.text = "Application Complete! Take care of your newly-adopted furbaby "
+    }
+    private fun parseDateTime(dateString: String, timeString: String): LocalDateTime {
+        val dateTimeString = "${dateString.trim()} ${timeString.trim()}"
+        val dateFormat = DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendPattern("MM-dd-yyyy h:mm a")
+            .toFormatter(Locale.getDefault())
+        return LocalDateTime.parse(dateTimeString, dateFormat)
+    }
+    private fun scheduleViewVisibility(view: View, scheduledDateTime: LocalDateTime) {
+        val scheduledInstant = scheduledDateTime.atZone(ZoneId.systemDefault()).toInstant()
+        val currentInstant = Instant.now()
+        val delayMillis = Duration.between(currentInstant, scheduledInstant).toMillis()
+
+        if (delayMillis > 0) {
+            scheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+            scheduledExecutorService.schedule({
+                runOnUiThread {
+                    view.visibility = View.VISIBLE
+                }
+            }, delayMillis, TimeUnit.MILLISECONDS)
+        } else {
+            view.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (this::scheduledExecutorService.isInitialized) {
+            scheduledExecutorService.shutdown()
+        }
     }
 
     override fun onResume() {

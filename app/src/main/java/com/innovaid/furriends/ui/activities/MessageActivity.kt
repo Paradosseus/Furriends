@@ -43,9 +43,6 @@ class MessageActivity : AppCompatActivity() {
             }
             tvTextMessage.setText("")
         }
-//        ivAttachImageButton.setOnClickListener {
-//
-//        }
 
         setupActionBar()
     }

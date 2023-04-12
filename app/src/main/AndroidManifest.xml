@@ -20,6 +20,13 @@
         android:theme="@style/Theme.Furriends"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.user.RequestRescueActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.activities.IncomingCallActivity"
             android:exported="false">
             <meta-data
@@ -32,7 +39,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".ui.activities.user.ReviewUserPetApplicationActivity"
@@ -240,7 +246,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ui.activities.user.UserDashboardActivity"

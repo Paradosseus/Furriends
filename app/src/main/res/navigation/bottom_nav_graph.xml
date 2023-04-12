@@ -16,11 +16,6 @@
         tools:layout="@layout/fragment_listings" >
     </fragment>
     <fragment
-        android:id="@+id/nav_notifications"
-        android:name="com.innovaid.furriends.ui.fragments.user.UserNotificationsFragment"
-        android:label="Notifications"
-        tools:layout="@layout/fragment_notifications" />
-    <fragment
         android:id="@+id/nav_inbox"
         android:name="com.innovaid.furriends.ui.fragments.SearchUserChatFragment"
         android:label="Chat"

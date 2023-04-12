@@ -71,6 +71,14 @@ object Constants {
     const val APPROVAL_STATUS = "approvalStatus"
     const val PET_ADOPTION_STATUS = "adoptionStatus"
     const val ADOPTED_TO = "adoptedTo"
+    const val PET_NAME = "petName"
+    const val PET_BREED = "petBreed"
+    const val PET_BIRTHDATE = "petBirthDate"
+    const val PET_TYPE = "petType"
+    const val PET_GENDER ="petGender"
+    const val PET_SPAYED_OR_NEUTERED = "spayedOrNeutered"
+    const val PET_DESCRIPTION = "description"
+
 
     const val STRAY_ANIMAL_IMAGE: String = "strayAnimalImage"
     const val EXTRA_STRAY_ANIMAL_ID = "extraPetId"

@@ -36,15 +36,6 @@ class UserDashboardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_dashboard)
 
-        FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
-            val user = FirebaseAuth.getInstance().currentUser
-            if (user != null) {
-                val db = FirebaseFirestore.getInstance()
-                val userRef = db.collection(Constants.USERS).document(user.uid)
-                userRef.update("fcmToken", token)
-            }
-        }
-
         //Side Navigation Menu
         drawerLayout = findViewById(R.id.drawerLayout)
         toggle = ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close)
@@ -81,7 +72,7 @@ class UserDashboardActivity : BaseActivity() {
             setOf(
                 R.id.nav_dashboard,
                 R.id.nav_listings,
-                R.id.nav_notifications,
+                R.id.nav_listings,
                 R.id.nav_inbox
             ),drawerLayout
         )
